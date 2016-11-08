@@ -1,36 +1,76 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="en">
     <head>
-        <title>Login</title>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, user-scale=no, initial-scale=1, maximum-scale=1, minimum-scale=1"/>
-        <link rel="stylesheet" href="<?php echo base_url(); ?>asetts/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="<?php echo base_url(); ?>asetts/css/estiloss.css" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="<?php echo base_url(); ?>assets/img/IMPALA.jpg">
+
+        <title><?php echo $titulo; ?></title>
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/estilos.css" />
     </head>
 
     <body>
-        <form>
-            <h2>Login</h2>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Usuario:</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Usuario">
+
+        <div class="container">
+
+            <!-- Static navbar -->
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="<?php echo base_url(); ?>">Proyecto residencias</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li id="navInicio" ><a href="<?php echo base_url(); ?>">Inicio</a></li>
+                            <li id="navIniciarSesion"><a href="<?php echo base_url(); ?>welcome">Inicio de Sesión</a></li>
+                            <li id="navRegistro"><a href="<?php echo base_url(); ?>welcome/registro">Registrate</a></li>
+                        </ul>
+                        </li>
+                        </ul>
+
+                    </div><!--/.nav-collapse -->
+                </div><!--/.container-fluid -->
+            </nav>
+
+            <!-- Main component for a primary marketing message or call to action -->
+            <div class="jumbotron">
+                <h1 align="center"><?php echo $tituloPantalla; ?></h1>
             </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Contraseña:</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+
+        </div> <!-- /container -->
+        <br>
+        <br>
+
+        <section class="main container">
+            <div class="row">
+                <section class="posts col-md-12">
+                    <?php $this->load->view($contenido); ?>
+                </section>
             </div>
-            <label for="disabledSelect">Tipo de Usuario:</label>
-            <select id="disabledSelect" class="form-control">
-                <option></option>
-                <option>Administrador</option>
-                <option>Jefe de Carrera</option>
-                <option>Alumno</option>
-            </select>
+        </section>
 
 
-            <input type="Button" class="btn btn-success"  value="Ingresar"/>
-        </form>
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/javascript" src= "<?php echo base_url(); ?>assets/js/jquery-2.2.0.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+           document.getElementById("<?php echo $nav; ?>").className = "active"; 
+        });
+    </script>
     </body>
 </html>
 
