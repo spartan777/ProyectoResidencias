@@ -28,6 +28,13 @@ class Welcome extends CI_Controller {
         );
         $this->load->view('public/index', $data);
     }
+    
+    public function validar_usuario(){
+        $nombre_usuario = $this->input->post('nombre_usuario');
+        $pass_usuario = $this->input->post('pass_usuario');
+        $tipo_usuario = $this->input->post('tipo_usuario');
+        
+    }
 }
 
 /* End of file welcome.php */

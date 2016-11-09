@@ -17,6 +17,32 @@
     <body>
 
         <div class="container">
+
+            <!-- Static navbar -->
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="<?php echo base_url(); ?>">Proyecto residencias</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li id="navInicio" ><a href="<?php echo base_url(); ?>">Inicio</a></li>
+                            <li id="navIniciarSesion"><a href="<?php echo base_url(); ?>welcome">Inicio de Sesión</a></li>
+                            <li id="navRegistro"><a href="<?php echo base_url(); ?>welcome/registro">Registrate</a></li>
+                        </ul>
+                        </li>
+                        </ul>
+
+                    </div><!--/.nav-collapse -->
+                </div><!--/.container-fluid -->
+            </nav>
+
             <!-- Main component for a primary marketing message or call to action -->
             <div class="jumbotron">
                 <h1 align="center"><?php echo $tituloPantalla; ?></h1>
