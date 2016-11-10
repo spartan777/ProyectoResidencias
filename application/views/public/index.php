@@ -13,9 +13,8 @@
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/estilos.css" />
     </head>
-
+    
     <body>
-
         <div class="container">
             <!-- Main component for a primary marketing message or call to action -->
             <div class="jumbotron">
@@ -23,8 +22,7 @@
             </div>
 
         </div> <!-- /container -->
-        <br>
-        <br>
+     
 
         <section class="main container">
             <div class="row">
@@ -40,11 +38,7 @@
         <!-- Placed at the end of the document so the pages load faster -->
         <script type="text/javascript" src= "<?php echo base_url(); ?>assets/js/jquery-2.2.0.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
-        <script type="text/javascript">
-        $(document).ready(function(){
-           document.getElementById("<?php echo $nav; ?>").className = "active"; 
-        });
-    </script>
+        
     </body>
 </html>
 

@@ -6,7 +6,11 @@ class Login_model extends CI_Model {
     } 
     
     public function buscar_usuario($nombre_usuario, $pass_usuario, $tipo_usuario){
-        
+        $this->db->where('nombre_usuario', $nombre_usuario);
+        $this->db->where('pass_usuario', $pass_usuario);
+        $this->db->where('tipo_usuario', $tipo_usuario);
+        $query = $this->db->get('usuario');
+        return $query->row();
     }
     
 }

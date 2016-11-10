@@ -1,3 +1,4 @@
+<center><?php if (isset($error)) echo '<br><div style ="color:#FF0000;">' . $error . '</div><br>'; ?></center>
 <form class="form-horizontal" action="<?php echo base_url(); ?>welcome/validar_usuario" method="post">
     <div class="form-group">
         <label for="nombre_usuario" class="col-sm-3 control-label">Usuario</label>
