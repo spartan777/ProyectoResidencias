@@ -40,6 +40,14 @@
                                     <li><a href="<?php echo base_url(); ?>administrador/registro_jefe_carrera"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Agregar</a></li>
                                 </ul>
                             </li>
+                            
+                            <li id="navCatedratico" class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Catedrático <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="<?php echo base_url(); ?>administrador/catedraticos"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;Consultar</a></li>
+                                    <li><a href="<?php echo base_url(); ?>administrador/registro_catedraticos"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Agregar</a></li>
+                                </ul>
+                            </li>
                            
                             <li id="navCarrera" class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-education" aria-hidden="true"></span>&nbsp;Carreras <span class="caret"></span></a>
@@ -56,7 +64,7 @@
                                     <li><a href="<?php echo base_url(); ?>administrador/registro_salon"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Agregar</a></li>
                                 </ul>
                             </li>
-                            
+                                                        
                             <li id="navRegistro"><a href="<?php echo base_url(); ?>administrador/bitacora"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;Bitácora</a></li>
                         </ul>
                         </li>
