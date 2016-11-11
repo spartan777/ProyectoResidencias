@@ -1,6 +1,6 @@
 <table class="table table-hover">
     <thead>
-    <th>Id Jefe</th>
+    <th>Id Catedrático</th>
     <th>Nombre</th>
     <th>Paterno</th>
     <th>Materno</th>
@@ -27,14 +27,14 @@
             }*/
             ?>
             <tr class="info">
-                <td><?php echo $row->id_usuario; ?></td>
+                <td><?php echo $row->id_catedratico; ?></td>
                 <td><?php echo $row->nombre; ?></td>
                 <td><?php echo $row->ape_paterno; ?></td>
                 <td><?php echo $row->ape_materno; ?></td>
                 <td><?php echo $nombreCarrera; ?></td>
                 <td><?php echo $row->correo; ?></td>
-                <td><a href="<?php echo base_url() ?>administrador/editar_jefe_carrera/<?php echo $row->id_usuario; ?>"><span class="glyphicon glyphicon-edit"></span></a></td>
-                <td><a <?php //echo $visibleRef; ?> onclick="confirmarDeleteJefeCarrera('<?php echo $row->id_usuario; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+                <td><a href="<?php echo base_url() ?>administrador/editar_catedratico/<?php echo $row->id_catedratico; ?>"><span class="glyphicon glyphicon-edit"></span></a></td>
+                <td><a <?php //echo $visibleRef; ?> onclick="confirmarDeleteCatedratico('<?php echo $row->id_catedratico; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>
     <?php }
 } else { ?>
@@ -53,13 +53,13 @@
 </table>
 
 <!-- Modal eliminar-->
-<div class="modal fade" id="modalDeleteJefeCarrera" role="dialog">
+<div class="modal fade" id="modalDeleteCatedratico" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
-           <div class="modal-body" id="cuerpoEliminarJefeCarrera"></div>
+           <div class="modal-body" id="cuerpoEliminarCatedratico"></div>
             <div class="modal-footer">
-                <a id="rutaEliminarJefeCarrera" href=""><button type="button"
+                <a id="rutaEliminarCatedratico" href=""><button type="button"
                                                          class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;Aceptar</button></a>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>&nbsp;Close</button>
             </div>

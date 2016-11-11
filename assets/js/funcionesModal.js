@@ -12,6 +12,13 @@ function confirmarDeleteJefeCarrera(clave_acceso) {
 	$('#modalDeleteJefeCarrera').modal('show');
 }
 
+function confirmarDeleteCatedratico(clave_acceso) {
+	document.getElementById("cuerpoEliminarCatedratico").innerHTML = "¿Desea eliminar el Catedrático con clave: "
+			+ clave_acceso + "?";
+	document.getElementById("rutaEliminarCatedratico").href = "delete_catedratico/" + clave_acceso + "";
+	$('#modalDeleteCatedratico').modal('show');
+}
+
 function confirmarCambiarPasJefe(clave_acceso) {
 	document.getElementById("tituloCambiarJefe").innerHTML = "Cambiar contraseña del jefe " + clave_acceso;
 	document.getElementById("cuerpoCambiarJefe").innerHTML = "Ingrese la nueva contraseña del jefe de carrera: "

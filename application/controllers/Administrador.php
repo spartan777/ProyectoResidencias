@@ -10,6 +10,7 @@ class Administrador extends CI_Controller {
         $this->load->model('carrera_model');
         $this->load->model('jefe_carrera_model');
         $this->load->model('login_model');
+        $this->load->model('catedratico_model');
     }
 
     public function index() {
@@ -128,15 +129,15 @@ class Administrador extends CI_Controller {
             'correo' => $this->input->post('correo'),
             'id_carrera' => $this->input->post('id_carrera')
         );
-        
+
         $checkNombreJefeCarrera = $this->jefe_carrera_model->check_carrera_jefe_carrera($id_usuario);
-        if($checkNombreJefeCarrera == 1){
+        if ($checkNombreJefeCarrera == 1) {
             $this->jefe_carrera_model->update_jefe_carrera($id_usuario, $datosJefe);
             redirect('administrador/jefe_carrera');
-        }else{
+        } else {
             $error = "La carrera ya tiene un Jefe registrado.";
         }
-        
+
         $data = array(
             'contenido' => "private/admin/edit_jefe_carrera",
             'nav' => "navJefeCarrera",
@@ -153,12 +154,118 @@ class Administrador extends CI_Controller {
         );
         $this->load->view('private/admin/index', $data);
     }
-    
-    public function delete_jefe_carrera(){
+
+    public function delete_jefe_carrera() {
         $id_usuario = $this->uri->segment(3);
         $this->jefe_carrera_model->delete_jefe_carrera($id_usuario);
         $this->login_model->delete_usuario($id_usuario);
         redirect('administrador/jefe_carrera');
+    }
+
+    public function catedratico() {
+        $data = array(
+            'contenido' => "private/admin/catedratico",
+            'nav' => "navCatedratico",
+            'titulo' => "Proyecto Residencias | Catedráticos",
+            'tituloPantalla' => "Catedráticos",
+            'result' => $this->catedratico_model->get_all_catedratico()
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function registro_catedratico() {
+        $data = array(
+            'contenido' => "private/admin/registro_catedratico",
+            'nav' => "navCatedratico",
+            'titulo' => "Proyecto Residencias | Registro Catedrático",
+            'tituloPantalla' => "Registro de Catedráticos",
+            'result' => $this->carrera_model->get_all_carreras()
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function add_catedratico() {
+        $datosCatedratico = array(
+            'id_catedratico' => $this->input->post('id_usuario'),
+            'nombre' => $this->input->post('nombre'),
+            'ape_paterno' => $this->input->post('ape_paterno'),
+            'ape_materno' => $this->input->post('ape_materno'),
+            'correo' => $this->input->post('correo'),
+            'id_carrera' => $this->input->post('id_carrera')
+        );
+
+        $checkIdCatedratico = $this->catedratico_model->check_id_catedratico($datosCatedratico['id_catedratico']);
+
+        if ($checkIdCatedratico == 0) {
+            $this->catedratico_model->add_catedratico($datosCatedratico);
+            redirect('administrador/catedratico');
+        } else {
+            $error = "El id del Catedrático ya existe.";
+        }
+
+        $data = array(
+            'contenido' => "private/admin/registro_catedratico",
+            'nav' => "navJefeCarrera",
+            'titulo' => "Proyecto Residencias | Registro Catedrático",
+            'tituloPantalla' => "Registro de Catedráticos",
+            'result' => $this->carrera_model->get_all_carreras(),
+            'error' => $error,
+            'id_usuario' => $datosCatedratico['id_usuario'],
+            'nombre' => $datosCatedratico['nombre'],
+            'ape_paterno' => $datosCatedratico['ape_paterno'],
+            'ape_materno' => $datosCatedratico['ape_materno'],
+            'correo' => $datosCatedratico['correo'],
+            'id_carrera' => $datosCatedratico['id_carrera']
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function editar_catedratico() {
+        $id_catedratico = $this->uri->segment(3);
+        $result = $this->catedratico_model->get_catedratico_by_id($id_catedratico);
+
+        foreach ($result->result() as $row) {
+            $nombre = $row->nombre;
+            $ape_paterno = $row->ape_paterno;
+            $ape_materno = $row->ape_materno;
+            $correo = $row->correo;
+            $id_carrera = $row->id_carrera;
+        }
+
+        $data = array(
+            'contenido' => "private/admin/edit_catedratico",
+            'nav' => "navCatedratico",
+            'titulo' => "Proyecto Residencias | Editar Catedrático",
+            'result' => $this->carrera_model->get_all_carreras(),
+            'tituloPantalla' => "Editar " . $nombre,
+            'id_usuario' => $id_catedratico,
+            'nombre' => $nombre,
+            'ape_paterno' => $ape_paterno,
+            'ape_materno' => $ape_materno,
+            'correo' => $correo,
+            'id_carrera' => $id_carrera
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function edit_catedratico() {
+        $id_catedratico = $this->uri->segment(3);
+        $datosJefe = array(
+            'nombre' => $this->input->post('nombre'),
+            'ape_paterno' => $this->input->post('ape_paterno'),
+            'ape_materno' => $this->input->post('ape_materno'),
+            'correo' => $this->input->post('correo'),
+            'id_carrera' => $this->input->post('id_carrera')
+        );
+
+        $this->catedratico_model->update_catedratico($id_catedratico, $datosJefe);
+        redirect('administrador/catedratico');
+    }
+
+    public function delete_catedratico() {
+        $id_catedratico = $this->uri->segment(3);
+        $this->catedratico_model->delete_catedratico($id_catedratico);
+        redirect('administrador/catedratico');
     }
 
     public function carreras() {
