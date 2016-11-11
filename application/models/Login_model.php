@@ -13,4 +13,12 @@ class Login_model extends CI_Model {
         return $query->row();
     }
     
+    public function insert_usuario($data){
+        $this->db->insert('usuario', $data);
+    }
+    
+    public function delete_usuario($id_usuario){
+        $this->db->where('nombre_usuario',$id_usuario);
+    	$this->db->delete('usuario');
+    }
 }

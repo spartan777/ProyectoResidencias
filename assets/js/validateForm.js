@@ -12,32 +12,30 @@ $(document).ready(function () {
     
     var validatorAddJefe = $('#formRegJefeCarrera').validate({
         rules: {
+            id_usuario: {
+                required: true
+            },
             nombre: {
                 required: true
             },
-            apellidoPaterno: {
+            ape_paterno: {
                 required: true
             },
-            apellidoMaterno: {
+            ape_materno: {
                 required: true
             },
-            carrera: {
+            id_carrera: {
                 required: true
             },
-            numero_control: {
+            correo: {
+                required: true,
+                email: true
+            },
+            contra: {
                 required: true
             },
-            email: {
-                required: true
-            },
-            telefono_residente: {
-                required: true
-            },
-            password: {
-                required: true
-            },
-            password2: {
-                equalTo: "#password"
+            contra2: {
+                equalTo: "#contra"
             }
 
         }

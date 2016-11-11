@@ -1,16 +1,5 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Carrera_model
- *
- * @author javier.castro
- */
 class Carrera_model extends CI_Model {
     
     public function __construct() {
@@ -58,5 +47,12 @@ class Carrera_model extends CI_Model {
         $this->db->where('id_carrera',$id_carrera);
     	$query = $this->db->get('jefe_carrera');
         return $query->num_rows;
+    }
+    
+    public function select_name_carrera($id_carrera){
+        $this->db->select('nombre_carrera');
+        $this->db->where('id_carrera', $id_carrera);
+        $query = $this->db->get('carreras');
+        return $query;
     }
 }

@@ -14,7 +14,7 @@
     </div>
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-6">
-            <button type="submit" class="btn btn-success">Ingresar Datos</button>
+            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;Ingresar Datos</button>
         </div>
     </div>
 

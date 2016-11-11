@@ -8,6 +8,8 @@ class Administrador extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('carrera_model');
+        $this->load->model('jefe_carrera_model');
+        $this->load->model('login_model');
     }
 
     public function index() {
@@ -25,7 +27,8 @@ class Administrador extends CI_Controller {
             'contenido' => "private/admin/jefe_carrera",
             'nav' => "navJefeCarrera",
             'titulo' => "Proyecto Residencias | Jefes de Carrera",
-            'tituloPantalla' => "Jefes de carrera"
+            'tituloPantalla' => "Jefes de carrera",
+            'result' => $this->jefe_carrera_model->get_all_jefe_carrera()
         );
         $this->load->view('private/admin/index', $data);
     }
@@ -35,9 +38,127 @@ class Administrador extends CI_Controller {
             'contenido' => "private/admin/registro_jefe_carrera",
             'nav' => "navJefeCarrera",
             'titulo' => "Proyecto Residencias | Registro Jefes de Carrera",
-            'tituloPantalla' => "Registro de Jefes de Carrera"
+            'tituloPantalla' => "Registro de Jefes de Carrera",
+            'result' => $this->carrera_model->get_all_carreras()
         );
         $this->load->view('private/admin/index', $data);
+    }
+
+    public function add_jefe_carrera() {
+        $datosUsuario = array(
+            'nombre_usuario' => $this->input->post('id_usuario'),
+            'pass_usuario' => md5($this->input->post('contra'))
+        );
+
+        $datosJefe = array(
+            'id_usuario' => $this->input->post('id_usuario'),
+            'nombre' => $this->input->post('nombre'),
+            'ape_paterno' => $this->input->post('ape_paterno'),
+            'ape_materno' => $this->input->post('ape_materno'),
+            'correo' => $this->input->post('correo'),
+            'id_carrera' => $this->input->post('id_carrera')
+        );
+
+        $checkIdJefeCarrera = $this->jefe_carrera_model->check_id_jefe_carrera($datosJefe['id_usuario']);
+        $checkNombreJefeCarrera = $this->jefe_carrera_model->check_carrera_jefe_carrera($datosJefe['id_carrera']);
+
+        if ($checkIdJefeCarrera == 0) {
+            if ($checkNombreJefeCarrera == 0) {
+                $this->login_model->insert_usuario($datosUsuario);
+                $this->jefe_carrera_model->add_jefe_carrera($datosJefe);
+                redirect('administrador/jefe_carrera');
+            } else {
+                $error = "La carrera ya tiene un Jefe registrado.";
+            }
+        } else {
+            $error = "El id del Jefe de Carrera ya existe.";
+        }
+
+        $data = array(
+            'contenido' => "private/admin/registro_jefe_carrera",
+            'nav' => "navJefeCarrera",
+            'titulo' => "Proyecto Residencias | Registro Jefes de Carrera",
+            'tituloPantalla' => "Registro de Jefes de Carrera",
+            'result' => $this->carrera_model->get_all_carreras(),
+            'error' => $error,
+            'id_usuario' => $datosJefe['id_usuario'],
+            'nombre' => $datosJefe['nombre'],
+            'ape_paterno' => $datosJefe['ape_paterno'],
+            'ape_materno' => $datosJefe['ape_materno'],
+            'correo' => $datosJefe['correo'],
+            'id_carrera' => $datosJefe['id_carrera']
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function editar_jefe_carrera() {
+        $id_usuario = $this->uri->segment(3);
+        $result = $this->jefe_carrera_model->get_jefe_carrera_by_id($id_usuario);
+
+        foreach ($result->result() as $row) {
+            $nombre = $row->nombre;
+            $ape_paterno = $row->ape_paterno;
+            $ape_materno = $row->ape_materno;
+            $correo = $row->correo;
+            $id_carrera = $row->id_carrera;
+        }
+
+        $data = array(
+            'contenido' => "private/admin/edit_jefe_carrera",
+            'nav' => "navJefeCarrera",
+            'titulo' => "Proyecto Residencias | Editar Jefe de Carrera",
+            'result' => $this->carrera_model->get_all_carreras(),
+            'tituloPantalla' => "Editar " . $nombre,
+            'id_usuario' => $id_usuario,
+            'nombre' => $nombre,
+            'ape_paterno' => $ape_paterno,
+            'ape_materno' => $ape_materno,
+            'correo' => $correo,
+            'id_carrera' => $id_carrera
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function edit_jefe_carrera() {
+        $id_usuario = $this->uri->segment(3);
+        $datosJefe = array(
+            'nombre' => $this->input->post('nombre'),
+            'ape_paterno' => $this->input->post('ape_paterno'),
+            'ape_materno' => $this->input->post('ape_materno'),
+            'correo' => $this->input->post('correo'),
+            'id_carrera' => $this->input->post('id_carrera')
+        );
+        
+        $checkNombreJefeCarrera = $this->jefe_carrera_model->check_carrera_jefe_carrera($id_usuario);
+        if($checkNombreJefeCarrera == 1){
+            $this->jefe_carrera_model->update_jefe_carrera($id_usuario, $datosJefe);
+            redirect('administrador/jefe_carrera');
+        }else{
+            $error = "La carrera ya tiene un Jefe registrado.";
+        }
+        
+        $data = array(
+            'contenido' => "private/admin/edit_jefe_carrera",
+            'nav' => "navJefeCarrera",
+            'titulo' => "Proyecto Residencias | Editar Jefe de Carrera",
+            'result' => $this->carrera_model->get_all_carreras(),
+            'tituloPantalla' => "Editar " . $nombre,
+            'id_usuario' => $datosJefe['id_usuario'],
+            'nombre' => $datosJefe['nombre'],
+            'ape_paterno' => $datosJefe['ape_paterno'],
+            'ape_materno' => $datosJefe['ape_materno'],
+            'correo' => $datosJefe['correo'],
+            'id_carrera' => $datosJefe['id_carrera'],
+            'error' => $error
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+    
+    public function delete_jefe_carrera(){
+        $id_usuario = $this->uri->segment(3);
+        $this->jefe_carrera_model->delete_jefe_carrera($id_usuario);
+        $this->login_model->delete_usuario($id_usuario);
+        redirect('administrador/jefe_carrera');
     }
 
     public function carreras() {

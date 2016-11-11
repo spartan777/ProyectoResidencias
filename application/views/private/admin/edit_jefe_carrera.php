@@ -1,9 +1,9 @@
 <center><?php if (isset($error)){ echo '<br><div style ="color:#FF0000;">' . $error . '</div><br>'; }?></center>
-<form id="formRegJefeCarrera" class="form-horizontal" action="<?php echo base_url(); ?>administrador/add_jefe_carrera" method="post">
+<form id="formRegJefeCarrera" class="form-horizontal" action="<?php echo base_url(); ?>administrador/edit_jefe_carrera/<?php echo $id_usuario; ?>" method="post">
     <div class="form-group">
         <label for="id_usuario" class="col-sm-3 control-label">Id Jefe</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="id_usuario" placeholder="Escriba el Id del Jefe" value="<?php if(isset($id_usuario)){ echo $id_usuario; } ?>">
+            <input type="text" class="form-control" readonly="" name="id_usuario" placeholder="Escriba el Id del Jefe" value="<?php if(isset($id_usuario)){ echo $id_usuario; } ?>">
         </div>
     </div>
     
@@ -53,22 +53,8 @@
     </div>
 
     <div class="form-group">
-        <label for="contra" class="col-sm-3 control-label">Password</label>
-        <div class="col-sm-6">
-            <input type="password" class="form-control" id="contra" name="contra" placeholder="Password">
-        </div>
-    </div>
-    
-    <div class="form-group">
-        <label for="contra2" class="col-sm-3 control-label">Repetir Password</label>
-        <div class="col-sm-6">
-            <input type="password" class="form-control" name="contra2" placeholder="Repetir Password">
-        </div>
-    </div>
-
-    <div class="form-group">
         <div class="col-sm-offset-3 col-sm-6">
-            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;Guardar</button>
+            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;Editar Datos</button>
         </div>
     </div>
 </form>

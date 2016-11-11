@@ -6,9 +6,9 @@ function confirmarDeleteCarrera(clave_acceso) {
 }
 
 function confirmarDeleteJefeCarrera(clave_acceso) {
-	document.getElementById("cuerpoEliminarJefe").innerHTML = "¿Desea eliminar la carrera con clave: "
+	document.getElementById("cuerpoEliminarJefeCarrera").innerHTML = "¿Desea eliminar el jefe de carrera con clave: "
 			+ clave_acceso + "?";
-	document.getElementById("rutaEliminarJefe").href = "delete_carrera/" + clave_acceso + "";
+	document.getElementById("rutaEliminarJefeCarrera").href = "delete_jefe_carrera/" + clave_acceso + "";
 	$('#modalDeleteJefeCarrera').modal('show');
 }
 
