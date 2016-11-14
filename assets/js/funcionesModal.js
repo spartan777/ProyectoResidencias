@@ -19,12 +19,11 @@ function confirmarDeleteCatedratico(clave_acceso) {
 	$('#modalDeleteCatedratico').modal('show');
 }
 
-function confirmarCambiarPasJefe(clave_acceso) {
-	document.getElementById("tituloCambiarJefe").innerHTML = "Cambiar contraseña del jefe " + clave_acceso;
-	document.getElementById("cuerpoCambiarJefe").innerHTML = "Ingrese la nueva contraseña del jefe de carrera: "
-			+ clave_acceso + "";
-	document.getElementById("rutaCambiarJefe").action = "cambiar_pass_jefe/" + clave_acceso + "";
-	$('#modalCambiarJefeCarrera').modal('show');
+function confirmarDeleteSalon(clave_acceso) {
+	document.getElementById("cuerpoEliminarSalon").innerHTML = "¿Desea eliminar el salón con clave: "
+			+ clave_acceso + "?";
+	document.getElementById("rutaEliminarSalon").href = "delete_salon/" + clave_acceso + "";
+	$('#modalDeleteSalon').modal('show');
 }
 
 function confirmarDeleteDictamen(nombre_archivo) {

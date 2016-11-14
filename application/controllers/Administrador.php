@@ -11,6 +11,7 @@ class Administrador extends CI_Controller {
         $this->load->model('jefe_carrera_model');
         $this->load->model('login_model');
         $this->load->model('catedratico_model');
+        $this->load->model('salon_model');
     }
 
     public function index() {
@@ -383,12 +384,13 @@ class Administrador extends CI_Controller {
         redirect('administrador/carreras');
     }
 
-    public function salones() {
+    public function salon() {
         $data = array(
             'contenido' => "private/admin/salones",
             'nav' => "navSalon",
             'titulo' => "Proyecto Residencias | Salones",
-            'tituloPantalla' => "Carreras"
+            'tituloPantalla' => "Salones",
+            'result' => $this->salon_model->get_all_salones()
         );
         $this->load->view('private/admin/index', $data);
     }
@@ -401,6 +403,88 @@ class Administrador extends CI_Controller {
             'tituloPantalla' => "Registro de salón"
         );
         $this->load->view('private/admin/index', $data);
+    }
+
+    public function add_salon() {
+        $datos = array(
+            'id_salon' => $this->input->post('id_salon'),
+            'nombre' => $this->input->post('nombre')
+        );
+
+        $error = "";
+
+        $checkIdCarrera = $this->salon_model->check_id_salon($datos['id_salon']);
+
+        if ($checkIdCarrera == 0) {
+            $this->salon_model->add_salon($datos);
+            redirect('administrador/salon');
+        } else {
+            $error = "El id de salón ya existe.";
+        }
+
+        $data = array(
+            'contenido' => "private/admin/registro_salon",
+            'nav' => "navSalon",
+            'titulo' => "Proyecto Residencias | Registro de Salón",
+            'tituloPantalla' => "Registro de Salón",
+            'error' => $error,
+            'id_salon' => $datos['id_salon'],
+            'nombre' => $datos['nombre']
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function editar_salon() {
+        $id_salon = $this->uri->segment(3);
+        $result = $this->salon_model->get_salon_by_id($id_salon);
+
+        foreach ($result->result() as $row) {
+            $nombre = $row->nombre;
+        }
+
+        $data = array(
+            'contenido' => "private/admin/edit_salon",
+            'nav' => "navSalon",
+            'titulo' => "Proyecto Residencias | Editar Salón",
+            'tituloPantalla' => "Editar Salón " . $nombre,
+            'id_salon' => $id_salon,
+            'nombre' => $nombre
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function edit_salon() {
+        $id_salon = $this->uri->segment(3);
+        $data['nombre'] = $this->input->post('nombre');
+
+        $result = $this->salon_model->get_salon_by_id($id_salon);
+
+        foreach ($result->result() as $row) {
+            $nombre_salonBD = $row->nombre;
+        }
+
+        if ($data['nombre'] == $nombre_salonBD) {
+            redirect('administrador/salon');
+        } else {
+            $this->salon_model->update_salon($id_salon, $data);
+            redirect('administrador/salon');
+        }
+
+        $data = array(
+            'contenido' => "private/admin/edit_salon",
+            'nav' => "navSalon",
+            'titulo' => "Proyecto Residencias | Editar Salón",
+            'tituloPantalla' => "Editar Salón " . $data['nombre'],
+            'id_salon' => $id_salon,
+            'nombre' => $data['nombre']
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function delete_salon() {
+        $id_salon = $this->uri->segment(3);
+        $this->salon_model->delete_salon($id_salon);
+        redirect('administrador/salon');
     }
 
 }

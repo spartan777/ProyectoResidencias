@@ -41,12 +41,14 @@ $(document).ready(function () {
         }
     });
     
-    var validatorCambiarJefe = $('#rutaCambiarJefe').validate({
+    var validatorAddSalon = $('#addSalon').validate({
         rules: {
-            password2: {
-                equalTo: "#passwordCambiar"
+            id_salon: {
+                required: true
+            },
+            nombre: {
+                required: true
             }
-
         }
     });
     
