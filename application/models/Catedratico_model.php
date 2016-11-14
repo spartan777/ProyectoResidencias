@@ -27,6 +27,12 @@ class Catedratico_model extends CI_Model {
         return $query;
     }
     
+    public function get_catedratico_by_carrera($id_carrera){
+        $this->db->where('id_carrera',$id_carrera);
+    	$query = $this->db->get('catedratico');
+        return $query;
+    }
+    
     public function update_catedratico($id_catedratico, $data){
         $this->db->where('id_catedratico',$id_catedratico);
     	$this->db->update('catedratico',$data);

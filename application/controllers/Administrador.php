@@ -18,7 +18,7 @@ class Administrador extends CI_Controller {
         $data = array(
             'contenido' => "private/admin/welcome",
             'nav' => "navHome",
-            'titulo' => "Proyecto Residencias | Iniciar Sesión",
+            'titulo' => "Proyecto Residencias | Zona Administrador",
             'tituloPantalla' => "Bienvenido"
         );
         $this->load->view('private/admin/index', $data);
@@ -49,7 +49,8 @@ class Administrador extends CI_Controller {
     public function add_jefe_carrera() {
         $datosUsuario = array(
             'nombre_usuario' => $this->input->post('id_usuario'),
-            'pass_usuario' => md5($this->input->post('contra'))
+            'pass_usuario' => md5($this->input->post('contra')),
+            'tipo_usuario' => "Jefe"
         );
 
         $datosJefe = array(

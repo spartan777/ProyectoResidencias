@@ -66,10 +66,10 @@
                             </li>
                                                         
                             <li id="navRegistro"><a href="<?php echo base_url(); ?>administrador/bitacora"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;Bitácora</a></li>
+                            <li id="navRegistro"><a href="<?php echo base_url(); ?>welcome/cerrar_sesion"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Cerrar Sesión</a></li>
+                            <li><a><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Usuario: <?php echo $this->session->userdata['user_login']; ?></a></li>
                         </ul>
-                        </li>
-                        </ul>
-
+                       
                     </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->
             </nav>

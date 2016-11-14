@@ -19,6 +19,13 @@ function confirmarDeleteCatedratico(clave_acceso) {
 	$('#modalDeleteCatedratico').modal('show');
 }
 
+function confirmarDeleteCatedraticoByJefe(clave_acceso) {
+	document.getElementById("cuerpoEliminarCatedratico").innerHTML = "¿Desea eliminar el Catedrático con clave: "
+			+ clave_acceso + "?";
+	document.getElementById("rutaEliminarCatedratico").href = "delete_catedratico/" + clave_acceso + "";
+	$('#modalDeleteCatedratico').modal('show');
+}
+
 function confirmarDeleteSalon(clave_acceso) {
 	document.getElementById("cuerpoEliminarSalon").innerHTML = "¿Desea eliminar el salón con clave: "
 			+ clave_acceso + "?";

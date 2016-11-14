@@ -12,6 +12,7 @@
         <title><?php echo $titulo; ?></title>
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/estilos.css" />
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/font-awesome.min.css" />
     </head>
 
     <body>
@@ -32,13 +33,26 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li id="navInicio" ><a href="<?php echo base_url(); ?>">Inicio</a></li>
-                            <li id="navIniciarSesion"><a href="<?php echo base_url(); ?>welcome">Inicio de Sesión</a></li>
-                            <li id="navRegistro"><a href="<?php echo base_url(); ?>welcome/registro">Registrate</a></li>
+                            <li id="navHome" ><a href="<?php echo base_url(); ?>jefe_carrera"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Inicio</a></li>
+                                                        
+                            <li id="navCatedratico" class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Catedrático <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="<?php echo base_url(); ?>jefe_carrera/catedratico"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;Consultar</a></li>
+                                    <li><a href="<?php echo base_url(); ?>jefe_carrera/registro_catedratico"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Agregar</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li id="navSalon" class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>&nbsp;Salones <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="<?php echo base_url(); ?>administrador/salon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;Consultar</a></li>
+                                    <li><a href="<?php echo base_url(); ?>administrador/registro_salon"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Agregar</a></li>
+                                </ul>
+                            </li>
+                            <li id="navRegistro"><a href="<?php echo base_url(); ?>welcome/cerrar_sesion"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Cerrar Sesión</a></li>
+                            <li><a><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Usuario: <?php echo $this->session->userdata['user_login']; ?></a></li>
                         </ul>
-                        </li>
-                        </ul>
-
                     </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->
             </nav>
