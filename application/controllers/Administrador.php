@@ -132,8 +132,8 @@ class Administrador extends CI_Controller {
             'id_carrera' => $this->input->post('id_carrera')
         );
 
-        $checkNombreJefeCarrera = $this->jefe_carrera_model->check_carrera_jefe_carrera($id_usuario);
-        if ($checkNombreJefeCarrera == 1) {
+        $checkNombreJefeCarrera = $this->jefe_carrera_model->check_update_jefe_carrera($id_usuario, $datosJefe['id_carrera']);
+        if ($checkNombreJefeCarrera == 0) {
             $this->jefe_carrera_model->update_jefe_carrera($id_usuario, $datosJefe);
             redirect('administrador/jefe_carrera');
         } else {
@@ -145,8 +145,8 @@ class Administrador extends CI_Controller {
             'nav' => "navJefeCarrera",
             'titulo' => "Proyecto Residencias | Editar Jefe de Carrera",
             'result' => $this->carrera_model->get_all_carreras(),
-            'tituloPantalla' => "Editar " . $nombre,
-            'id_usuario' => $datosJefe['id_usuario'],
+            'tituloPantalla' => "Editar " . $datosJefe['nombre'],
+            'id_usuario' => $id_usuario,
             'nombre' => $datosJefe['nombre'],
             'ape_paterno' => $datosJefe['ape_paterno'],
             'ape_materno' => $datosJefe['ape_materno'],
