@@ -1,18 +1,21 @@
-<?php if (!defined('BASEPATH'))
+<?php
+
+if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Jefe_carrera extends CI_Controller {
-    
+
     public function __construct() {
         parent::__construct();
         $this->load->model('carrera_model');
         $this->load->model('jefe_carrera_model');
         $this->load->model('catedratico_model');
         $this->load->model('salon_model');
+        $this->load->model('grupo_model');
     }
-    
-    public function index(){
-         $data = array(
+
+    public function index() {
+        $data = array(
             'contenido' => "private/jefe_carrera/welcome",
             'nav' => "navHome",
             'titulo' => "Proyecto Residencias | Zona Jefe de Carrera",
@@ -20,11 +23,11 @@ class Jefe_carrera extends CI_Controller {
         );
         $this->load->view('private/jefe_carrera/index', $data);
     }
-    
-    public function catedratico(){
+
+    public function catedratico() {
         $id_usuario = $this->session->userdata['user_login'];
         $resultados = $this->jefe_carrera_model->get_jefe_carrera_by_id($id_usuario);
-        foreach ($resultados->result() as $row){
+        foreach ($resultados->result() as $row) {
             $id_carrera = $row->id_carrera;
         }
         $data = array(
@@ -34,9 +37,9 @@ class Jefe_carrera extends CI_Controller {
             'result' => $this->catedratico_model->get_catedratico_by_carrera($id_carrera),
             'tituloPantalla' => "Catedráticos"
         );
-       $this->load->view('private/jefe_carrera/index', $data);
+        $this->load->view('private/jefe_carrera/index', $data);
     }
-    
+
     public function registro_catedratico() {
         $data = array(
             'contenido' => "private/jefe_carrera/registro_catedratico",
@@ -46,15 +49,20 @@ class Jefe_carrera extends CI_Controller {
         );
         $this->load->view('private/jefe_carrera/index', $data);
     }
-    
+
     public function add_catedratico() {
+        $id_usuario = $this->session->userdata['user_login'];
+        $resultados = $this->jefe_carrera_model->get_jefe_carrera_by_id($id_usuario);
+        foreach ($resultados->result() as $row) {
+            $id_carrera = $row->id_carrera;
+        }
         $datosCatedratico = array(
             'id_catedratico' => $this->input->post('id_usuario'),
             'nombre' => $this->input->post('nombre'),
             'ape_paterno' => $this->input->post('ape_paterno'),
             'ape_materno' => $this->input->post('ape_materno'),
             'correo' => $this->input->post('correo'),
-            'id_carrera' => $this->input->post('id_carrera')
+            'id_carrera' => $id_carrera
         );
 
         $checkIdCatedratico = $this->catedratico_model->check_id_catedratico($datosCatedratico['id_catedratico']);
@@ -125,26 +133,114 @@ class Jefe_carrera extends CI_Controller {
         $this->catedratico_model->delete_catedratico($id_catedratico);
         redirect('jefe_carrera/catedratico');
     }
-    
-    public function salon(){
-         $data = array(
+
+    public function grupos() {
+        $data = array(
+            'contenido' => "private/jefe_carrera/grupos",
+            'nav' => "navGrupo",
+            'titulo' => "Proyecto Residencias | Grupos",
+            'tituloPantalla' => "Grupos",
+            'result' => $this->grupo_model->get_all_grupos()
+        );
+        $this->load->view('private/jefe_carrera/index', $data);
+    }
+
+    public function registro_grupo() {
+        $data = array(
+            'contenido' => "private/jefe_carrera/registro_grupo",
+            'nav' => "navGrupo",
+            'titulo' => "Proyecto Residencias | Registro de Grupo",
+            'tituloPantalla' => "Registro de Grupo"
+        );
+        $this->load->view('private/jefe_carrera/index', $data);
+    }
+
+    public function add_grupo() {
+        $id_usuario = $this->session->userdata['user_login'];
+        $resultados = $this->jefe_carrera_model->get_jefe_carrera_by_id($id_usuario);
+        foreach ($resultados->result() as $row) {
+            $id_carrera = $row->id_carrera;
+        }
+        $datos = array(
+            'id_grupo' => $this->input->post('id_grupo'),
+            'nombre' => $this->input->post('nombre'),
+            'id_carrera' => $id_carrera
+        );
+
+        $error = "";
+
+        $checkIdCarrera = $this->grupo_model->check_id_grupo($datos['id_grupo']);
+
+        if ($checkIdCarrera == 0) {
+            $this->grupo_model->add_grupo($datos);
+            redirect('jefe_carrera/grupos');
+        } else {
+            $error = "El id de grupo ya existe.";
+        }
+
+        $data = array(
+            'contenido' => "private/jefe_carrera/registro_grupo",
+            'nav' => "navGrupo",
+            'titulo' => "Proyecto Residencias | Registro de Grupo",
+            'tituloPantalla' => "Registro de Grupo",
+            'error' => $error,
+            'id_grupo' => $datos['id_grupo'],
+            'nombre' => $datos['nombre']
+        );
+        $this->load->view('private/jefe_carrera/index', $data);
+    }
+
+    public function editar_grupo() {
+        $id_grupo = $this->uri->segment(3);
+        $result = $this->grupo_model->get_grupo_by_id($id_grupo);
+
+        foreach ($result->result() as $row) {
+            $nombre = $row->nombre;
+        }
+
+        $data = array(
+            'contenido' => "private/jefe_carrera/edit_grupo",
+            'nav' => "navGrupo",
+            'titulo' => "Proyecto Residencias | Editar Grupo",
+            'tituloPantalla' => "Editar Grupo " . $nombre,
+            'id_grupo' => $id_grupo,
+            'nombre' => $nombre
+        );
+        $this->load->view('private/jefe_carrera/index', $data);
+    }
+
+    public function edit_grupo() {
+        $id_grupo = $this->uri->segment(3);
+        $data['nombre'] = $this->input->post('nombre');
+        $this->grupo_model->update_grupo($id_grupo, $data);
+        redirect('jefe_carrera/grupos');
+    }
+
+    public function delete_grupo() {
+        $id_grupo = $this->uri->segment(3);
+        $this->grupo_model->delete_grupo($id_grupo);
+        redirect('jefe_carrera/grupos');
+    }
+
+    public function salon() {
+        $data = array(
             'contenido' => "private/jefe_carrera/salones",
-            'nav' => "navCatedratico",
+            'nav' => "navSalon",
             'titulo' => "Proyecto Residencias | Salones",
             'result' => $this->salon_model->get_all_salones(),
             'tituloPantalla' => "Salones"
         );
-       $this->load->view('private/jefe_carrera/index', $data);
+        $this->load->view('private/jefe_carrera/index', $data);
     }
-    
-    public function asignar_horario(){
+
+    public function asignar_horario() {
         $data = array(
             'contenido' => "private/jefe_carrera/asignar_horario",
-            'nav' => "navCatedratico",
+            'nav' => "navSalon",
             'titulo' => "Proyecto Residencias | Salones",
             'tituloPantalla' => "Salones"
         );
-       $this->load->view('private/jefe_carrera/index', $data);
+        $this->load->view('private/jefe_carrera/index', $data);
     }
-    
+
 }

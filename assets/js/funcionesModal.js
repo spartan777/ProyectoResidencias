@@ -33,10 +33,9 @@ function confirmarDeleteSalon(clave_acceso) {
 	$('#modalDeleteSalon').modal('show');
 }
 
-function confirmarDeleteDictamen(nombre_archivo) {
-	document.getElementById("tituloEliminarDictamen").innerHTML = "Eliminar " + nombre_archivo;
-	document.getElementById("cuerpoEliminarDictamen").innerHTML = "¿Desea eliminar el dictamen con nombre: "
-			+ nombre_archivo + "?";
-	document.getElementById("rutaEliminarDictamen").href = "eliminar_dictamen/" + nombre_archivo + "";
-	$('#modalDeleteDictamen').modal('show');
+function confirmarDeleteGrupo(clave_acceso) {
+	document.getElementById("cuerpoEliminarGrupo").innerHTML = "¿Desea eliminar el grupo con clave: "
+			+ clave_acceso + "?";
+	document.getElementById("rutaEliminarGrupo").href = "delete_grupo/" + clave_acceso + "";
+	$('#modalDeleteGrupo').modal('show');
 }

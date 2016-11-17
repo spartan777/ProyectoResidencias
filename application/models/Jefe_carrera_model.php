@@ -18,6 +18,26 @@ class Jefe_carrera_model extends CI_Model {
         return $query->num_rows();
     }
     
+    public function check_update_jefe_carrera($id_usuario, $id_carrera){
+        $this->db->where('id_usuario', $id_usuario);
+        $query = $this->db->get('jefe_carrera');
+        $num = 0;
+        foreach ($query->result() as $row){
+            $id = $row->id_carrera;
+        }
+        
+        if($id != $id_carrera){
+            $this->db->where('id_carrera', $id_carrera);
+            $queryId = $this->db->get('jefe_carrera');
+            
+            if($queryId->num_rows() == 1){
+                $num = 1;
+            }
+        }
+        
+        return $num;
+    }
+
     public function add_jefe_carrera($data){
         $this->db->insert('jefe_carrera', $data);
     }
