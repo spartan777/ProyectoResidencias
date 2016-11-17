@@ -10,21 +10,21 @@
     <div class="form-group">
         <label for="nombre" class="col-sm-3 control-label">Nombre Catedrático</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="nombre" placeholder="Escriba el Nombre del Catedrático" value="<?php if(isset($nombre)){ echo $nombre; } ?>">
+            <input type="text" class="form-control" name="nombre" maxlength="50" placeholder="Escriba el Nombre del Catedrático" value="<?php if(isset($nombre)){ echo $nombre; } ?>">
         </div>
     </div>
     
     <div class="form-group">
         <label for="inputPassword3" class="col-sm-3 control-label">Apellido Paterno</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="ape_paterno" placeholder="Escriba Apellido Paterno" value="<?php if(isset($ape_paterno)){ echo $ape_paterno; } ?>">
+            <input type="text" class="form-control" name="ape_paterno" maxlength="50" placeholder="Escriba Apellido Paterno" value="<?php if(isset($ape_paterno)){ echo $ape_paterno; } ?>">
         </div>
     </div>
 
     <div class="form-group">
         <label for="ape_materno" class="col-sm-3 control-label">Apellido Materno</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="ape_materno" placeholder="Escriba Apellido Paterno" value="<?php if(isset($ape_materno)){ echo $ape_materno; } ?>">
+            <input type="text" class="form-control" name="ape_materno" maxlength="50" placeholder="Escriba Apellido Paterno" value="<?php if(isset($ape_materno)){ echo $ape_materno; } ?>">
         </div>
     </div>
 
@@ -48,7 +48,7 @@
     <div class="form-group">
         <label for="correo" class="col-sm-3 control-label">Correo</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="correo" placeholder="Correo" value="<?php if(isset($correo)){ echo $correo; } ?>">
+            <input type="text" class="form-control" name="correo" maxlength="100"  placeholder="Correo" value="<?php if(isset($correo)){ echo $correo; } ?>">
         </div>
     </div>
 
