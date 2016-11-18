@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-11-2016 a las 00:45:42
+-- Tiempo de generación: 18-11-2016 a las 23:00:31
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -97,6 +97,28 @@ INSERT INTO `jefe_carrera` (`id_usuario`, `nombre`, `ape_materno`, `ape_paterno`
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `materias`
+--
+
+CREATE TABLE `materias` (
+  `id_materia` varchar(20) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `id_carrera` varchar(13) NOT NULL,
+  `creditos` int(11) NOT NULL,
+  `horas_teoricas` int(11) NOT NULL,
+  `horas_practicas` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `materias`
+--
+
+INSERT INTO `materias` (`id_materia`, `nombre`, `id_carrera`, `creditos`, `horas_teoricas`, `horas_practicas`) VALUES
+('8963', 'Prueba Edit', '698', 9, 6, 4);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `salones`
 --
 
@@ -174,6 +196,13 @@ ALTER TABLE `jefe_carrera`
   ADD KEY `id_carrera` (`id_carrera`);
 
 --
+-- Indices de la tabla `materias`
+--
+ALTER TABLE `materias`
+  ADD PRIMARY KEY (`id_materia`),
+  ADD KEY `id_carrera` (`id_carrera`);
+
+--
 -- Indices de la tabla `salones`
 --
 ALTER TABLE `salones`
@@ -215,3 +244,9 @@ ALTER TABLE `grupos`
 --
 ALTER TABLE `jefe_carrera`
   ADD CONSTRAINT `jefe_carrera_ibfk_1` FOREIGN KEY (`id_carrera`) REFERENCES `carreras` (`id_carrera`);
+
+--
+-- Filtros para la tabla `materias`
+--
+ALTER TABLE `materias`
+  ADD CONSTRAINT `materias_ibfk_1` FOREIGN KEY (`id_carrera`) REFERENCES `carreras` (`id_carrera`);
