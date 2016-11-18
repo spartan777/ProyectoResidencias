@@ -59,6 +59,15 @@
                                 </ul>
                             </li>
                             
+                            
+                            <li id="navMateria" class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>&nbsp;Materias <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="<?php echo base_url(); ?>jefe_carrera/materias"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;Consultar</a></li>
+                                    <li><a href="<?php echo base_url(); ?>jefe_carrera/registro_materia"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Agregar</a></li>
+                                </ul>
+                            </li>
+                            
                             <li id="navRegistro"><a href="<?php echo base_url(); ?>welcome/cerrar_sesion"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Cerrar Sesión</a></li>
                             <li><a><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Usuario: <?php echo $this->session->userdata['user_login']; ?></a></li>
                         </ul>
@@ -89,6 +98,10 @@
         <!-- Placed at the end of the document so the pages load faster -->
         <script type="text/javascript" src= "<?php echo base_url(); ?>assets/js/jquery-2.2.0.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+        <script src="<?php echo base_url() ?>assets/js/jquery.validate.min.js"></script>
+        <script src="<?php echo base_url() ?>assets/js/messages_es.js"></script>
+        <script src="<?php echo base_url() ?>assets/js/validateForm.js"></script>
+        <script src="<?php echo base_url() ?>assets/js/funcionesModal.js"></script>
         <script type="text/javascript">
         $(document).ready(function(){
            document.getElementById("<?php echo $nav; ?>").className = "active"; 

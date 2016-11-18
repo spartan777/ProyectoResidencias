@@ -39,3 +39,10 @@ function confirmarDeleteGrupo(clave_acceso) {
 	document.getElementById("rutaEliminarGrupo").href = "delete_grupo/" + clave_acceso + "";
 	$('#modalDeleteGrupo').modal('show');
 }
+
+function confirmarDeleteMateria(clave_acceso) {
+	document.getElementById("cuerpoEliminarMateria").innerHTML = "¿Desea eliminar la materia con clave: "
+			+ clave_acceso + "?";
+	document.getElementById("rutaEliminarMateria").href = "delete_materia/" + clave_acceso + "";
+	$('#modalDeleteMateria').modal('show');
+}

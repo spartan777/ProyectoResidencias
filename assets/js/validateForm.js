@@ -52,13 +52,36 @@ $(document).ready(function () {
         }
     });
     
-    var validatorAddGRupo = $('#addGrupo').validate({
+    var validatorAddGrupo = $('#addGrupo').validate({
         rules: {
             id_grupo: {
                 required: true
             },
             nombre: {
                 required: true
+            }
+        }
+    });
+    
+    var validatorAddMateria = $('#addMateria').validate({
+        rules: {
+            id_materia: {
+                required: true
+            },
+            nombre: {
+                required: true
+            },
+            creditos: {
+                required: true,
+                number: true
+            },
+            horas_teoricas: {
+                required: true,
+                number: true
+            },
+            horas_practicas: {
+                required: true,
+                number: true
             }
         }
     });

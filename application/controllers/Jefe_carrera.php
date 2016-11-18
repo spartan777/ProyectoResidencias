@@ -12,6 +12,7 @@ class Jefe_carrera extends CI_Controller {
         $this->load->model('catedratico_model');
         $this->load->model('salon_model');
         $this->load->model('grupo_model');
+        $this->load->model('materia_model');
     }
 
     public function index() {
@@ -220,6 +221,118 @@ class Jefe_carrera extends CI_Controller {
         $id_grupo = $this->uri->segment(3);
         $this->grupo_model->delete_grupo($id_grupo);
         redirect('jefe_carrera/grupos');
+    }
+    
+    public function materias() {
+        $id_usuario = $this->session->userdata['user_login'];
+        $resultados = $this->jefe_carrera_model->get_jefe_carrera_by_id($id_usuario);
+        foreach ($resultados->result() as $row) {
+            $id_carrera = $row->id_carrera;
+        }
+        
+        $data = array(
+            'contenido' => "private/jefe_carrera/materias",
+            'nav' => "navMateria",
+            'titulo' => "Proyecto Residencias | Materias",
+            'tituloPantalla' => "Materias",
+            'result' =>  $this->materia_model->get_materia_by_id_carrera($id_carrera)
+        );
+        $this->load->view('private/jefe_carrera/index', $data);
+    }
+
+    public function registro_materia() {
+        
+        $data = array(
+            'contenido' => "private/jefe_carrera/registro_materia",
+            'nav' => "navMateria",
+            'titulo' => "Proyecto Residencias | Registro de Materia",
+            'tituloPantalla' => "Registro de Materia"
+        );
+        $this->load->view('private/jefe_carrera/index', $data);
+    }
+
+    public function add_materia() {
+        $id_usuario = $this->session->userdata['user_login'];
+        $resultados = $this->jefe_carrera_model->get_jefe_carrera_by_id($id_usuario);
+        foreach ($resultados->result() as $row) {
+            $id_carrera = $row->id_carrera;
+        }
+        $datos = array(
+            'id_materia' => $this->input->post('id_materia'),
+            'nombre' => $this->input->post('nombre'),
+            'id_carrera' => $id_carrera,
+            'creditos' => $this->input->post('creditos'),
+            'horas_teoricas' => $this->input->post('horas_teoricas'),
+            'horas_practicas' => $this->input->post('horas_practicas')
+        );
+
+        $error = "";
+
+        $checkIdMateria = $this->materia_model->check_id_materia($datos['id_materia']);
+
+        if ($checkIdMateria == 0) {
+            $this->materia_model->add_materia($datos);
+            redirect('jefe_carrera/materias');
+        } else {
+            $error = "El id de materia ya existe.";
+        }
+
+        $data = array(
+            'contenido' => "private/jefe_carrera/registro_materia",
+            'nav' => "navMateria",
+            'titulo' => "Proyecto Residencias | Registro de Materia",
+            'tituloPantalla' => "Registro de Materia",
+            'error' => $error,
+            'id_materia' => $datos['id_materia'],
+            'nombre' => $datos['nombre'],
+            'creditos' => $datos['creditos'],
+            'horas_teoricas' => $datos['horas_teoricas'],
+            'horas_practicas' => $datos['horas_practicas']
+        );
+        $this->load->view('private/jefe_carrera/index', $data);
+    }
+
+    public function editar_materia() {
+        $id_materia = $this->uri->segment(3);
+        $result = $this->materia_model->get_materia_by_id($id_materia);
+
+        foreach ($result->result() as $row) {
+            $nombre = $row->nombre;
+            $creditos = $row->creditos;
+            $horas_teoricas = $row->horas_teoricas;
+            $horas_practicas = $row->horas_practicas;
+        }
+
+        $data = array(
+            'contenido' => "private/jefe_carrera/edit_materia",
+            'nav' => "navMateria",
+            'titulo' => "Proyecto Residencias | Editar Materia",
+            'tituloPantalla' => "Editar Materia " . $nombre,
+            'id_materia' => $id_materia,
+            'nombre' => $nombre,
+            'creditos' => $creditos,
+            'horas_teoricas' => $horas_teoricas,
+            'horas_practicas' => $horas_practicas
+        );
+        $this->load->view('private/jefe_carrera/index', $data);
+    }
+
+    public function edit_materia() {
+        $id_materia = $this->uri->segment(3);
+        $datos = array(
+            'nombre' => $this->input->post('nombre'),
+            'creditos' => $this->input->post('creditos'),
+            'horas_teoricas' => $this->input->post('horas_teoricas'),
+            'horas_practicas' => $this->input->post('horas_practicas')
+        );
+        $this->materia_model->update_materia($id_materia, $datos);
+        redirect('jefe_carrera/materias');
+    }
+
+    public function delete_materia() {
+        $id_materia = $this->uri->segment(3);
+        $this->materia_model->delete_materia($id_materia);
+        redirect('jefe_carrera/materias');
     }
 
     public function salon() {
