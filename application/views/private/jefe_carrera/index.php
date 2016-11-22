@@ -43,14 +43,6 @@
                                 </ul>
                             </li>
                             
-                            <li id="navSalon" class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>&nbsp;Salones <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="<?php echo base_url(); ?>jefe_carrera/salon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;Consultar</a></li>
-                                    <li><a href="<?php echo base_url(); ?>jefe_carrera/asignar_salon"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Agregar</a></li>
-                                </ul>
-                            </li>
-                            
                             <li id="navGrupo" class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>&nbsp;Grupos <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
@@ -67,6 +59,7 @@
                                     <li><a href="<?php echo base_url(); ?>jefe_carrera/registro_materia"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Agregar</a></li>
                                 </ul>
                             </li>
+                            <li id="navAsignar"><a href="<?php echo base_url(); ?>jefe_carrera/select_catedratico"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;Asignar Horario</a></li>
                             
                             <li id="navRegistro"><a href="<?php echo base_url(); ?>welcome/cerrar_sesion"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Cerrar Sesión</a></li>
                             <li><a><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Usuario: <?php echo $this->session->userdata['user_login']; ?></a></li>

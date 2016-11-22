@@ -27,6 +27,12 @@ class Grupo_model extends CI_Model {
         return $query;
     }
     
+    public function get_grupo_by_id_carrera($id_carrera){
+        $this->db->where('id_carrera',$id_carrera);
+    	$query = $this->db->get('grupos');
+        return $query;
+    }
+    
     public function update_grupo($id_grupo, $nombre_grupo){
         $this->db->where('id_grupo',$id_grupo);
     	$this->db->update('grupos',$nombre_grupo);

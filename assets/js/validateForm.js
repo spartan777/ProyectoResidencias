@@ -86,4 +86,25 @@ $(document).ready(function () {
         }
     });
     
+    var validatorAddDetalleHorario = $('#addDetalleHorario').validate({
+        rules: {
+            id_grupo: {
+                required: true
+            },
+            id_dia_semana: {
+                required: true
+            },
+            id_horario: {
+                required: true,
+                number: true
+            },
+            id_materia: {
+                required: true
+            },
+            id_salon: {
+                required: true
+            }
+        }
+    });
+    
 });
