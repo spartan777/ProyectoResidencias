@@ -147,6 +147,13 @@
 </tbody>
 </table>
 
+<?php
+    if ($resultTabla->num_rows > 0) {
+?>
+<a href="<?php echo base_url() ?>jefe_carrera/descargar_horario/<?php echo $id_catedratico; ?>"><button class="btn btn-primary"><span class="glyphicon glyphicon-download"></span>&nbsp;Descargar Horario</button></a>
+<?php
+    }
+?>
 
 <!--<table class="table table-bordered">
     <thead>
