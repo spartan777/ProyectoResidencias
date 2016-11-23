@@ -18,7 +18,7 @@ class Login_model extends CI_Model {
     }
     
     public function delete_usuario($id_usuario){
-        $this->db->where('nombre_usuario',$id_usuario);
+        $this->db->where('clave_usuario',$id_usuario);
     	$this->db->delete('usuario');
     }
 }

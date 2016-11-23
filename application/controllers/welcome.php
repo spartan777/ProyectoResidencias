@@ -28,9 +28,10 @@ class Welcome extends CI_Controller {
 
         if ($result) {
             $user_data = array(
-                'user_login' => $result->nombre_usuario,
+                'user_login' => $result->clave_usuario,
                 'pass_login' => $result->pass_usuario,
                 'tipo_login' => $result->tipo_usuario,
+                'nombre_usuario' => $result->nombre_usuario,
                 'logueado' => TRUE
             );
             $this->session->set_userdata($user_data);

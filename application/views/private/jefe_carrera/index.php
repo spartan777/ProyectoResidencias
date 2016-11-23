@@ -62,7 +62,7 @@
                             <li id="navAsignar"><a href="<?php echo base_url(); ?>jefe_carrera/select_catedratico"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;Asignar Horario</a></li>
                             
                             <li id="navRegistro"><a href="<?php echo base_url(); ?>welcome/cerrar_sesion"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Cerrar Sesión</a></li>
-                            <li><a><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Usuario: <?php echo $this->session->userdata['user_login']; ?></a></li>
+                            <li><a><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Usuario: <?php echo $this->session->userdata['nombre_usuario']; ?></a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-11-2016 a las 03:29:05
--- Versión del servidor: 5.6.17
--- Versión de PHP: 5.5.12
+-- Tiempo de generación: 24-11-2016 a las 00:11:00
+-- Versión del servidor: 10.1.13-MariaDB
+-- Versión de PHP: 5.6.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -20,11 +20,10 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `carreras`
 --
 
-CREATE TABLE IF NOT EXISTS `carreras` (
+CREATE TABLE `carreras` (
   `id_carrera` varchar(13) NOT NULL,
   `nombre_carrera` varchar(50) NOT NULL,
-  `img_carrera` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_carrera`)
+  `img_carrera` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -33,7 +32,8 @@ CREATE TABLE IF NOT EXISTS `carreras` (
 
 INSERT INTO `carreras` (`id_carrera`, `nombre_carrera`, `img_carrera`) VALUES
 ('123', 'Gestión', ''),
-('126', 'Sistemas', '');
+('5632', 'Sistemas', ''),
+('698', 'Informatica', '');
 
 -- --------------------------------------------------------
 
@@ -41,16 +41,13 @@ INSERT INTO `carreras` (`id_carrera`, `nombre_carrera`, `img_carrera`) VALUES
 -- Estructura de tabla para la tabla `catedratico`
 --
 
-CREATE TABLE IF NOT EXISTS `catedratico` (
+CREATE TABLE `catedratico` (
   `id_catedratico` varchar(20) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `ape_materno` varchar(50) NOT NULL,
   `ape_paterno` varchar(40) NOT NULL,
   `correo` varchar(100) NOT NULL,
-  `id_carrera` varchar(13) NOT NULL,
-  PRIMARY KEY (`id_catedratico`),
-  KEY `id_catedratico` (`id_catedratico`),
-  KEY `catedratico_ibfk_1` (`id_carrera`)
+  `id_carrera` varchar(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -66,11 +63,10 @@ INSERT INTO `catedratico` (`id_catedratico`, `nombre`, `ape_materno`, `ape_pater
 -- Estructura de tabla para la tabla `cat_dia_semana`
 --
 
-CREATE TABLE IF NOT EXISTS `cat_dia_semana` (
-  `id_dia_semana` int(11) NOT NULL AUTO_INCREMENT,
-  `desc_dia_semana` varchar(15) NOT NULL,
-  PRIMARY KEY (`id_dia_semana`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+CREATE TABLE `cat_dia_semana` (
+  `id_dia_semana` int(11) NOT NULL,
+  `desc_dia_semana` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `cat_dia_semana`
@@ -90,11 +86,10 @@ INSERT INTO `cat_dia_semana` (`id_dia_semana`, `desc_dia_semana`) VALUES
 -- Estructura de tabla para la tabla `cat_horario`
 --
 
-CREATE TABLE IF NOT EXISTS `cat_horario` (
-  `id_horario` int(11) NOT NULL AUTO_INCREMENT,
-  `desc_horario` varchar(15) NOT NULL,
-  PRIMARY KEY (`id_horario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+CREATE TABLE `cat_horario` (
+  `id_horario` int(11) NOT NULL,
+  `desc_horario` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `cat_horario`
@@ -120,32 +115,26 @@ INSERT INTO `cat_horario` (`id_horario`, `desc_horario`) VALUES
 -- Estructura de tabla para la tabla `detalle_horario`
 --
 
-CREATE TABLE IF NOT EXISTS `detalle_horario` (
-  `id_detalle` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `detalle_horario` (
+  `id_detalle` int(11) NOT NULL,
   `id_catedratico` varchar(20) NOT NULL,
   `id_dia_semana` int(11) NOT NULL,
   `id_horario` int(11) NOT NULL,
   `id_materia` varchar(20) NOT NULL,
   `id_salon` varchar(10) NOT NULL,
   `id_grupo` varchar(5) NOT NULL,
-  PRIMARY KEY (`id_detalle`),
-  KEY `id_catedratico` (`id_catedratico`),
-  KEY `id_dia_semana` (`id_dia_semana`),
-  KEY `id_horario` (`id_horario`),
-  KEY `id_materia` (`id_materia`),
-  KEY `id_salon` (`id_salon`),
-  KEY `id_grupo` (`id_grupo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+  `periodo` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `detalle_horario`
 --
 
-INSERT INTO `detalle_horario` (`id_detalle`, `id_catedratico`, `id_dia_semana`, `id_horario`, `id_materia`, `id_salon`, `id_grupo`) VALUES
-(5, '789', 3, 2, '8963', '21', '4787'),
-(6, '789', 3, 1, '8963', '21', '4787'),
-(7, '789', 1, 12, '8963', '21', '8544'),
-(8, '789', 4, 1, '8963', '21', '4787');
+INSERT INTO `detalle_horario` (`id_detalle`, `id_catedratico`, `id_dia_semana`, `id_horario`, `id_materia`, `id_salon`, `id_grupo`, `periodo`) VALUES
+(5, '789', 3, 2, '8963', '21', '4787', 'Agosto - Diciembre 2016'),
+(6, '789', 3, 1, '8963', '21', '4787', 'Agosto - Diciembre 2016'),
+(7, '789', 1, 12, '8963', '21', '8544', 'Agosto - Diciembre 2016'),
+(8, '789', 4, 1, '8963', '21', '4787', 'Agosto - Diciembre 2016');
 
 -- --------------------------------------------------------
 
@@ -153,12 +142,10 @@ INSERT INTO `detalle_horario` (`id_detalle`, `id_catedratico`, `id_dia_semana`, 
 -- Estructura de tabla para la tabla `grupos`
 --
 
-CREATE TABLE IF NOT EXISTS `grupos` (
+CREATE TABLE `grupos` (
   `id_grupo` varchar(5) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `id_carrera` varchar(13) NOT NULL,
-  PRIMARY KEY (`id_grupo`),
-  KEY `id_carrera` (`id_carrera`)
+  `id_carrera` varchar(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -166,8 +153,8 @@ CREATE TABLE IF NOT EXISTS `grupos` (
 --
 
 INSERT INTO `grupos` (`id_grupo`, `nombre`, `id_carrera`) VALUES
-('4787', 'CC3', '123'),
-('8544', 'CC5', '123');
+('4787', 'CC3', '698'),
+('8544', 'CC5', '698');
 
 -- --------------------------------------------------------
 
@@ -175,15 +162,13 @@ INSERT INTO `grupos` (`id_grupo`, `nombre`, `id_carrera`) VALUES
 -- Estructura de tabla para la tabla `jefe_carrera`
 --
 
-CREATE TABLE IF NOT EXISTS `jefe_carrera` (
+CREATE TABLE `jefe_carrera` (
   `id_usuario` varchar(20) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `ape_materno` varchar(50) NOT NULL,
   `ape_paterno` varchar(40) NOT NULL,
   `correo` varchar(100) NOT NULL,
-  `id_carrera` varchar(13) NOT NULL,
-  PRIMARY KEY (`id_usuario`),
-  KEY `id_carrera` (`id_carrera`)
+  `id_carrera` varchar(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -191,7 +176,9 @@ CREATE TABLE IF NOT EXISTS `jefe_carrera` (
 --
 
 INSERT INTO `jefe_carrera` (`id_usuario`, `nombre`, `ape_materno`, `ape_paterno`, `correo`, `id_carrera`) VALUES
-('585', 'fsd', 'fds', 'dfs', 'dsa', '123');
+('3698', 'ad', 'fsa', 'asd', 'dsa@dsa.com', '5632'),
+('895', 'sfk', 'sdf', 'jksaj', 'fds@asd.com', '123'),
+('89657', 'adsk', 'dal', 'ask', 'prueba@dksnmfd.com', '123');
 
 -- --------------------------------------------------------
 
@@ -199,15 +186,13 @@ INSERT INTO `jefe_carrera` (`id_usuario`, `nombre`, `ape_materno`, `ape_paterno`
 -- Estructura de tabla para la tabla `materias`
 --
 
-CREATE TABLE IF NOT EXISTS `materias` (
+CREATE TABLE `materias` (
   `id_materia` varchar(20) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `id_carrera` varchar(13) NOT NULL,
   `creditos` int(11) NOT NULL,
   `horas_teoricas` int(11) NOT NULL,
-  `horas_practicas` int(11) NOT NULL,
-  PRIMARY KEY (`id_materia`),
-  KEY `id_carrera` (`id_carrera`)
+  `horas_practicas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -215,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `materias` (
 --
 
 INSERT INTO `materias` (`id_materia`, `nombre`, `id_carrera`, `creditos`, `horas_teoricas`, `horas_practicas`) VALUES
-('8963', 'Calculo', '123', 10, 5, 5);
+('8963', 'Prueba Edit', '698', 9, 6, 4);
 
 -- --------------------------------------------------------
 
@@ -223,10 +208,9 @@ INSERT INTO `materias` (`id_materia`, `nombre`, `id_carrera`, `creditos`, `horas
 -- Estructura de tabla para la tabla `salones`
 --
 
-CREATE TABLE IF NOT EXISTS `salones` (
+CREATE TABLE `salones` (
   `id_salon` varchar(10) NOT NULL,
-  `nombre` varchar(30) NOT NULL,
-  PRIMARY KEY (`id_salon`)
+  `nombre` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -234,7 +218,9 @@ CREATE TABLE IF NOT EXISTS `salones` (
 --
 
 INSERT INTO `salones` (`id_salon`, `nombre`) VALUES
-('21', 'Edit prueba');
+('21', 'Edit prueba'),
+('23', 'Prueba'),
+('65', 'Sala de computo');
 
 -- --------------------------------------------------------
 
@@ -242,26 +228,127 @@ INSERT INTO `salones` (`id_salon`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `usuario`
 --
 
-CREATE TABLE IF NOT EXISTS `usuario` (
-  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre_usuario` varchar(20) NOT NULL,
+CREATE TABLE `usuario` (
+  `id_usuario` int(11) NOT NULL,
+  `nombre_usuario` varchar(100) NOT NULL,
   `pass_usuario` varchar(50) NOT NULL,
   `tipo_usuario` varchar(15) NOT NULL,
-  PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+  `clave_usuario` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `pass_usuario`, `tipo_usuario`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Admin'),
-(2, '0', '0', ''),
-(3, '585', '21232f297a57a5a743894a0e4a801fc3', 'Jefe'),
-(4, '', '', ''),
-(5, '', '', ''),
-(6, '', '', '');
+INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `pass_usuario`, `tipo_usuario`, `clave_usuario`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Admin', ''),
+(2, '0', '0', '', ''),
+(4, '', '', '', ''),
+(5, '', '', '', ''),
+(6, '', '', '', ''),
+(7, 'fds@asd.com', '21232f297a57a5a743894a0e4a801fc3', 'Jefe', '895'),
+(8, '3698', '21232f297a57a5a743894a0e4a801fc3', 'Jefe', ''),
+(9, '89657', '21232f297a57a5a743894a0e4a801fc3', 'Jefe', '');
 
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `carreras`
+--
+ALTER TABLE `carreras`
+  ADD PRIMARY KEY (`id_carrera`);
+
+--
+-- Indices de la tabla `catedratico`
+--
+ALTER TABLE `catedratico`
+  ADD PRIMARY KEY (`id_catedratico`),
+  ADD KEY `id_catedratico` (`id_catedratico`),
+  ADD KEY `catedratico_ibfk_1` (`id_carrera`);
+
+--
+-- Indices de la tabla `cat_dia_semana`
+--
+ALTER TABLE `cat_dia_semana`
+  ADD PRIMARY KEY (`id_dia_semana`);
+
+--
+-- Indices de la tabla `cat_horario`
+--
+ALTER TABLE `cat_horario`
+  ADD PRIMARY KEY (`id_horario`);
+
+--
+-- Indices de la tabla `detalle_horario`
+--
+ALTER TABLE `detalle_horario`
+  ADD PRIMARY KEY (`id_detalle`),
+  ADD KEY `id_catedratico` (`id_catedratico`),
+  ADD KEY `id_dia_semana` (`id_dia_semana`),
+  ADD KEY `id_horario` (`id_horario`),
+  ADD KEY `id_materia` (`id_materia`),
+  ADD KEY `id_salon` (`id_salon`),
+  ADD KEY `id_grupo` (`id_grupo`);
+
+--
+-- Indices de la tabla `grupos`
+--
+ALTER TABLE `grupos`
+  ADD PRIMARY KEY (`id_grupo`),
+  ADD KEY `id_carrera` (`id_carrera`);
+
+--
+-- Indices de la tabla `jefe_carrera`
+--
+ALTER TABLE `jefe_carrera`
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD KEY `id_carrera` (`id_carrera`);
+
+--
+-- Indices de la tabla `materias`
+--
+ALTER TABLE `materias`
+  ADD PRIMARY KEY (`id_materia`),
+  ADD KEY `id_carrera` (`id_carrera`);
+
+--
+-- Indices de la tabla `salones`
+--
+ALTER TABLE `salones`
+  ADD PRIMARY KEY (`id_salon`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id_usuario`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `cat_dia_semana`
+--
+ALTER TABLE `cat_dia_semana`
+  MODIFY `id_dia_semana` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `cat_horario`
+--
+ALTER TABLE `cat_horario`
+  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT de la tabla `detalle_horario`
+--
+ALTER TABLE `detalle_horario`
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- Restricciones para tablas volcadas
 --
@@ -276,12 +363,12 @@ ALTER TABLE `catedratico`
 -- Filtros para la tabla `detalle_horario`
 --
 ALTER TABLE `detalle_horario`
-  ADD CONSTRAINT `detalle_horario_ibfk_6` FOREIGN KEY (`id_grupo`) REFERENCES `grupos` (`id_grupo`),
   ADD CONSTRAINT `detalle_horario_ibfk_1` FOREIGN KEY (`id_catedratico`) REFERENCES `catedratico` (`id_catedratico`),
   ADD CONSTRAINT `detalle_horario_ibfk_2` FOREIGN KEY (`id_dia_semana`) REFERENCES `cat_dia_semana` (`id_dia_semana`),
   ADD CONSTRAINT `detalle_horario_ibfk_3` FOREIGN KEY (`id_horario`) REFERENCES `cat_horario` (`id_horario`),
   ADD CONSTRAINT `detalle_horario_ibfk_4` FOREIGN KEY (`id_materia`) REFERENCES `materias` (`id_materia`),
-  ADD CONSTRAINT `detalle_horario_ibfk_5` FOREIGN KEY (`id_salon`) REFERENCES `salones` (`id_salon`);
+  ADD CONSTRAINT `detalle_horario_ibfk_5` FOREIGN KEY (`id_salon`) REFERENCES `salones` (`id_salon`),
+  ADD CONSTRAINT `detalle_horario_ibfk_6` FOREIGN KEY (`id_grupo`) REFERENCES `grupos` (`id_grupo`);
 
 --
 -- Filtros para la tabla `grupos`

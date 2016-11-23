@@ -48,7 +48,8 @@ class Administrador extends CI_Controller {
 
     public function add_jefe_carrera() {
         $datosUsuario = array(
-            'nombre_usuario' => $this->input->post('id_usuario'),
+            'nombre_usuario' => $this->input->post('correo'),
+            'clave_usuario' => $this->input->post('id_usuario'),
             'pass_usuario' => md5($this->input->post('contra')),
             'tipo_usuario' => "Jefe"
         );
@@ -64,14 +65,19 @@ class Administrador extends CI_Controller {
 
         $checkIdJefeCarrera = $this->jefe_carrera_model->check_id_jefe_carrera($datosJefe['id_usuario']);
         $checkNombreJefeCarrera = $this->jefe_carrera_model->check_carrera_jefe_carrera($datosJefe['id_carrera']);
+        $checkCorreoJefeCarrera = $this->jefe_carrera_model->check_correo_jefe_carrera($datosJefe['correo']);
 
         if ($checkIdJefeCarrera == 0) {
-            if ($checkNombreJefeCarrera == 0) {
-                $this->login_model->insert_usuario($datosUsuario);
-                $this->jefe_carrera_model->add_jefe_carrera($datosJefe);
-                redirect('administrador/jefe_carrera');
-            } else {
-                $error = "La carrera ya tiene un Jefe registrado.";
+            if($checkCorreoJefeCarrera == 0){
+                if ($checkNombreJefeCarrera == 0) {
+                    $this->login_model->insert_usuario($datosUsuario);
+                    $this->jefe_carrera_model->add_jefe_carrera($datosJefe);
+                    redirect('administrador/jefe_carrera');
+                } else {
+                    $error = "La carrera ya tiene un Jefe registrado.";
+                }
+            }else{
+                $error = "El correo ya existe.";
             }
         } else {
             $error = "El id del Jefe de Carrera ya existe.";
@@ -133,9 +139,14 @@ class Administrador extends CI_Controller {
         );
 
         $checkNombreJefeCarrera = $this->jefe_carrera_model->check_update_jefe_carrera($id_usuario, $datosJefe['id_carrera']);
+        $checkCorreoJefeCarrera = $this->jefe_carrera_model->check_update_correo_jefe_carrera($datosJefe['correo'], $datosJefe['id_carrera']);
         if ($checkNombreJefeCarrera == 0) {
-            $this->jefe_carrera_model->update_jefe_carrera($id_usuario, $datosJefe);
-            redirect('administrador/jefe_carrera');
+            if($checkCorreoJefeCarrera == 0){
+                $this->jefe_carrera_model->update_jefe_carrera($id_usuario, $datosJefe);
+                redirect('administrador/jefe_carrera');
+            }else{
+                $error = "El correo ya existe.";
+            }
         } else {
             $error = "La carrera ya tiene un Jefe registrado.";
         }
