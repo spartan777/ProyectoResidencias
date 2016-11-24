@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-11-2016 a las 00:11:00
+-- Tiempo de generación: 24-11-2016 a las 01:11:04
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -13,6 +13,21 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `scah`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `bitacora`
+--
+
+CREATE TABLE `bitacora` (
+  `id_bitacora` int(11) NOT NULL,
+  `id_usuario` varchar(20) DEFAULT NULL,
+  `fecha` timestamp NULL DEFAULT NULL,
+  `modulo` varchar(100) NOT NULL,
+  `accion` varchar(15) NOT NULL,
+  `registro` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -255,6 +270,13 @@ INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `pass_usuario`, `tipo_usu
 --
 
 --
+-- Indices de la tabla `bitacora`
+--
+ALTER TABLE `bitacora`
+  ADD PRIMARY KEY (`id_bitacora`),
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
 -- Indices de la tabla `carreras`
 --
 ALTER TABLE `carreras`
@@ -352,6 +374,12 @@ ALTER TABLE `usuario`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `bitacora`
+--
+ALTER TABLE `bitacora`
+  ADD CONSTRAINT `bitacora_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `jefe_carrera` (`id_usuario`);
 
 --
 -- Filtros para la tabla `catedratico`
