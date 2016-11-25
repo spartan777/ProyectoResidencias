@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-11-2016 a las 01:11:04
+-- Tiempo de generación: 25-11-2016 a las 01:02:08
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -23,11 +23,19 @@ SET time_zone = "+00:00";
 CREATE TABLE `bitacora` (
   `id_bitacora` int(11) NOT NULL,
   `id_usuario` varchar(20) DEFAULT NULL,
-  `fecha` timestamp NULL DEFAULT NULL,
+  `fecha` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `modulo` varchar(100) NOT NULL,
   `accion` varchar(15) NOT NULL,
   `registro` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `bitacora`
+--
+
+INSERT INTO `bitacora` (`id_bitacora`, `id_usuario`, `fecha`, `modulo`, `accion`, `registro`) VALUES
+(1, '895', '0000-00-00 00:00:00', 'Catedratico', 'Insertar', '7852'),
+(2, '895', '2016-11-24 17:42:13', 'Prueba', 'Prueba', 'Prueba');
 
 -- --------------------------------------------------------
 
@@ -351,6 +359,11 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
+--
+-- AUTO_INCREMENT de la tabla `bitacora`
+--
+ALTER TABLE `bitacora`
+  MODIFY `id_bitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `cat_dia_semana`
 --
