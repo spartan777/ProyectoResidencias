@@ -41,6 +41,8 @@
 $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 
+$route['administrador/bitacora/(:num)'] = 'administrador/bitacora';//cuando no sea la primera página
+$route['administrador/bitacora'] = 'administrador/bitacora';//cuando sea la primera página
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

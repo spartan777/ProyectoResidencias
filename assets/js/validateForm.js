@@ -103,6 +103,9 @@ $(document).ready(function () {
             },
             id_salon: {
                 required: true
+            },
+            periodo: {
+                required: true
             }
         }
     });

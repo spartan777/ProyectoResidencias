@@ -1,16 +1,5 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Detalle_horario_model
- *
- * @author Admin
- */
 class Detalle_horario_model extends CI_Model {
     
     public function __construct() {
@@ -39,5 +28,43 @@ class Detalle_horario_model extends CI_Model {
     
     public function insert_detalle_horario($data){
         $this->db->insert('detalle_horario',$data);
-    }    
+    }
+
+    public function suma_horas_teoricas($id_catedratico){
+        $sumaHoras = 0;
+        $this->db->where('id_catedratico', $id_catedratico);
+        $query = $this->db->get('detalle_horario');
+        
+        if($query->num_rows() > 0){
+            foreach ($query->result() as $row){
+                $id_materia = $row->id_materia;
+                $this->db->where('id_materia', $id_materia);
+                $queryMaterias = $this->db->get('materias');
+                foreach ($queryMaterias->result() as $rowMaterias){
+                    $sumaHoras = $sumaHoras + $rowMaterias->horas_teoricas;
+                }
+            }
+        }
+        
+        return $sumaHoras;
+    }
+    
+    public function suma_horas_practicas($id_catedratico){
+        $sumaHoras = 0;
+        $this->db->where('id_catedratico', $id_catedratico);
+        $query = $this->db->get('detalle_horario');
+        
+        if($query->num_rows() > 0){
+            foreach ($query->result() as $row){
+                $id_materia = $row->id_materia;
+                $this->db->where('id_materia', $id_materia);
+                $queryMaterias = $this->db->get('materias');
+                foreach ($queryMaterias->result() as $rowMaterias){
+                    $sumaHoras = $sumaHoras + $rowMaterias->horas_practicas;
+                }
+            }
+        }
+        
+        return $sumaHoras;
+    }
 }

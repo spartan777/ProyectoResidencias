@@ -96,6 +96,10 @@
 ?>
             </select>
         </div>
+        <div class="form-group">
+            <label for="periodo">Periodo:</label>
+            <input type="text" name="periodo" placeholder="Ingrese el periodo" value="<?php if(isset($periodo)){echo $periodo;} ?>">
+        </div>
         <input type="hidden" name="id_catedratico" value="<?php echo $id_catedratico ?>">
         <button type="submit" class="btn btn-primary">Agregar</button>
     </form>
@@ -108,6 +112,7 @@
     <th>Salón</th>
     <th>Día</th>
     <th>Hora</th>
+    <th>Periodo</th>
 </thead>
 <tbody>
     <?php
@@ -128,6 +133,7 @@
                 <td><?php echo $row->salon; ?></td>
                 <td><?php echo $row->dia; ?></td>
                 <td><?php echo $row->hora; ?></td>
+                <td><?php echo $row->periodo; ?></td>
                 <!--<td><a href="<?php //echo base_url() ?>jefe_carrera/editar_grupo/<?php //echo $row->id_grupo; ?>"><span class="glyphicon glyphicon-edit"></span></a></td>
                 <td><a <?php //echo $visibleRef;   ?> onclick="confirmarDeleteGrupo('<?php //echo $row->id_grupo; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
                 -->
@@ -138,6 +144,7 @@
         ?>
         <tr class="danger">
             <td>No hay registros</td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>

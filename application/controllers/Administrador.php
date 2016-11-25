@@ -12,6 +12,7 @@ class Administrador extends CI_Controller {
         $this->load->model('login_model');
         $this->load->model('catedratico_model');
         $this->load->model('salon_model');
+        $this->load->model('bitacora_model');
     }
 
     public function index() {
@@ -68,7 +69,7 @@ class Administrador extends CI_Controller {
         $checkCorreoJefeCarrera = $this->jefe_carrera_model->check_correo_jefe_carrera($datosJefe['correo']);
 
         if ($checkIdJefeCarrera == 0) {
-            if($checkCorreoJefeCarrera == 0){
+            if ($checkCorreoJefeCarrera == 0) {
                 if ($checkNombreJefeCarrera == 0) {
                     $this->login_model->insert_usuario($datosUsuario);
                     $this->jefe_carrera_model->add_jefe_carrera($datosJefe);
@@ -76,7 +77,7 @@ class Administrador extends CI_Controller {
                 } else {
                     $error = "La carrera ya tiene un Jefe registrado.";
                 }
-            }else{
+            } else {
                 $error = "El correo ya existe.";
             }
         } else {
@@ -141,10 +142,10 @@ class Administrador extends CI_Controller {
         $checkNombreJefeCarrera = $this->jefe_carrera_model->check_update_jefe_carrera($id_usuario, $datosJefe['id_carrera']);
         $checkCorreoJefeCarrera = $this->jefe_carrera_model->check_update_correo_jefe_carrera($datosJefe['correo'], $datosJefe['id_carrera']);
         if ($checkNombreJefeCarrera == 0) {
-            if($checkCorreoJefeCarrera == 0){
+            if ($checkCorreoJefeCarrera == 0) {
                 $this->jefe_carrera_model->update_jefe_carrera($id_usuario, $datosJefe);
                 redirect('administrador/jefe_carrera');
-            }else{
+            } else {
                 $error = "El correo ya existe.";
             }
         } else {
@@ -497,6 +498,30 @@ class Administrador extends CI_Controller {
         $id_salon = $this->uri->segment(3);
         $this->salon_model->delete_salon($id_salon);
         redirect('administrador/salon');
+    }
+
+    public function bitacora() {
+        $pages = 10; //Número de registros mostrados por páginas
+        $this->load->library('pagination'); //Cargamos la librería de paginación
+        $config['base_url'] = base_url() . 'administrador/bitacora/'; // parametro base de la aplicación, si tenemos un .htaccess nos evitamos el index.php
+        $config['total_rows'] = $this->bitacora_model->filas(); //calcula el número de filas  
+        $config['per_page'] = $pages; //Número de registros mostrados por páginas
+        $config['num_links'] = 20; //Número de links mostrados en la paginación
+        $config['first_link'] = 'Primera'; //primer link
+        $config['last_link'] = 'Última'; //último link
+        $config["uri_segment"] = 3; //el segmento de la paginación
+        $config['next_link'] = 'Siguiente'; //siguiente link
+        $config['prev_link'] = 'Anterior'; //anterior link
+        $this->pagination->initialize($config); //inicializamos la paginación		
+        
+        $data = array(
+            'contenido' => "private/admin/bitacora",
+            'nav' => "navBitacora",
+            'titulo' => "Proyecto Residencias | Bitacora",
+            'tituloPantalla' => "Bitacora",
+            'bitacora' => $this->bitacora_model->total_paginados($config['per_page'], $this->uri->segment(3))
+        );
+        $this->load->view('private/admin/index', $data);
     }
 
 }
