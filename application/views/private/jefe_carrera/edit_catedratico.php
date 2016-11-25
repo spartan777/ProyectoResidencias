@@ -29,23 +29,6 @@
     </div>
 
     <div class="form-group">
-        <label for="id_carrera" class="col-sm-3 control-label">Carrera</label>
-        <div class="col-sm-3">
-            <select class="form-control" name="id_carrera">
-                <option value=""></option>
-                <?php if (isset($result)) {
-                    foreach ($result->result() as $row) {
-                        ?>
-                <option <?php if(isset($id_carrera) && $id_carrera == $row->id_carrera ){ echo "selected";} ?> value="<?php echo $row->id_carrera ?>"><?php echo $row->nombre_carrera ?></option>
-                        <?php
-                    }
-                }
-                ?>
-            </select>
-        </div>
-    </div> 
-
-    <div class="form-group">
         <label for="correo" class="col-sm-3 control-label">Correo</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="correo" maxlength="100"  placeholder="Correo" value="<?php if(isset($correo)){ echo $correo; } ?>">

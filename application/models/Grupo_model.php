@@ -38,7 +38,7 @@ class Grupo_model extends CI_Model {
     	$this->db->update('grupos',$nombre_grupo);
     }
     
-    public function delete_salon($id_grupo){
+    public function delete_grupo($id_grupo){
         $this->db->where('id_grupo',$id_grupo);
         $this->db->delete('grupos');
     }
