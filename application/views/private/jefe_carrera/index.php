@@ -96,10 +96,18 @@
         <script src="<?php echo base_url() ?>assets/js/validateForm.js"></script>
         <script src="<?php echo base_url() ?>assets/js/funcionesModal.js"></script>
         <script type="text/javascript">
-        $(document).ready(function(){
-           document.getElementById("<?php echo $nav; ?>").className = "active"; 
-        });
-    </script>
+            $(document).ready(function(){
+               document.getElementById("<?php echo $nav; ?>").className = "active";
+               
+            });
+            
+            function sumar(){
+                var h_teo = parseInt(document.getElementById("horas_teoricas").value);
+                var h_prac = parseInt(document.getElementById("horas_practicas").value);
+                var creditos = h_teo + h_prac;
+               document.getElementById("creditos").value=creditos;
+            }
+        </script>
     </body>
 </html>
 

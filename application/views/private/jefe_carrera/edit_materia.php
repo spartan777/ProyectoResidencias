@@ -13,21 +13,21 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="creditos" class="col-sm-3 control-label">Créditos </label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="creditos" maxlength="2"  value="<?php if(isset($creditos)){echo $creditos;} ?>">
-        </div>
-    </div>
-    <div class="form-group">
         <label for="horas_teoricas" class="col-sm-3 control-label">Horas Teóricas </label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="horas_teoricas" maxlength="2"  value="<?php if(isset($horas_teoricas)){echo $horas_teoricas;} ?>">
+            <input type="text" class="form-control" id="horas_teoricas" onkeyup="sumar();" name="horas_teoricas" maxlength="2"  value="<?php if(isset($horas_teoricas)){echo $horas_teoricas;} ?>">
         </div>
     </div>
     <div class="form-group">
         <label for="horas_practicas" class="col-sm-3 control-label">Horas Prácticas </label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="horas_practicas" maxlength="2"  value="<?php if(isset($horas_practicas)){echo $horas_practicas;} ?>">
+            <input type="text" class="form-control" id="horas_practicas" onkeyup="sumar();" name="horas_practicas" maxlength="2"  value="<?php if(isset($horas_practicas)){echo $horas_practicas;} ?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="creditos" class="col-sm-3 control-label">Créditos </label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="creditos" name="creditos" maxlength="2" readonly=""  value="<?php if(isset($creditos)){echo $creditos;} ?>">
         </div>
     </div>
     <div class="form-group">
