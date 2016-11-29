@@ -3,9 +3,9 @@
     <th>Clave Materia</th>
     <th>Nombre Materia</th>
     <th>Carrera</th>
-    <th>Creditos</th>
     <th>Horas Teóricas</th>
     <th>Horas Prácticas</th>
+    <th>Creditos</th>
     <th>Editar</th>
     <th>Eliminar</th>
 </thead>
@@ -30,9 +30,9 @@
                 <td><?php echo $row->id_materia; ?></td>
                 <td><?php echo $row->nombre; ?></td>
                 <td><?php echo $nombreCarrera; ?></td>
-                <td><?php echo $row->creditos; ?></td>
                 <td><?php echo $row->horas_teoricas; ?></td>
                 <td><?php echo $row->horas_practicas; ?></td>
+                <td><?php echo $row->creditos; ?></td>
                 <td><a href="<?php echo base_url() ?>jefe_carrera/editar_materia/<?php echo $row->id_materia; ?>"><span class="glyphicon glyphicon-edit"></span></a></td>
                 <td><a <?php //echo $visibleRef; ?> onclick="confirmarDeleteMateria('<?php echo $row->id_materia; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>
