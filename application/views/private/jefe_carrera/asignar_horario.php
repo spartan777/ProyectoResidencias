@@ -97,7 +97,7 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="periodo">Periodo:</label>
+            <label for="periodo">Período:</label>
             <input type="text" name="periodo" placeholder="Ingrese el periodo" value="<?php if(isset($periodo)){echo $periodo;} ?>">
         </div>
         <input type="hidden" name="id_catedratico" value="<?php echo $id_catedratico ?>">
@@ -112,7 +112,7 @@
     <th>Salón</th>
     <th>Día</th>
     <th>Hora</th>
-    <th>Periodo</th>
+    <th>Período</th>
 </thead>
 <tbody>
     <?php

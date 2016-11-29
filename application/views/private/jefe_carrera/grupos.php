@@ -1,7 +1,7 @@
 <table class="table table-hover">
     <thead>
-    <th>Id Salón</th>
-    <th>Nombre Salón</th>
+    <th>Id Grupo</th>
+    <th>Nombre Grupo</th>
     <th>Editar</th>
     <th>Eliminar</th>
 </thead>

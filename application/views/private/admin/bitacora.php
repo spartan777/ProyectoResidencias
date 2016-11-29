@@ -16,7 +16,7 @@
                 Fecha
             </th>
             <th>
-                Modulo
+                Módulo
             </th>
             <th>
                 Acción

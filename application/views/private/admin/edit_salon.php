@@ -3,13 +3,13 @@
     <div class="form-group">
         <label for="id_salon" class="col-sm-3 control-label">Id Salón</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="id_salon" maxlength="13" readonly="" value="<?php if(isset($id_salon)){echo $id_salon;} ?>">
+            <input type="text" class="form-control" name="id_salon" maxlength="4" readonly="" value="<?php if(isset($id_salon)){echo $id_salon;} ?>">
         </div>
     </div>
     <div class="form-group">
         <label for="nombre" class="col-sm-3 control-label">Nombre Salón </label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="nombre" maxlength="50"  value="<?php if(isset($nombre)){echo $nombre;} ?>">
+            <input type="text" class="form-control" name="nombre" maxlength="4"  value="<?php if(isset($nombre)){echo $nombre;} ?>">
         </div>
     </div>
     <div class="form-group">

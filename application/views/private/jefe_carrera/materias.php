@@ -1,11 +1,11 @@
 <table class="table table-hover">
     <thead>
-    <th>Id Materia</th>
+    <th>Clave Materia</th>
     <th>Nombre Materia</th>
     <th>Carrera</th>
     <th>Creditos</th>
-    <th>Horas Teoricas</th>
-    <th>Horas Practicas</th>
+    <th>Horas Teóricas</th>
+    <th>Horas Prácticas</th>
     <th>Editar</th>
     <th>Eliminar</th>
 </thead>
