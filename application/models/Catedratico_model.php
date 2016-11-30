@@ -42,4 +42,10 @@ class Catedratico_model extends CI_Model {
         $this->db->where('id_catedratico',$id_catedratico);
     	$this->db->delete('catedratico');
     }
+    
+    public function count_catedratico_of_detalle($id_catedratico){
+        $this->db->where('id_catedratico',$id_catedratico);
+    	$query = $this->db->get('detalle_horario');
+        return $query->num_rows;
+    }
 }

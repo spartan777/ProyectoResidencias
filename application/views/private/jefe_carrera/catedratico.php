@@ -19,11 +19,12 @@
                 $nombreCarrera = $carrera->nombre_carrera;
             }
             
-           /*if($query > 0){
+           $query = $this->catedratico_model->id_catedratico($row->id_catedratico);
+           if($query > 0){
                 $visibleRef = "style='visibility:hidden'";
             }else{
                 $visibleRef = "";
-            }*/
+            }
             ?>
             <tr class="info">
                 <td><?php echo $row->id_catedratico; ?></td>
@@ -33,7 +34,7 @@
                 <td><?php echo $nombreCarrera; ?></td>
                 <td><?php echo $row->correo; ?></td>
                 <td><a href="<?php echo base_url() ?>jefe_carrera/editar_catedratico/<?php echo $row->id_catedratico; ?>"><span class="glyphicon glyphicon-edit"></span></a></td>
-                <td><a <?php //echo $visibleRef; ?> onclick="confirmarDeleteCatedraticoByJefe('<?php echo $row->id_catedratico; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+                <td><a <?php echo $visibleRef; ?> onclick="confirmarDeleteCatedraticoByJefe('<?php echo $row->id_catedratico; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>
     <?php }
 } else { ?>

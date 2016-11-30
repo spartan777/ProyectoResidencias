@@ -8,10 +8,12 @@
 <tbody>
     <?php if ($result->num_rows > 0) {
         foreach ($result->result() as $row) {
-            $this->load->model('carrera_model');
             $query = $this->carrera_model->count_carrera_of_jefe($row->id_carrera);
+            $queryMateria = $this->carrera_model->count_carrera_of_materia($row->id_carrera);
+            $queryGrupo = $this->carrera_model->count_carrera_of_grupo($row->id_carrera);
+            $queryCate = $this->carrera_model->count_carrera_of_catedratico($row->id_carrera);
             
-            if($query > 0){
+            if($query > 0 OR $queryMateria > 0 OR $queryGrupo > 0 OR $queryCate > 0){
                 $visibleRef = "style='visibility:hidden'";
             }else{
                 $visibleRef = "";

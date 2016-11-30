@@ -43,4 +43,10 @@ class Grupo_model extends CI_Model {
         $this->db->delete('grupos');
     }
     
+    public function count_grupo_of_detalle($id_grupo){
+        $this->db->where('id_catedratico',$id_grupo);
+    	$query = $this->db->get('detalle_horario');
+        return $query->num_rows;
+    }
+    
 }
