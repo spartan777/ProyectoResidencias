@@ -46,3 +46,18 @@ function confirmarDeleteMateria(clave_acceso) {
 	document.getElementById("rutaEliminarMateria").href = "delete_materia/" + clave_acceso + "";
 	$('#modalDeleteMateria').modal('show');
 }
+
+function confirmarDeleteClasificacion(clave_acceso) {
+	document.getElementById("cuerpoEliminarClasificacion").innerHTML = "¿Desea eliminar la clasificación con clave: "
+			+ clave_acceso + "?";
+	document.getElementById("rutaEliminarClasificacion").href = "delete_clasificacion/" + clave_acceso + "";
+	$('#modalDeleteClasificacion').modal('show');
+}
+
+function confirmarAcccion(clave_acceso) {
+	document.getElementById("cuerpoAccion").innerHTML = "¿Que movimiento desea realizar al catedratico con clave: "
+			+ clave_acceso + "?";
+	document.getElementById("rutaAccionActividad").href = "asignar_actividad/" + clave_acceso + "";
+        document.getElementById("rutaAccionGrupo").href = "asignar_horario/" + clave_acceso + "";
+	$('#modalAccion').modal('show');
+}

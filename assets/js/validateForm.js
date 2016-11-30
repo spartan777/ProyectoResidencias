@@ -86,6 +86,24 @@ $(document).ready(function () {
         }
     });
     
+    var validatorAddclasificacion = $('#addClasificacion').validate({
+        rules: {
+            id_clasificacion: {
+                required: true
+            },
+            clasificacion: {
+                required: true
+            },
+            descripcion: {
+                required: true,
+                number: true
+            },
+            actividad: {
+                required: true
+            }
+        }
+    });
+    
     var validatorAddDetalleHorario = $('#addDetalleHorario').validate({
         rules: {
             id_grupo: {

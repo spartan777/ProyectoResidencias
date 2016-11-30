@@ -13,6 +13,7 @@ class Administrador extends CI_Controller {
         $this->load->model('catedratico_model');
         $this->load->model('salon_model');
         $this->load->model('bitacora_model');
+        $this->load->model('clasificacion_model');
     }
 
     public function index() {
@@ -500,6 +501,100 @@ class Administrador extends CI_Controller {
         redirect('administrador/salon');
     }
 
+    public function clasificacion() {
+        $data = array(
+            'contenido' => "private/admin/clasificacion",
+            'nav' => "navClasificacion",
+            'titulo' => "Proyecto Residencias | Clasificación",
+            'tituloPantalla' => "Clasificación",
+            'result' => $this->clasificacion_model->get_all_clasificacion()
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function registro_clasificacion() {
+        $data = array(
+            'contenido' => "private/admin/registro_clasificacion",
+            'nav' => "navClasificacion",
+            'titulo' => "Proyecto Residencias | Registro de Clasificación",
+            'tituloPantalla' => "Registro de Clasificación"
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function add_clasificacion() {
+        $datos = array(
+            'id_clasificacion' => $this->input->post('id_clasificacion'),
+            'clasificacion' => $this->input->post('clasificacion'),
+            'descripcion' => $this->input->post('descripcion'),
+            'actividad' => $this->input->post('actividad')
+        );
+
+        $error = "";
+
+        $checkIdCarrera = $this->clasificacion_model->check_id_clasificacion($datos['id_clasificacion']);
+
+        if ($checkIdCarrera == 0) {
+            $this->clasificacion_model->add_clasificacion($datos);
+            redirect('administrador/clasificacion');
+        } else {
+            $error = "El id de clasificación ya existe.";
+        }
+
+        $data = array(
+            'contenido' => "private/admin/clasificacion",
+            'nav' => "navClasificacion",
+            'titulo' => "Proyecto Residencias | Registro de Clasificación",
+            'tituloPantalla' => "Registro de Clasificación",
+            'error' => $error,
+            'id_clasificaion' => $datos['id_clasificaion'],
+            'clasificacion' => $datos['clasificacion'],
+            'descripcion' => $datos['descripcion'],
+            'actividad' => $datos['actividad']
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function editar_clasificacion() {
+        $id_clasificacion = $this->uri->segment(3);
+        $result = $this->clasificacion_model->get_clasificacion_by_id($id_clasificacion);
+
+        foreach ($result->result() as $row) {
+            $clasificacion = $row->clasificacion;
+            $descripcion = $row->descripcion;
+            $actividad = $row->actividad;
+        }
+
+        $data = array(
+            'contenido' => "private/admin/edit_clasificacion",
+            'nav' => "navClasificacion",
+            'titulo' => "Proyecto Residencias | Editar Clasificación",
+            'tituloPantalla' => "Editar Clasificación " . $clasificacion,
+            'id_clasificacion' => $id_clasificacion,
+            'clasificacion' => $clasificacion,
+            'descripcion' => $descripcion,
+            'actividad' => $actividad
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function edit_clasificacion() {
+        $id_clasificacion = $this->uri->segment(3);
+        $datos = array(
+            'clasificacion' => $this->input->post('clasificacion'),
+            'descripcion' => $this->input->post('descripcion'),
+            'actividad' => $this->input->post('actividad')
+        );
+        $this->clasificacion_model->update_clasificacion($id_clasificacion, $datos);
+        redirect('administrador/clasificacion');
+    }
+
+    public function delete_clasificacion() {
+        $id_clasificacion = $this->uri->segment(3);
+        $this->clasificacion_model->delete_clasificacion($id_clasificacion);
+        redirect('administrador/clasificacion');
+    }
+
     public function bitacora() {
         $pages = 10; //Número de registros mostrados por páginas
         $this->load->library('pagination'); //Cargamos la librería de paginación
@@ -513,7 +608,7 @@ class Administrador extends CI_Controller {
         $config['next_link'] = 'Siguiente'; //siguiente link
         $config['prev_link'] = 'Anterior'; //anterior link
         $this->pagination->initialize($config); //inicializamos la paginación		
-        
+
         $data = array(
             'contenido' => "private/admin/bitacora",
             'nav' => "navBitacora",

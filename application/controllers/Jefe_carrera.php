@@ -16,6 +16,7 @@ class Jefe_carrera extends CI_Controller {
         $this->load->model('catalogos_model');
         $this->load->model('detalle_horario_model');
         $this->load->model('bitacora_model');
+        $this->load->model('clasificacion_model');
     }
 
     public function index() {
@@ -532,6 +533,39 @@ class Jefe_carrera extends CI_Controller {
             'periodo' => $datos['periodo'],
             'horas_teoricas' => $this->detalle_horario_model->suma_horas_teoricas($datos['id_catedratico']),
             'horas_practicas' => $this->detalle_horario_model->suma_horas_practicas($datos['id_catedratico']),
+        );
+        $this->load->view('private/jefe_carrera/index', $data);
+    }
+    
+    public function asignar_actividad() {
+        $id_catedratico = $this->uri->segment(3);
+        $result = $this->catedratico_model->get_catedratico_by_id($id_catedratico);
+
+        foreach ($result->result() as $row) {
+            $nombre = $row->nombre;
+            $ape_paterno = $row->ape_paterno;
+            $ape_materno = $row->ape_materno;
+        }
+
+        $id_usuario = $this->session->userdata['user_login'];
+        $resultados = $this->jefe_carrera_model->get_jefe_carrera_by_id($id_usuario);
+        foreach ($resultados->result() as $row) {
+            $id_carrera = $row->id_carrera;
+        }
+
+        $data = array(
+            'contenido' => "private/jefe_carrera/asignar_actividad",
+            'nav' => "navAsignar",
+            'titulo' => "Proyecto Residencias | Asignar Actividad",
+            'tituloPantalla' => "Asignar Horario | Detalle de Actividades",
+            'nombre' => $nombre . '&nbsp;' . $ape_paterno . '&nbsp;' . $ape_materno,
+            'resultDiaSemana' => $this->catalogos_model->get_all_dias(),
+            'resultHorario' => $this->catalogos_model->get_all_horarios(),
+            'resulClasificacion' => $this->clasificacion_model->get_all_clasificacion(),
+            'resultTabla' => $this->detalle_horario_model->get_detalle_horario_by_id_catedratico($id_catedratico),
+            'id_catedratico' => $id_catedratico,
+            'horas_teoricas' => $this->detalle_horario_model->suma_horas_teoricas($id_catedratico),
+            'horas_practicas' => $this->detalle_horario_model->suma_horas_practicas($id_catedratico),
         );
         $this->load->view('private/jefe_carrera/index', $data);
     }

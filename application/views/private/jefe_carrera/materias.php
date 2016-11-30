@@ -17,14 +17,14 @@
             foreach ($queryNombre->result() as $carrera){
                 $nombreCarrera = $carrera->nombre_carrera;
             }
-            /*$this->load->model('carrera_model');
-            $query = $this->carrera_model->count_carrera_of_jefe($row->id_carrera);
+           
+            $query = $this->materia_model->count_materia_of_detalle($row->id_materia);
             
             if($query > 0){
                 $visibleRef = "style='visibility:hidden'";
             }else{
                 $visibleRef = "";
-            }*/
+            }
             ?>
             <tr class="info">
                 <td><?php echo $row->id_materia; ?></td>
@@ -34,7 +34,7 @@
                 <td><?php echo $row->horas_practicas; ?></td>
                 <td><?php echo $row->creditos; ?></td>
                 <td><a href="<?php echo base_url() ?>jefe_carrera/editar_materia/<?php echo $row->id_materia; ?>"><span class="glyphicon glyphicon-edit"></span></a></td>
-                <td><a <?php //echo $visibleRef; ?> onclick="confirmarDeleteMateria('<?php echo $row->id_materia; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+                <td><a <?php echo $visibleRef; ?> onclick="confirmarDeleteMateria('<?php echo $row->id_materia; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>
     <?php }
 } else { ?>

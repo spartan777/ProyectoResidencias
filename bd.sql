@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2016 a las 01:02:08
+-- Tiempo de generación: 01-12-2016 a las 00:43:57
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -35,7 +35,8 @@ CREATE TABLE `bitacora` (
 
 INSERT INTO `bitacora` (`id_bitacora`, `id_usuario`, `fecha`, `modulo`, `accion`, `registro`) VALUES
 (1, '895', '0000-00-00 00:00:00', 'Catedratico', 'Insertar', '7852'),
-(2, '895', '2016-11-24 17:42:13', 'Prueba', 'Prueba', 'Prueba');
+(2, '895', '2016-11-24 17:42:13', 'Prueba', 'Prueba', 'Prueba'),
+(3, '895', '2016-11-28 16:36:55', 'Catedrático', 'Alta', '123');
 
 -- --------------------------------------------------------
 
@@ -78,6 +79,7 @@ CREATE TABLE `catedratico` (
 --
 
 INSERT INTO `catedratico` (`id_catedratico`, `nombre`, `ape_materno`, `ape_paterno`, `correo`, `id_carrera`) VALUES
+('123', 'jdsa', 'das', 'asd', 'prueba@da.com', '123'),
 ('789', 'Prueba', 'Prueba2', 'Prueba1', 'dsa@ds.xocm', '123');
 
 -- --------------------------------------------------------
@@ -131,6 +133,26 @@ INSERT INTO `cat_horario` (`id_horario`, `desc_horario`) VALUES
 (10, '17:00 - 18:00'),
 (11, '18:00 - 19:00'),
 (12, '19:00 - 20:00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clasificacion`
+--
+
+CREATE TABLE `clasificacion` (
+  `id_clasificacion` varchar(2) NOT NULL,
+  `clasificacion` varchar(40) NOT NULL,
+  `descripcion` varchar(50) NOT NULL,
+  `actividad` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `clasificacion`
+--
+
+INSERT INTO `clasificacion` (`id_clasificacion`, `clasificacion`, `descripcion`, `actividad`) VALUES
+('2', 'Prueba 1', 'Prueba 2', 'Prueba 3');
 
 -- --------------------------------------------------------
 
@@ -311,6 +333,12 @@ ALTER TABLE `cat_horario`
   ADD PRIMARY KEY (`id_horario`);
 
 --
+-- Indices de la tabla `clasificacion`
+--
+ALTER TABLE `clasificacion`
+  ADD PRIMARY KEY (`id_clasificacion`);
+
+--
 -- Indices de la tabla `detalle_horario`
 --
 ALTER TABLE `detalle_horario`
@@ -363,7 +391,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id_bitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_bitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `cat_dia_semana`
 --

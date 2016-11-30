@@ -8,20 +8,19 @@
 <tbody>
     <?php if ($result->num_rows > 0) {
         foreach ($result->result() as $row) {
-            /*$this->load->model('carrera_model');
-            $query = $this->carrera_model->count_carrera_of_jefe($row->id_carrera);
+            $query = $this->salon_model->count_salon_of_detalle($row->id_salon);
             
             if($query > 0){
                 $visibleRef = "style='visibility:hidden'";
             }else{
                 $visibleRef = "";
-            }*/
+            }
             ?>
             <tr class="info">
                 <td><?php echo $row->id_salon; ?></td>
                 <td><?php echo $row->nombre; ?></td>
                 <td><a href="<?php echo base_url() ?>administrador/editar_salon/<?php echo $row->id_salon; ?>"><span class="glyphicon glyphicon-edit"></span></a></td>
-                <td><a <?php //echo $visibleRef; ?> onclick="confirmarDeleteSalon('<?php echo $row->id_salon; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+                <td><a <?php echo $visibleRef; ?> onclick="confirmarDeleteSalon('<?php echo $row->id_salon; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>
     <?php }
 } else { ?>

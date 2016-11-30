@@ -1,5 +1,6 @@
 <div class="row">
-    <?php if (isset($result)) {
+    <?php
+    if (isset($result)) {
         foreach ($result->result() as $row) {
             ?>
             <div class="col-lg-3 col-md-6">
@@ -11,11 +12,11 @@
                             </div>
                             <div class="col-xs-9 text-right">
                                 <div class="huge"><?php echo $row->id_catedratico; ?></div>
-                                <div><?php echo $row->nombre.' '.$row->ape_paterno.' '.$row->ape_materno; ?></div>
+                                <div><?php echo $row->nombre . ' ' . $row->ape_paterno . ' ' . $row->ape_materno; ?></div>
                             </div>
                         </div>
                     </div>
-                    <a href="<?php echo base_url(); ?>jefe_carrera/asignar_horario/<?php echo $row->id_catedratico; ?>">
+                    <a onclick="confirmarAcccion('<?php echo $row->id_catedratico; ?>')" >
                         <div class="panel-footer">
                             <span class="pull-left">Ver Detalles</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -24,5 +25,24 @@
                     </a>
                 </div>
             </div>
-        <?php }} ?>
+    <?php }
+} ?>
+</div>
+
+<!-- Modal eliminar-->
+<div class="modal fade" id="modalAccion" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body" id="cuerpoAccion"></div>
+            <div class="modal-footer">
+                <a id="rutaAccionActividad" href=""><button type="button"
+                                                            class="btn btn-success"><span class="glyphicon glyphicon-list"></span>&nbsp;Asignar Actividad</button></a>
+                <a id="rutaAccionGrupo" href=""><button type="button" 
+                                                        class="btn btn-info" ><span class="glyphicon glyphicon-certificate"></span>&nbsp;Asignar Grupo</button></a>
+                <a href=""><button type="button" 
+                                      class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>&nbsp;Cerrar</button></a>
+            </div>
+        </div>
+    </div>
 </div>
