@@ -106,8 +106,7 @@ $(document).ready(function () {
                 required: true
             },
             descripcion: {
-                required: true,
-                number: true
+                required: true
             },
             actividad: {
                 required: true

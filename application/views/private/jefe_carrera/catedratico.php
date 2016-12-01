@@ -19,7 +19,7 @@
                 $nombreCarrera = $carrera->nombre_carrera;
             }
             
-           $query = $this->catedratico_model->id_catedratico($row->id_catedratico);
+           $query = $this->catedratico_model->count_catedratico_of_detalle($row->id_catedratico);
            if($query > 0){
                 $visibleRef = "style='visibility:hidden'";
             }else{
