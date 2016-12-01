@@ -97,8 +97,17 @@
         <script src="<?php echo base_url() ?>assets/js/funcionesModal.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
+                $("#clasificacion").change(function () {
+                    $("#clasificacion option:selected").each(function () {
+                        clasificacion = $('#clasificacion').val();
+                        $.post("<?php echo base_url() ?>jefe_carrera/carga_actividad", {
+                            clasificacion: clasificacion
+                        }, function (data) {
+                            $("#actividad").html(data);
+                        });
+                    });
+                });
                document.getElementById("<?php echo $nav; ?>").className = "active";
-               
             });
             
             function sumar(){

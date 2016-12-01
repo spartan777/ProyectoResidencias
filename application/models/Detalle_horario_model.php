@@ -18,10 +18,11 @@ class Detalle_horario_model extends CI_Model {
         return $query;       
     }
     
-    public function check_detalle_horario($id_salon, $id_horario, $id_dia_semana){
+    public function check_detalle_horario($id_salon, $id_horario, $id_dia_semana, $id_periodo){
         $this->db->where('id_salon', $id_salon);
         $this->db->where('id_horario', $id_horario);
         $this->db->where('id_dia_semana', $id_dia_semana);
+        $this->db->where('id_periodo', $id_periodo);
         $query = $this->db->get('detalle_horario');
         return $query->num_rows();
     }

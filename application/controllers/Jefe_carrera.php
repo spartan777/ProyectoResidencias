@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -15,6 +14,7 @@ class Jefe_carrera extends CI_Controller {
         $this->load->model('materia_model');
         $this->load->model('catalogos_model');
         $this->load->model('detalle_horario_model');
+        $this->load->model('detalle_actividad_model');
         $this->load->model('bitacora_model');
         $this->load->model('clasificacion_model');
     }
@@ -410,7 +410,7 @@ class Jefe_carrera extends CI_Controller {
             'accion' => "Eliminar",
             'registro' => $id_materia
         );
-        
+
         $this->materia_model->delete_materia($id_materia);
         $this->bitacora_model->insert_bitacora($datosBitacora);
         redirect('jefe_carrera/materias');
@@ -464,6 +464,7 @@ class Jefe_carrera extends CI_Controller {
             'id_catedratico' => $id_catedratico,
             'horas_teoricas' => $this->detalle_horario_model->suma_horas_teoricas($id_catedratico),
             'horas_practicas' => $this->detalle_horario_model->suma_horas_practicas($id_catedratico),
+            'resultPeriodo' => $this->periodo_model->get_all_periodos()
         );
         $this->load->view('private/jefe_carrera/index', $data);
     }
@@ -476,7 +477,7 @@ class Jefe_carrera extends CI_Controller {
             'id_materia' => $this->input->post('id_materia'),
             'id_salon' => $this->input->post('id_salon'),
             'id_grupo' => $this->input->post('id_grupo'),
-            'periodo' => $this->input->post('periodo')
+            'id_periodo' => $this->input->post('periodo')
         );
 
         $result = $this->catedratico_model->get_catedratico_by_id($datos['id_catedratico']);
@@ -494,17 +495,17 @@ class Jefe_carrera extends CI_Controller {
         }
 
         $error = "";
-        $checkHorario = $this->detalle_horario_model->check_detalle_horario($datos['id_salon'], $datos['id_horario'], $datos['id_dia_semana']);
+        $checkHorario = $this->detalle_horario_model->check_detalle_horario($datos['id_salon'], $datos['id_horario'], $datos['id_dia_semana'], $datos['id_periodo']);
 
         if ($checkHorario == 0) {
             $datosBitacora = array(
-            'id_usuario' => $id_usuario,
-            'modulo' => "Horario",
-            'accion' => "Alta",
-            'registro' => $datos['id_catedratico']
+                'id_usuario' => $id_usuario,
+                'modulo' => "Horario",
+                'accion' => "Alta",
+                'registro' => $datos['id_catedratico']
             );
-            
-            $this->detalle_horario_model->detalle_horario_model->insert_detalle_horario($datos);
+
+            $this->detalle_horario_model->insert_detalle_horario($datos);
             $this->bitacora_model->insert_bitacora($datosBitacora);
             redirect('jefe_carrera/asignar_horario/' . $datos['id_catedratico']);
         } else {
@@ -530,13 +531,14 @@ class Jefe_carrera extends CI_Controller {
             'id_salon' => $datos['id_salon'],
             'id_grupo' => $datos['id_grupo'],
             'error' => $error,
-            'periodo' => $datos['periodo'],
+            'periodo' => $datos['id_periodo'],
             'horas_teoricas' => $this->detalle_horario_model->suma_horas_teoricas($datos['id_catedratico']),
             'horas_practicas' => $this->detalle_horario_model->suma_horas_practicas($datos['id_catedratico']),
+            'resultPeriodo' => $this->periodo_model->get_all_periodos()
         );
         $this->load->view('private/jefe_carrera/index', $data);
     }
-    
+
     public function asignar_actividad() {
         $id_catedratico = $this->uri->segment(3);
         $result = $this->catedratico_model->get_catedratico_by_id($id_catedratico);
@@ -545,12 +547,6 @@ class Jefe_carrera extends CI_Controller {
             $nombre = $row->nombre;
             $ape_paterno = $row->ape_paterno;
             $ape_materno = $row->ape_materno;
-        }
-
-        $id_usuario = $this->session->userdata['user_login'];
-        $resultados = $this->jefe_carrera_model->get_jefe_carrera_by_id($id_usuario);
-        foreach ($resultados->result() as $row) {
-            $id_carrera = $row->id_carrera;
         }
 
         $data = array(
@@ -562,10 +558,83 @@ class Jefe_carrera extends CI_Controller {
             'resultDiaSemana' => $this->catalogos_model->get_all_dias(),
             'resultHorario' => $this->catalogos_model->get_all_horarios(),
             'resulClasificacion' => $this->clasificacion_model->get_all_clasificacion(),
-            'resultTabla' => $this->detalle_horario_model->get_detalle_horario_by_id_catedratico($id_catedratico),
+            'resultTabla' => $this->detalle_actividad_model->get_detalle_actividad_by_id_catedratico($id_catedratico),
             'id_catedratico' => $id_catedratico,
-            'horas_teoricas' => $this->detalle_horario_model->suma_horas_teoricas($id_catedratico),
-            'horas_practicas' => $this->detalle_horario_model->suma_horas_practicas($id_catedratico),
+            'horas_apoyo' => $this->detalle_actividad_model->suma_horas_apoyo($id_catedratico),
+            'resultPeriodo' => $this->periodo_model->get_all_periodos()
+        );
+        $this->load->view('private/jefe_carrera/index', $data);
+    }
+
+    public function carga_actividad() {
+        $options = "";
+        if ($this->input->post('clasificacion')) {
+            $clasificacion = $this->input->post('clasificacion');
+            $actividad = $this->clasificacion_model->carga_actividad($clasificacion);
+            foreach ($actividad as $fila) {
+                ?>
+                <option value="<?php echo $fila->id_clasificacion ?>"><?php echo $fila->actividad ?></option>
+                <?php
+            }
+        }
+    }
+    
+    public function add_detalle_actividad() {
+        $datos = array(
+            'id_catedratico' => $this->input->post('id_catedratico'),
+            'id_dia_semana' => $this->input->post('id_dia_semana'),
+            'id_horario' => $this->input->post('id_horario'),
+            'id_actividad' => $this->input->post('actividad'),
+            'id_periodo' => $this->input->post('periodo')
+        );
+
+        $result = $this->catedratico_model->get_catedratico_by_id($datos['id_catedratico']);
+
+        foreach ($result->result() as $row) {
+            $nombre = $row->nombre;
+            $ape_paterno = $row->ape_paterno;
+            $ape_materno = $row->ape_materno;
+        }
+
+        $error = "";
+        $checkHorario = $this->detalle_actividad_model->check_detalle_horario($datos['id_salon'], $datos['id_horario'], $datos['id_dia_semana'], $datos['id_periodo']);
+        $checkActividad = $this->detalle_actividad_model->check_detalle_actividad($datos['id_salon'], $datos['id_horario'], $datos['id_dia_semana'], $datos['id_periodo']);
+        if ($checkHorario == 0 OR $checkActividad == 0) {
+            $datosBitacora = array(
+                'id_usuario' => $datos['id_catedratico'],
+                'modulo' => "Horario",
+                'accion' => "Alta",
+                'registro' => $datos['id_catedratico']
+            );
+
+            $this->detalle_actividad_model->insert_detalle_actividad($datos);
+            $this->bitacora_model->insert_bitacora($datosBitacora);
+            redirect('jefe_carrera/asignar_actividad/' . $datos['id_catedratico']);
+        } else {
+            $error = "Ya se encuentra ocupado el catedrático en ese horario";
+        }
+
+        $data = array(
+            'contenido' => "private/jefe_carrera/asignar_actividad",
+            'nav' => "navAsignar",
+            'titulo' => "Proyecto Residencias | Asignar Actividad",
+            'tituloPantalla' => "Asignar Horario | Detalle de Actividades",
+            'nombre' => $nombre . '&nbsp;' . $ape_paterno . '&nbsp;' . $ape_materno,
+            'resultDiaSemana' => $this->catalogos_model->get_all_dias(),
+            'resultHorario' => $this->catalogos_model->get_all_horarios(),
+            'resulClasificacion' => $this->clasificacion_model->get_all_clasificacion(),
+            'resultTabla' => $this->detalle_actividad_model->get_detalle_actividad_by_id_catedratico($datos['id_catedratico']),
+            'id_catedratico' => $datos['id_catedratico'],
+            'horas_apoyo' => $this->detalle_actividad_model->suma_horas_apoyo($datos['id_catedratico']),
+            'id_catedratico' => $datos['id_catedratico'],
+            'id_dia_semana' => $datos['id_dia_semana'],
+            'id_horario' => $datos['id_horario'],
+            'actividad' => $datos['id_actividad'],
+            'clasificacion' => $this->input->post('clasificacion'),
+            'id_grupo' => $datos['id_grupo'],
+            'periodo' => $datos['id_periodo'],
+            'error' => $error,
+            'resultPeriodo' => $this->periodo_model->get_all_periodos()
         );
         $this->load->view('private/jefe_carrera/index', $data);
     }

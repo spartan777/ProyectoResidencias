@@ -8,8 +8,16 @@
     </div>
     <div class="form-group">
         <label for="clasificacion" class="col-sm-3 control-label">Clasificación </label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="clasificacion" maxlength="50" placeholder="Escriba la Clasificación" value="<?php if(isset($clasificacion)){echo $clasificacion;} ?>">
+        <div class="col-sm-3">
+            <select class="form-control" name="clasificacion">
+                <option value=""></option>
+                <option value="docencia" <?php if(isset($clasificacion) and $clasificacion == "docencia"){echo "selected"; } ?>>Docencia</option>
+                <option value="investigacion" <?php if(isset($clasificacion) and $clasificacion == "investigacion"){echo "selected"; } ?>>Investigación</option>
+                <option value="tutoria" <?php if(isset($clasificacion) and $clasificacion == "tutoria"){echo "selected"; } ?>>Tutoria y dirección individualizada de estudiantes</option>
+                <option value="gestion_aca" <?php if(isset($clasificacion) and $clasificacion == "gestion_aca"){echo "selected"; } ?>>Gestión académica-vinculación</option>
+                <option value="formacion" <?php if(isset($clasificacion) and $clasificacion == "formacion"){echo "selected"; } ?>>Formación disciplinaria y pedagogica delporfesor</option>
+                <option value="otras" <?php if(isset($clasificacion) and $clasificacion == "otras"){echo "selected"; } ?>>Otras Actividades</option>
+            </select>
         </div>
     </div>
     <div class="form-group">

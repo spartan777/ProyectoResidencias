@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-12-2016 a las 00:43:57
+-- Tiempo de generación: 02-12-2016 a las 00:37:58
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -152,7 +152,29 @@ CREATE TABLE `clasificacion` (
 --
 
 INSERT INTO `clasificacion` (`id_clasificacion`, `clasificacion`, `descripcion`, `actividad`) VALUES
-('2', 'Prueba 1', 'Prueba 2', 'Prueba 3');
+('2', 'docencia', 'Prueba 2', 'Prueba 3');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_actividad`
+--
+
+CREATE TABLE `detalle_actividad` (
+  `id_detalle_act` int(11) NOT NULL,
+  `id_catedratico` varchar(20) NOT NULL,
+  `id_dia_semana` int(11) NOT NULL,
+  `id_horario` int(11) NOT NULL,
+  `id_clasificacion` varchar(2) NOT NULL,
+  `id_periodo` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `detalle_actividad`
+--
+
+INSERT INTO `detalle_actividad` (`id_detalle_act`, `id_catedratico`, `id_dia_semana`, `id_horario`, `id_clasificacion`, `id_periodo`) VALUES
+(1, '789', 2, 4, '2', '');
 
 -- --------------------------------------------------------
 
@@ -168,18 +190,18 @@ CREATE TABLE `detalle_horario` (
   `id_materia` varchar(20) NOT NULL,
   `id_salon` varchar(10) NOT NULL,
   `id_grupo` varchar(5) NOT NULL,
-  `periodo` varchar(30) NOT NULL
+  `id_periodo` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `detalle_horario`
 --
 
-INSERT INTO `detalle_horario` (`id_detalle`, `id_catedratico`, `id_dia_semana`, `id_horario`, `id_materia`, `id_salon`, `id_grupo`, `periodo`) VALUES
-(5, '789', 3, 2, '8963', '21', '4787', 'Agosto - Diciembre 2016'),
-(6, '789', 3, 1, '8963', '21', '4787', 'Agosto - Diciembre 2016'),
-(7, '789', 1, 12, '8963', '21', '8544', 'Agosto - Diciembre 2016'),
-(8, '789', 4, 1, '8963', '21', '4787', 'Agosto - Diciembre 2016');
+INSERT INTO `detalle_horario` (`id_detalle`, `id_catedratico`, `id_dia_semana`, `id_horario`, `id_materia`, `id_salon`, `id_grupo`, `id_periodo`) VALUES
+(5, '789', 3, 2, '8963', '21', '4787', 'Agosto - D'),
+(6, '789', 3, 1, '8963', '21', '4787', 'Agosto - D'),
+(7, '789', 1, 12, '8963', '21', '8544', 'Agosto - D'),
+(8, '789', 4, 1, '8963', '21', '4787', 'Agosto - D');
 
 -- --------------------------------------------------------
 
@@ -246,6 +268,17 @@ CREATE TABLE `materias` (
 
 INSERT INTO `materias` (`id_materia`, `nombre`, `id_carrera`, `creditos`, `horas_teoricas`, `horas_practicas`) VALUES
 ('8963', 'Prueba Edit', '698', 9, 6, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `periodos`
+--
+
+CREATE TABLE `periodos` (
+  `id_periodo` varchar(10) NOT NULL,
+  `descripcion` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -339,6 +372,16 @@ ALTER TABLE `clasificacion`
   ADD PRIMARY KEY (`id_clasificacion`);
 
 --
+-- Indices de la tabla `detalle_actividad`
+--
+ALTER TABLE `detalle_actividad`
+  ADD PRIMARY KEY (`id_detalle_act`),
+  ADD KEY `id_catedratico` (`id_catedratico`),
+  ADD KEY `id_horario` (`id_horario`),
+  ADD KEY `id_dia_semana` (`id_dia_semana`),
+  ADD KEY `id_clasificacion` (`id_clasificacion`);
+
+--
 -- Indices de la tabla `detalle_horario`
 --
 ALTER TABLE `detalle_horario`
@@ -372,6 +415,12 @@ ALTER TABLE `materias`
   ADD KEY `id_carrera` (`id_carrera`);
 
 --
+-- Indices de la tabla `periodos`
+--
+ALTER TABLE `periodos`
+  ADD PRIMARY KEY (`id_periodo`);
+
+--
 -- Indices de la tabla `salones`
 --
 ALTER TABLE `salones`
@@ -403,6 +452,11 @@ ALTER TABLE `cat_dia_semana`
 ALTER TABLE `cat_horario`
   MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
+-- AUTO_INCREMENT de la tabla `detalle_actividad`
+--
+ALTER TABLE `detalle_actividad`
+  MODIFY `id_detalle_act` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT de la tabla `detalle_horario`
 --
 ALTER TABLE `detalle_horario`
@@ -427,6 +481,15 @@ ALTER TABLE `bitacora`
 --
 ALTER TABLE `catedratico`
   ADD CONSTRAINT `catedratico_ibfk_1` FOREIGN KEY (`id_carrera`) REFERENCES `carreras` (`id_carrera`);
+
+--
+-- Filtros para la tabla `detalle_actividad`
+--
+ALTER TABLE `detalle_actividad`
+  ADD CONSTRAINT `detalle_actividad_ibfk_1` FOREIGN KEY (`id_catedratico`) REFERENCES `catedratico` (`id_catedratico`),
+  ADD CONSTRAINT `detalle_actividad_ibfk_2` FOREIGN KEY (`id_horario`) REFERENCES `cat_horario` (`id_horario`),
+  ADD CONSTRAINT `detalle_actividad_ibfk_3` FOREIGN KEY (`id_dia_semana`) REFERENCES `cat_dia_semana` (`id_dia_semana`),
+  ADD CONSTRAINT `detalle_actividad_ibfk_4` FOREIGN KEY (`id_clasificacion`) REFERENCES `clasificacion` (`id_clasificacion`);
 
 --
 -- Filtros para la tabla `detalle_horario`

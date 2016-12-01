@@ -52,6 +52,17 @@ $(document).ready(function () {
         }
     });
     
+    var validatorAddPeriodo = $('#addPeriodo').validate({
+        rules: {
+            id_periodo: {
+                required: true
+            },
+            descripcion: {
+                required: true
+            }
+        }
+    });
+    
     var validatorAddGrupo = $('#addGrupo').validate({
         rules: {
             id_grupo: {

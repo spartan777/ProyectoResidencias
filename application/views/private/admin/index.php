@@ -72,6 +72,14 @@
                                     <li><a href="<?php echo base_url(); ?>administrador/registro_clasificacion"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Agregar</a></li>
                                 </ul>
                             </li>
+                            
+                            <li id="navPeriodo" class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>&nbsp;Periodo <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="<?php echo base_url(); ?>administrador/periodo"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;Consultar</a></li>
+                                    <li><a href="<?php echo base_url(); ?>administrador/registro_periodo"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Agregar</a></li>
+                                </ul>
+                            </li>
                                                         
                             <li id="navRegistro"><a href="<?php echo base_url(); ?>administrador/bitacora"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;Bitácora</a></li>
                             <li id="navRegistro"><a href="<?php echo base_url(); ?>welcome/cerrar_sesion"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Cerrar Sesión</a></li>

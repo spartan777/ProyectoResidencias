@@ -14,6 +14,7 @@ class Administrador extends CI_Controller {
         $this->load->model('salon_model');
         $this->load->model('bitacora_model');
         $this->load->model('clasificacion_model');
+        $this->load->model('periodo_model');
     }
 
     public function index() {
@@ -593,6 +594,109 @@ class Administrador extends CI_Controller {
         $id_clasificacion = $this->uri->segment(3);
         $this->clasificacion_model->delete_clasificacion($id_clasificacion);
         redirect('administrador/clasificacion');
+    }
+    
+    public function periodo() {
+        $data = array(
+            'contenido' => "private/admin/periodos",
+            'nav' => "navPeriodo",
+            'titulo' => "Proyecto Residencias | Periodos",
+            'tituloPantalla' => "Periodos",
+            'result' => $this->periodo_model->get_all_periodos()
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function registro_periodo() {
+        $data = array(
+            'contenido' => "private/admin/registro_periodo",
+            'nav' => "navPeriodo",
+            'titulo' => "Proyecto Residencias | Registro de Periodo",
+            'tituloPantalla' => "Registro de periodo"
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function add_periodo() {
+        $datos = array(
+            'id_periodo' => $this->input->post('id_periodo'),
+            'descripcion' => $this->input->post('descripcion')
+        );
+
+        $error = "";
+
+        $checkIdPeriodo = $this->periodo_model->check_id_periodo($datos['id_periodo']);
+
+        if ($checkIdPeriodo == 0) {
+            $this->periodo_model->add_periodo($datos);
+            redirect('administrador/periodo');
+        } else {
+            $error = "El id de periodo ya existe.";
+        }
+
+        $data = array(
+             'contenido' => "private/admin/registro_periodo",
+            'nav' => "navPeriodo",
+            'titulo' => "Proyecto Residencias | Registro de Periodo",
+            'tituloPantalla' => "Registro de periodo",
+            'error' => $error,
+            'id_periodo' => $datos['id_periodo'],
+            'descripcion' => $datos['descripcion']
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function editar_periodo() {
+        $id_periodo = $this->uri->segment(3);
+        $result = $this->periodo_model->get_periodo_by_id($id_periodo);
+
+        foreach ($result->result() as $row) {
+            $descripcion = $row->descripcion;
+        }
+
+        $data = array(
+            'contenido' => "private/admin/edit_periodo",
+            'nav' => "navSalon",
+            'titulo' => "Proyecto Residencias | Editar Periodo",
+            'tituloPantalla' => "Editar Periodo " . $descripcion,
+            'id_periodo' => $id_periodo,
+            'descripcion' => $descripcion
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function edit_periodo() {
+        $id_periodo = $this->uri->segment(3);
+        $data['descripcion'] = $this->input->post('descripcion');
+
+        $result = $this->periodo_model->get_periodo_by_id($id_periodo);
+
+        foreach ($result->result() as $row) {
+            $descripcion = $row->descripcion;
+        }
+
+        if ($data['descripcion'] == $descripcion) {
+            redirect('administrador/salon');
+        } else {
+            $this->periodo_model->update_periodo($id_periodo, $data);
+            redirect('administrador/periodo');
+        }
+
+        $data = array(
+            'contenido' => "private/admin/edit_periodo",
+            'nav' => "navSalon",
+            'titulo' => "Proyecto Residencias | Editar Periodo",
+            'tituloPantalla' => "Editar Periodo " . $data['descripcion'],
+            'id_periodo' => $id_periodo,
+            'descripcion' => $data['descripcion']
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function delete_periodo() {
+        $id_periodo = $this->uri->segment(3);
+        $this->periodo_model->delete_periodo($id_periodo);
+        redirect('administrador/periodo');
     }
 
     public function bitacora() {

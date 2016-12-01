@@ -54,6 +54,13 @@ function confirmarDeleteClasificacion(clave_acceso) {
 	$('#modalDeleteClasificacion').modal('show');
 }
 
+function confirmarDeletePeriodo(clave_acceso) {
+	document.getElementById("cuerpoEliminarPeriodo").innerHTML = "¿Desea eliminar el periodo con clave: "
+			+ clave_acceso + "?";
+	document.getElementById("rutaEliminarPeriodo").href = "delete_periodo/" + clave_acceso + "";
+	$('#modalDeletePeriodo').modal('show');
+}
+
 function confirmarAcccion(clave_acceso) {
 	document.getElementById("cuerpoAccion").innerHTML = "¿Que movimiento desea realizar al catedratico con clave: "
 			+ clave_acceso + "?";
