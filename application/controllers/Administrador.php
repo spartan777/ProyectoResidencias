@@ -15,6 +15,7 @@ class Administrador extends CI_Controller {
         $this->load->model('bitacora_model');
         $this->load->model('clasificacion_model');
         $this->load->model('periodo_model');
+        $this->load->model('academia_model');
     }
 
     public function index() {
@@ -282,6 +283,54 @@ class Administrador extends CI_Controller {
         $id_catedratico = $this->uri->segment(3);
         $this->catedratico_model->delete_catedratico($id_catedratico);
         redirect('administrador/catedratico');
+    }
+
+    public function academia() {
+        $data = array(
+            'contenido' => "private/admin/academia",
+            'nav' => "navAcademia",
+            'titulo' => "Proyecto Residencias | Academia",
+            'tituloPantalla' => "Academia",
+            'result' => $this->academia_model->get_all_academia()
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function editar_academia() {
+        $id_academia = $this->uri->segment(3);
+        $result = $this->academia_model->get_academia_by_id($id_academia);
+
+        foreach ($result->result() as $row) {
+            $nombre = $row->nombre;
+            $paterno = $row->paterno;
+            $materno = $row->materno;
+            $tipo = $row->tipo;
+        }
+
+        $data = array(
+            'contenido' => "private/admin/edit_academia",
+            'nav' => "navAcademia",
+            'titulo' => "Proyecto Residencias | Editar Academia",
+            'tituloPantalla' => "Editar " . $nombre,
+            'id_academia' => $id_academia,
+            'nombre' => $nombre,
+            'paterno' => $paterno,
+            'materno' => $materno,
+            'tipo' => $tipo
+        );
+        $this->load->view('private/admin/index', $data);
+    }
+
+    public function edit_academia() {
+        $id_academia = $this->uri->segment(3);
+       
+        $data = array(
+            'nombre' => $this->input->post('nombre'),
+            'paterno' => $this->input->post('paterno'),
+            'materno' => $this->input->post('materno')
+        );
+        $this->academia_model->update_academia($id_academia, $data);
+        redirect('administrador/academia');
     }
 
     public function carreras() {
@@ -595,7 +644,7 @@ class Administrador extends CI_Controller {
         $this->clasificacion_model->delete_clasificacion($id_clasificacion);
         redirect('administrador/clasificacion');
     }
-    
+
     public function periodo() {
         $data = array(
             'contenido' => "private/admin/periodos",
@@ -635,7 +684,7 @@ class Administrador extends CI_Controller {
         }
 
         $data = array(
-             'contenido' => "private/admin/registro_periodo",
+            'contenido' => "private/admin/registro_periodo",
             'nav' => "navPeriodo",
             'titulo' => "Proyecto Residencias | Registro de Periodo",
             'tituloPantalla' => "Registro de periodo",

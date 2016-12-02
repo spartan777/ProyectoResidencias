@@ -80,8 +80,8 @@
                                     <li><a href="<?php echo base_url(); ?>administrador/registro_periodo"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Agregar</a></li>
                                 </ul>
                             </li>
-                                                        
-                            <li id="navRegistro"><a href="<?php echo base_url(); ?>administrador/bitacora"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;Bitácora</a></li>
+                            <li id="navAcademia"><a href="<?php echo base_url(); ?>administrador/academia"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>&nbsp;Academia</a></li>                    
+                            <li id="navBitacora"><a href="<?php echo base_url(); ?>administrador/bitacora"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;Bitácora</a></li>
                             <li id="navRegistro"><a href="<?php echo base_url(); ?>welcome/cerrar_sesion"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Cerrar Sesión</a></li>
                             <li><a><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Usuario: <?php echo $this->session->userdata['user_login']; ?></a></li>
                         </ul>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-12-2016 a las 00:37:58
+-- Tiempo de generación: 03-12-2016 a las 00:06:23
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -13,6 +13,28 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `scah`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `academia`
+--
+
+CREATE TABLE `academia` (
+  `id_academia` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `paterno` varchar(30) NOT NULL,
+  `materno` varchar(30) NOT NULL,
+  `tipo` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `academia`
+--
+
+INSERT INTO `academia` (`id_academia`, `nombre`, `paterno`, `materno`, `tipo`) VALUES
+(1, 'Prueba', 'Alfonsin', 'Ferat', 'Subdirectora Académica'),
+(2, 'Rosa Carolina', 'Armas', 'Guzmán', 'Directora Académica');
 
 -- --------------------------------------------------------
 
@@ -333,6 +355,12 @@ INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `pass_usuario`, `tipo_usu
 --
 
 --
+-- Indices de la tabla `academia`
+--
+ALTER TABLE `academia`
+  ADD PRIMARY KEY (`id_academia`);
+
+--
 -- Indices de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
@@ -436,6 +464,11 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
+--
+-- AUTO_INCREMENT de la tabla `academia`
+--
+ALTER TABLE `academia`
+  MODIFY `id_academia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
