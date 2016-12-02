@@ -97,8 +97,23 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="periodo">Período:</label>
-            <input type="text" name="periodo" placeholder="Ingrese el periodo" value="<?php if(isset($periodo)){echo $periodo;} ?>">
+            <label for="periodo">Periodo:</label>
+            <select class="form-control" name="periodo">
+                <option value=""></option>
+                    <?php
+                    if (isset($resultPeriodo)) {
+                        foreach ($resultPeriodo->result() as $row) {
+                            ?>
+                        <option <?php
+                            if (isset($periodo) && $periodo == $row->id_periodo) {
+                                echo "selected";
+                            }
+                            ?> value="<?php echo $row->id_periodo ?>"><?php echo $row->descripcion ?></option>
+                        <?php
+                    }
+                }
+                ?>
+            </select>
         </div>
         <input type="hidden" name="id_catedratico" value="<?php echo $id_catedratico ?>">
         <button type="submit" class="btn btn-primary">Agregar</button>

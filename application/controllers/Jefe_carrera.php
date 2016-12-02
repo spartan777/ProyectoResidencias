@@ -17,6 +17,7 @@ class Jefe_carrera extends CI_Controller {
         $this->load->model('detalle_actividad_model');
         $this->load->model('bitacora_model');
         $this->load->model('clasificacion_model');
+        $this->load->model('periodo_model');
     }
 
     public function index() {
@@ -584,7 +585,7 @@ class Jefe_carrera extends CI_Controller {
             'id_catedratico' => $this->input->post('id_catedratico'),
             'id_dia_semana' => $this->input->post('id_dia_semana'),
             'id_horario' => $this->input->post('id_horario'),
-            'id_actividad' => $this->input->post('actividad'),
+            'id_clasificacion' => $this->input->post('actividad'),
             'id_periodo' => $this->input->post('periodo')
         );
 
@@ -595,13 +596,13 @@ class Jefe_carrera extends CI_Controller {
             $ape_paterno = $row->ape_paterno;
             $ape_materno = $row->ape_materno;
         }
-
+        $id_usuario = $this->session->userdata['user_login'];
         $error = "";
-        $checkHorario = $this->detalle_actividad_model->check_detalle_horario($datos['id_salon'], $datos['id_horario'], $datos['id_dia_semana'], $datos['id_periodo']);
-        $checkActividad = $this->detalle_actividad_model->check_detalle_actividad($datos['id_salon'], $datos['id_horario'], $datos['id_dia_semana'], $datos['id_periodo']);
+        $checkHorario = $this->detalle_actividad_model->check_detalle_horario($datos['id_catedratico'], $datos['id_horario'], $datos['id_dia_semana'], $datos['id_periodo']);
+        $checkActividad = $this->detalle_actividad_model->check_detalle_actividad($datos['id_catedratico'], $datos['id_horario'], $datos['id_dia_semana'], $datos['id_periodo']);
         if ($checkHorario == 0 OR $checkActividad == 0) {
             $datosBitacora = array(
-                'id_usuario' => $datos['id_catedratico'],
+                'id_usuario' => $id_usuario,
                 'modulo' => "Horario",
                 'accion' => "Alta",
                 'registro' => $datos['id_catedratico']
