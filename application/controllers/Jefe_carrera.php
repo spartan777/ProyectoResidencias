@@ -18,6 +18,7 @@ class Jefe_carrera extends CI_Controller {
         $this->load->model('bitacora_model');
         $this->load->model('clasificacion_model');
         $this->load->model('periodo_model');
+        $this->load->model('academia_model');
     }
 
     public function index() {
@@ -497,18 +498,23 @@ class Jefe_carrera extends CI_Controller {
 
         $error = "";
         $checkHorario = $this->detalle_horario_model->check_detalle_horario($datos['id_salon'], $datos['id_horario'], $datos['id_dia_semana'], $datos['id_periodo']);
-
+        $checkHorasMateria = $this->detalle_horario_model->check_horas_materia( $datos['id_materia'], $datos['id_catedratico'], $datos['id_periodo']);
+                
         if ($checkHorario == 0) {
-            $datosBitacora = array(
-                'id_usuario' => $id_usuario,
-                'modulo' => "Horario",
-                'accion' => "Alta",
-                'registro' => $datos['id_catedratico']
-            );
+            if($checkHorasMateria == 0){
+                $datosBitacora = array(
+                    'id_usuario' => $id_usuario,
+                    'modulo' => "Horario",
+                    'accion' => "Alta",
+                    'registro' => $datos['id_catedratico']
+                );
 
-            $this->detalle_horario_model->insert_detalle_horario($datos);
-            $this->bitacora_model->insert_bitacora($datosBitacora);
-            redirect('jefe_carrera/asignar_horario/' . $datos['id_catedratico']);
+                $this->detalle_horario_model->insert_detalle_horario($datos);
+                $this->bitacora_model->insert_bitacora($datosBitacora);
+                redirect('jefe_carrera/asignar_horario/' . $datos['id_catedratico']);
+            }else{
+                $error = "Ya se ocuparon los creditos de la materia";
+            }
         } else {
             $error = "Ya se encuentra ocupado el salon en ese horario";
         }
@@ -1048,16 +1054,43 @@ class Jefe_carrera extends CI_Controller {
             $ape_paternoJefe = $rowJefe->ape_paterno;
             $ape_maternoJefe = $rowJefe->ape_materno;
         }
+        
+        $resultPeriodo = $this->periodo_model->get_periodo_by_id($periodo);
+        foreach ($resultPeriodo->result() as $peri){
+            $descPeriodo = $peri->descripcion;
+        }        
+        
+        $resultAcademia = $this->academia_model->get_all_academia();
+        foreach ($resultAcademia->result as $academia){
+            if($rowJefe->id_academia == 2){
+                $nombreDirector = $rowJefe->nombre;
+                $paternoDirector = $rowJefe->paterno;
+                $maternoDirector = $rowJefe->materno;
+            }
+            
+            if($rowJefe->id_academia == 1){
+                $nombreSubdirector = $rowJefe->nombre;
+                $paternoSubdirector = $rowJefe->paterno;
+                $maternoSubdirector = $rowJefe->materno;
+            }
+        }
+        
         $nombreDocente = $nombre . " " . $ape_paterno . " " . $ape_materno;
+        $nombreDirAcademia = $nombreDirector . " " . $paternoDirector . " " . $maternoDirector;
+        $nombreSubAcademia = $nombreSubdirector . " " . $paternoSubdirector . " " . $maternoSubdirector;        
         $nombreJefeCarrera = $nombreJefe . " " . $ape_paternoJefe . " " . $ape_maternoJefe;
-        $titulo = "INSTITUTO TECNOLÓGICO SUPERIOR DE COSAMALOAPAN SEMESTRE " . $periodo;
+        $titulo = "INSTITUTO TECNOLÓGICO SUPERIOR DE COSAMALOAPAN SEMESTRE " . $descPeriodo;
         $docente = "NOMBRE DEL DOCENTE: " . $nombreDocente;
         $academia = "ACADEMIA: " . $nombreCarrera;
         $tituloDivision = "JEFE DE DIVISIÓN " . $nombreCarrera;
         $tituloCatedratico = "CATEDRATICO DE " . $nombreCarrera;
-
+        $horasTotales = $this->detalle_horario_model->suma_horas_teoricas($id_catedratico) + $this->detalle_horario_model->suma_horas_practicas($id_catedratico);
+        
+        $objPHPExcel->getActiveSheet()->setCellValue('F35', $nombreDirAcademia);
+        $objPHPExcel->getActiveSheet()->setCellValue('D35', $nombreSubAcademia);
         $objPHPExcel->getActiveSheet()->setCellValue('E1', $titulo);
         $objPHPExcel->getActiveSheet()->setCellValue('A2', $docente);
+        $objPHPExcel->getActiveSheet()->setCellValue('C5', $horasTotales);
         $objPHPExcel->getActiveSheet()->setCellValue('A3', $academia);
         $objPHPExcel->getActiveSheet()->setCellValue('A35', $nombreJefeCarrera);
         $objPHPExcel->getActiveSheet()->setCellValue('A36', $tituloDivision);

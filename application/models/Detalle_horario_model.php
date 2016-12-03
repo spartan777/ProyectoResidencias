@@ -68,4 +68,26 @@ class Detalle_horario_model extends CI_Model {
         
         return $sumaHoras;
     }
+    
+    public function check_horas_materia( $id_materia, $id_catedratico, $id_periodo){
+        $horas = 0;
+        
+        $this->db->where('id_catedratico', $id_catedratico);
+        $this->db->where('id_materia', $id_materia);
+        $this->db->where('id_periodo', $id_periodo);
+        $query = $this->db->get('detalle_horario');
+        
+        $this->db->where('id_materia', $id_materia);
+        $query2 = $this->db->get('materias');
+        
+        foreach ($query2->result() as $row){
+            $creditos = $row->creditos;
+        }
+        
+        if($query->num_rows() == $creditos){
+            $horas = 1;
+        }
+        
+        return $horas;
+    }
 }
