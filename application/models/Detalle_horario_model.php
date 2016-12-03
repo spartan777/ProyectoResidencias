@@ -8,10 +8,10 @@ class Detalle_horario_model extends CI_Model {
     
     public function get_detalle_horario_by_id_catedratico($id_catedratico){
         $queryBD = "SELECT dh.id_detalle AS detalle, g.nombre AS grupo, h.desc_horario AS hora, ds.desc_dia_semana AS dia, "
-                . "s.nombre AS salon, m.nombre AS materia, dh.id_dia_semana AS id_dia, dh.id_horario AS id_horario, dh.periodo AS periodo "
-                . "FROM detalle_horario dh, cat_horario h, cat_dia_semana ds, salones s, materias m, grupos g "
+                . "s.nombre AS salon, m.nombre AS materia, dh.id_dia_semana AS id_dia, dh.id_horario AS id_horario, p.descripcion AS periodo "
+                . "FROM detalle_horario dh, cat_horario h, cat_dia_semana ds, salones s, materias m, grupos g, periodos p "
                 . "WHERE dh.id_dia_semana = ds.id_dia_semana AND dh.id_horario = h.id_horario AND dh.id_grupo = g.id_grupo "
-                . "AND dh.id_materia = m.id_materia AND dh.id_salon = s.id_salon AND dh.id_catedratico = '$id_catedratico' "
+                . "AND dh.id_materia = m.id_materia AND dh.id_salon = s.id_salon AND p.id_periodo = dh.id_periodo AND dh.id_catedratico = '$id_catedratico' "
                 . "ORDER BY ds.id_dia_semana, h.id_horario";
       
         $query = $this->db->query($queryBD);
