@@ -1054,24 +1054,19 @@ class Jefe_carrera extends CI_Controller {
             $ape_paternoJefe = $rowJefe->ape_paterno;
             $ape_maternoJefe = $rowJefe->ape_materno;
         }
-        
-        $resultPeriodo = $this->periodo_model->get_periodo_by_id($periodo);
-        foreach ($resultPeriodo->result() as $peri){
-            $descPeriodo = $peri->descripcion;
-        }        
-        
+                
         $resultAcademia = $this->academia_model->get_all_academia();
-        foreach ($resultAcademia->result as $academia){
-            if($rowJefe->id_academia == 2){
-                $nombreDirector = $rowJefe->nombre;
-                $paternoDirector = $rowJefe->paterno;
-                $maternoDirector = $rowJefe->materno;
+        foreach ($resultAcademia->result() as $academia){
+            if($academia->id_academia == 2){
+                $nombreDirector = $academia->nombre;
+                $paternoDirector = $academia->paterno;
+                $maternoDirector = $academia->materno;
             }
             
-            if($rowJefe->id_academia == 1){
-                $nombreSubdirector = $rowJefe->nombre;
-                $paternoSubdirector = $rowJefe->paterno;
-                $maternoSubdirector = $rowJefe->materno;
+            if($academia->id_academia == 1){
+                $nombreSubdirector = $academia->nombre;
+                $paternoSubdirector = $academia->paterno;
+                $maternoSubdirector = $academia->materno;
             }
         }
         
@@ -1079,7 +1074,7 @@ class Jefe_carrera extends CI_Controller {
         $nombreDirAcademia = $nombreDirector . " " . $paternoDirector . " " . $maternoDirector;
         $nombreSubAcademia = $nombreSubdirector . " " . $paternoSubdirector . " " . $maternoSubdirector;        
         $nombreJefeCarrera = $nombreJefe . " " . $ape_paternoJefe . " " . $ape_maternoJefe;
-        $titulo = "INSTITUTO TECNOLÓGICO SUPERIOR DE COSAMALOAPAN SEMESTRE " . $descPeriodo;
+        $titulo = "INSTITUTO TECNOLÓGICO SUPERIOR DE COSAMALOAPAN SEMESTRE " . $periodo;
         $docente = "NOMBRE DEL DOCENTE: " . $nombreDocente;
         $academia = "ACADEMIA: " . $nombreCarrera;
         $tituloDivision = "JEFE DE DIVISIÓN " . $nombreCarrera;
