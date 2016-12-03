@@ -650,6 +650,7 @@ class Jefe_carrera extends CI_Controller {
         $id_catedratico = $this->uri->segment(3);
         $id_usuario = $this->session->userdata['user_login'];
         $resultados = $this->detalle_horario_model->get_detalle_horario_by_id_catedratico($id_catedratico);
+        $resultadosActividad = $this->detalle_actividad_model->get_detalle_actividad_by_id_catedratico($id_catedratico);
         $file = APPPATH . 'template/FORMATO_HORARIOS_MAESTRO.xlsx';
         $this->load->library('excel');
         $objPHPExcel = PHPExcel_IOFactory::load($file);
@@ -1032,6 +1033,242 @@ class Jefe_carrera extends CI_Controller {
                     }
                 }
                 $periodo = $row->periodo;
+            }
+        }
+        
+        if ($resultadosActividad != NULL) {
+            foreach ($resultadosActividad->result() as $rowAct) {
+                if ($rowAct->id_dia == 1) {
+                    if ($rowAct->id_horario == 1) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('B10', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 2) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('B12', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 3) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('B14', $rowAct->descripcion);
+                    }
+                    if ($row->id_horario == 4) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('B16', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 5) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('B18', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 6) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('B20', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 7) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('B22', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 8) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('B24', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 9) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('B26', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 10) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('B28', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 11) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('B30', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 12) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('B32', $rowAct->descripcion);
+                    }
+                }
+
+                if ($rowAct->id_dia == 2) {
+                    if ($rowAct->id_horario == 1) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('D10', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 2) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('D12', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 3) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('D14', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 4) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('D16', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 5) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('D18', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 6) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('D20', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 7) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('D22', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 8) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('D24', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 9) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('D26', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 10) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('D28', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 11) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('D30', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 12) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('D32', $rowAct->descripcion);
+                    }
+                }
+
+                if ($rowAct->id_dia == 3) {
+                    if ($rowAct->id_horario == 1) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('F10', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 2) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('F12', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 3) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('F14', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 4) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('F16', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 5) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('F18', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 6) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('F20', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 7) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('F22', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 8) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('F24', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 9) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('F26', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 10) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('F28', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 11) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('F30', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 12) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('F32', $rowAct->descripcion);
+                    }
+                }
+
+                if ($rowAct->id_dia == 4) {
+                    if ($rowAct->id_horario == 1) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('H10', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 2) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('H12', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 3) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('H14', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 4) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('H16', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 5) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('H18', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 6) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('H20', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 7) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('H22', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 8) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('H24', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 9) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('H26', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 10) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('H28', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 11) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('H30', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 12) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('H32', $rowAct->descripcion);
+                    }
+                }
+                if ($rowAct->id_dia == 5) {
+                    if ($rowAct->id_horario == 1) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('J10', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 2) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('J12', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 3) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('J14', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 4) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('J16', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 5) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('J18', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 6) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('J20', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 7) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('J22', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 8) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('J24', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 9) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('J26', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 10) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('J28', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 11) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('J30', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 12) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('J32', $rowAct->descripcion);
+                    }
+                }
+                if ($rowAct->id_dia == 6) {
+                    if ($rowAct->id_horario == 1) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('L10', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 2) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('L12', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 3) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('L14', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 4) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('L16', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 5) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('L18', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 6) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('L20', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 7) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('L22', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 8) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('L24', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 9) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('L26', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 10) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('L28', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 11) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('L30', $rowAct->descripcion);
+                    }
+                    if ($rowAct->id_horario == 12) {
+                        $objPHPExcel->getActiveSheet()->setCellValue('L32', $rowAct->descripcion);
+                    }
+                }
             }
         }
 
