@@ -3,7 +3,7 @@
     <div class="form-group">
         <label for="id_clasificacion" class="col-sm-3 control-label">Id Clasificación</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="id_clasificacion" maxlength="13" placeholder="Escriba el Id Clasificación" value="<?php if(isset($id_clasificacion)){echo $id_clasificacion;} ?>">
+            <input type="text" class="form-control" name="id_clasificacion" maxlength="2" placeholder="Escriba el Id Clasificación" value="<?php if(isset($id_clasificacion)){echo $id_clasificacion;} ?>">
         </div>
     </div>
     <div class="form-group">
