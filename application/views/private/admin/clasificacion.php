@@ -36,7 +36,7 @@
                             break;
                         case "formacion": echo "Formación disciplinaria y pedagogica delporfesor";
                             break;
-                        case "otras": echo "Otras Actividades";
+                        case "otros": echo "Otras Actividades";
                             break;
                     }
                     ?></td>
