@@ -118,7 +118,7 @@ class Detalle_horario_model extends CI_Model {
     }
     
     public function check_horas_seguidas($id_catedratico, $id_dia_semana,$id_periodo, $id_materia, $id_horario){
-        $horas = 0;
+        $horas = 1;
         
         $this->db->where('id_catedratico', $id_catedratico);
         $this->db->where('id_dia_semana', $id_dia_semana);
@@ -128,8 +128,8 @@ class Detalle_horario_model extends CI_Model {
         foreach ($query->result() as $row){
             $horario = $row->id_horario;
         }
-        if((($id_horario - $horario) != 1) OR (($id_horario - $horario) != -1)){
-            $horas = 1;
+        if((($id_horario - $horario) == 1) OR (($id_horario - $horario) == -1)){
+            $horas = 0;
         }
         return $horas;
     }
