@@ -66,7 +66,7 @@ class Detalle_actividad_model extends CI_Model {
         return $query->num_rows();
     }
     
-    public function delete_detalle_horario($id_horario){
+    public function delete_detalle_actividad($id_horario){
         $this->db->where('id_detalle_act', $id_horario);
         $this->db->delete('detalle_actividad');
     }
