@@ -91,7 +91,7 @@ class Jefe_carrera_model extends CI_Model {
    
     public function count_jefe_of_bitacora($id_usuario){
         $this->db->where('id_usuario', $id_usuario);
-        $query = $this->db->get('jefe_carrera');
+        $query = $this->db->get('bitacora');
         return $query->num_rows();
     }
 }
