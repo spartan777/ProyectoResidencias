@@ -178,7 +178,7 @@ if ($resultTabla->num_rows > 0) {
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
-            <div class="modal-body" id="cuerpoDeleteDetalleActvidad"></div>
+            <div class="modal-body" id="cuerpoDeleteDetalleActividad"></div>
             <form class="form-inline" id="DeleteDetalleHorario" action="<?php echo base_url(); ?>jefe_carrera/delete_detalle_actividad" method="post">
                 <input type="hidden" id="id_detalle" name="id_detalle" value="">
                 <input type="hidden" id="id_catedratico" name="id_catedratico" value="">
