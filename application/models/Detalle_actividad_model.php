@@ -58,4 +58,17 @@ class Detalle_actividad_model extends CI_Model {
         return $query->num_rows();
     }
     
+    public function suma_horas_apoyo_periodo($id_catedratico, $id_periodo){
+        $this->db->where('id_catedratico', $id_catedratico);
+        $this->db->where('id_periodo', $id_periodo);
+        $query = $this->db->get('detalle_actividad');
+        
+        return $query->num_rows();
+    }
+    
+    public function delete_detalle_horario($id_horario){
+        $this->db->where('id_detalle_act', $id_horario);
+        $this->db->delete('detalle_actividad');
+    }
+    
 }

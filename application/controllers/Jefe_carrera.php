@@ -554,6 +554,21 @@ class Jefe_carrera extends CI_Controller {
         );
         $this->load->view('private/jefe_carrera/index', $data);
     }
+    
+    public function delete_detalle_horario(){
+        $id_horario = $this->input->post('id_detalle');
+        $id_catedratico = $this->input->post('id_catedratico');
+        $datosBitacora = array(
+            'id_usuario' => $this->session->userdata['user_login'],
+            'modulo' => "Horario",
+            'accion' => "Eliminar",
+            'registro' => $id_horario
+        );
+
+        $this->detalle_horario_model->delete_detalle_horario($id_horario);
+        $this->bitacora_model->insert_bitacora($datosBitacora);
+        redirect('jefe_carrera/asignar_horario/' . $id_catedratico);
+    }
 
     public function asignar_actividad() {
         $id_catedratico = $this->uri->segment(3);
@@ -581,7 +596,7 @@ class Jefe_carrera extends CI_Controller {
         );
         $this->load->view('private/jefe_carrera/index', $data);
     }
-
+    
     public function carga_actividad() {
         $options = "";
         if ($this->input->post('clasificacion')) {
@@ -653,6 +668,21 @@ class Jefe_carrera extends CI_Controller {
             'resultPeriodo' => $this->periodo_model->get_all_periodos()
         );
         $this->load->view('private/jefe_carrera/index', $data);
+    }
+    
+    public function delete_detalle_actividad(){
+        $id_horario = $this->input->post('id_detalle');
+        $id_catedratico = $this->input->post('id_catedratico');
+        $datosBitacora = array(
+            'id_usuario' => $this->session->userdata['user_login'],
+            'modulo' => "Horario Actividad",
+            'accion' => "Eliminar",
+            'registro' => $id_horario
+        );
+
+        $this->detalle_actividad_model->delete_detalle_actividad($id_horario);
+        $this->bitacora_model->insert_bitacora($datosBitacora);
+        redirect('jefe_carrera/asignar_actividad/' . $id_catedratico);
     }
 
     public function descargar_horario() {
@@ -1326,13 +1356,15 @@ class Jefe_carrera extends CI_Controller {
         $academia = "ACADEMIA: " . $nombreCarrera;
         $tituloDivision = "JEFE DE DIVISIÓN " . $nombreCarrera;
         $tituloCatedratico = "CATEDRATICO DE " . $nombreCarrera;
-        $horasTotales = $this->detalle_horario_model->suma_horas_teoricas($id_catedratico) + $this->detalle_horario_model->suma_horas_practicas($id_catedratico);
+        $horasTotales = $this->detalle_horario_model->suma_horas_periodo($id_catedratico, $id_periodo);
+        $horasApoyo = $this->detalle_actividad_model->suma_horas_apoyo_periodo($id_catedratico, $id_periodo);
         
         $objPHPExcel->getActiveSheet()->setCellValue('F35', $nombreDirAcademia);
         $objPHPExcel->getActiveSheet()->setCellValue('D35', $nombreSubAcademia);
         $objPHPExcel->getActiveSheet()->setCellValue('E1', $titulo);
         $objPHPExcel->getActiveSheet()->setCellValue('A2', $docente);
         $objPHPExcel->getActiveSheet()->setCellValue('C5', $horasTotales);
+        $objPHPExcel->getActiveSheet()->setCellValue('G5', $horasApoyo);
         $objPHPExcel->getActiveSheet()->setCellValue('A3', $academia);
         $objPHPExcel->getActiveSheet()->setCellValue('A35', $nombreJefeCarrera);
         $objPHPExcel->getActiveSheet()->setCellValue('A36', $tituloDivision);

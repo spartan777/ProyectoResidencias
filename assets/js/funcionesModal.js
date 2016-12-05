@@ -68,3 +68,19 @@ function confirmarAcccion(clave_acceso) {
         document.getElementById("rutaAccionGrupo").href = "asignar_horario/" + clave_acceso + "";
 	$('#modalAccion').modal('show');
 }
+
+function confirmarDeleteDetalleHorario(clave_detalle,id_catedratico){
+    document.getElementById("cuerpoDeleteDetalleHorario").innerHTML = "¿Desea eliminar el detalle horario con clave: "
+			+ clave_detalle + "?";
+    document.getElementById("id_detalle").value = clave_detalle;
+    document.getElementById("id_catedratico").value = id_catedratico;
+    $('#modalDeleteDetalleHorario').modal('show');
+}
+
+function confirmarDeleteDetalleActividad(clave_detalle,id_catedratico){
+    document.getElementById("cuerpoDeleteDetalleActividad").innerHTML = "¿Desea eliminar el detalle de la actividad con clave: "
+			+ clave_detalle + "?";
+    document.getElementById("id_detalle").value = clave_detalle;
+    document.getElementById("id_catedratico").value = id_catedratico;
+    $('#modalDeleteDetalleActividad').modal('show');
+}

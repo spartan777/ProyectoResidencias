@@ -133,4 +133,17 @@ class Detalle_horario_model extends CI_Model {
         }
         return $horas;
     }
+    
+    public function suma_horas_periodo($id_catedratico, $id_periodo){
+        $this->db->where('id_catedratico', $id_catedratico);
+        $this->db->where('id_periodo', $id_periodo);
+        $query = $this->db->get('detalle_horario');
+        
+        return $query->num_rows();
+    }
+    
+    public function delete_detalle_horario($id_horario){
+        $this->db->where('id_detalle', $id_horario);
+        $this->db->delete('detalle_horario');
+    }
 }

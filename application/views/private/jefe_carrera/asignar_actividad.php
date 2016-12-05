@@ -125,14 +125,7 @@
             <?php
             if ($resultTabla->num_rows > 0) {
                 foreach ($resultTabla->result() as $row) {
-                    /* $this->load->model('carrera_model');
-                      $query = $this->carrera_model->count_carrera_of_jefe($row->id_carrera);
-
-                      if($query > 0){
-                      $visibleRef = "style='visibility:hidden'";
-                      }else{
-                      $visibleRef = "";
-                      } */
+                   
                     ?>
             <tr class="info">
                 <td><?php
@@ -155,9 +148,7 @@
                 <td><?php echo $row->actividad; ?></td>
                 <td><?php echo $row->dia; ?></td>
                 <td><?php echo $row->hora; ?></td>
-                <!--<td><a href="<?php //echo base_url()   ?>jefe_carrera/editar_grupo/<?php //echo $row->id_grupo;   ?>"><span class="glyphicon glyphicon-edit"></span></a></td>
-                <td><a <?php //echo $visibleRef;    ?> onclick="confirmarDeleteGrupo('<?php //echo $row->id_grupo;  ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
-                -->
+                <td><a onclick="confirmarDeleteDetalleActividad('<?php echo $row->detalle;  ?>','<?php echo $id_catedratico; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>                
             </tr>
         <?php
     }
@@ -183,11 +174,29 @@ if ($resultTabla->num_rows > 0) {
 ?>
 
 <!-- Modal eliminar-->
+<div class="modal fade" id="modalDeleteDetalleActividad" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body" id="cuerpoDeleteDetalleActvidad"></div>
+            <form class="form-inline" id="DeleteDetalleHorario" action="<?php echo base_url(); ?>jefe_carrera/delete_detalle_actividad" method="post">
+                <input type="hidden" id="id_detalle" name="id_detalle" value="">
+                <input type="hidden" id="id_catedratico" name="id_catedratico" value="">
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span>&nbsp;Aceptar</button>
+               </form>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>&nbsp;Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal eliminar-->
 <div class="modal fade" id="modalDescargarHorario" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
-            <div class="modal-body" id="cuerpoDescargarHorario"></div>
+            <div class="modal-body" id="cuerpoDescargarHorario">Elija el periodo a descargar del Horario:</div>
             <form class="form-inline" id="addDetalleActividad" action="<?php echo base_url(); ?>jefe_carrera/descargar_horario" method="post">
 
                 <div class="form-group">
