@@ -10,21 +10,22 @@
     <th>Eliminar</th>
 </thead>
 <tbody>
-    <?php if ($result->num_rows > 0) {
+    <?php
+    if ($result->num_rows > 0) {
         foreach ($result->result() as $row) {
             $this->load->model('carrera_model');
             //$query = $this->carrera_model->count_carrera_of_jefe($row->id_carrera);
             $queryNombre = $this->carrera_model->select_name_carrera($row->id_carrera);
-            
-            foreach ($queryNombre->result() as $carrera){
+
+            foreach ($queryNombre->result() as $carrera) {
                 $nombreCarrera = $carrera->nombre_carrera;
             }
-            
-           /*if($query > 0){
+            $query = $this->catedratico_model->count_catedratico_of_detalle($row->id_catedratico);
+            if ($query > 0) {
                 $visibleRef = "style='visibility:hidden'";
-            }else{
+            } else {
                 $visibleRef = "";
-            }*/
+            }
             ?>
             <tr class="info">
                 <td><?php echo $row->id_catedratico; ?></td>
@@ -34,10 +35,11 @@
                 <td><?php echo $nombreCarrera; ?></td>
                 <td><?php echo $row->correo; ?></td>
                 <td><a href="<?php echo base_url() ?>administrador/editar_catedratico/<?php echo $row->id_catedratico; ?>"><span class="glyphicon glyphicon-edit"></span></a></td>
-                <td><a <?php //echo $visibleRef; ?> onclick="confirmarDeleteCatedratico('<?php echo $row->id_catedratico; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+                <td><a <?php echo $visibleRef;  ?> onclick="confirmarDeleteCatedratico('<?php echo $row->id_catedratico; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>
-    <?php }
-} else { ?>
+        <?php }
+    } else {
+        ?>
         <tr class="danger">
             <td>No hay registros</td>
             <td></td>
@@ -57,10 +59,10 @@
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
-           <div class="modal-body" id="cuerpoEliminarCatedratico"></div>
+            <div class="modal-body" id="cuerpoEliminarCatedratico"></div>
             <div class="modal-footer">
                 <a id="rutaEliminarCatedratico" href=""><button type="button"
-                                                         class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;Aceptar</button></a>
+                                                                class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;Aceptar</button></a>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>&nbsp;Close</button>
             </div>
         </div>
