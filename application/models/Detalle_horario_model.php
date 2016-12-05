@@ -128,7 +128,7 @@ class Detalle_horario_model extends CI_Model {
         foreach ($query->result() as $row){
             $horario = $row->id_horario;
         }
-        if((($id_horario - $horario) == 1) OR (($id_horario - $horario) == -1)){
+        if((($id_horario - $horario) != 1) OR (($id_horario - $horario) != -1)){
             $horas = 1;
         }
         return $horas;
