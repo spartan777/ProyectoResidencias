@@ -170,153 +170,43 @@
 </table>
 
 <?php
-    if ($resultTabla->num_rows > 0) {
+if ($resultTabla->num_rows > 0) {
+    ?>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#modalDescargarHorario"><span class="glyphicon glyphicon-download"></span>&nbsp;Descargar Horario</button></a
+    <?php
+}
 ?>
-<a href="<?php echo base_url() ?>jefe_carrera/descargar_horario/<?php echo $id_catedratico; ?>"><button class="btn btn-primary"><span class="glyphicon glyphicon-download"></span>&nbsp;Descargar Horario</button></a>
+
+<!-- Modal eliminar-->
+<div class="modal fade" id="modalDescargarHorario" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body" id="cuerpoDescargarHorario"></div>
+            <form class="form-inline" id="addDetalleActividad" action="<?php echo base_url(); ?>jefe_carrera/descargar_horario" method="post">
+
+                <div class="form-group">
+                    <label for="id_periodo">Periodo:</label>
+                    <select class="form-control" name="id_periodo">
+                        <option value=""></option>
 <?php
+if (isset($resultPeriodo)) {
+    foreach ($resultPeriodo->result() as $row) {
+        ?>
+                                <option value="<?php echo $row->id_periodo ?>"><?php echo $row->descripcion ?></option>
+        <?php
     }
+}
 ?>
+                    </select>
+                </div>
+                <input type="hidden" name="id_catedratico" value="<?php echo $id_catedratico ?>">
 
-<!--<table class="table table-bordered">
-    <thead>
-    <th></th>
-    <th>Lunes</th>
-    <th>Martes</th>
-    <th>Miercoles</th>
-    <th>Jueves</th>
-    <th>Viernes</th>
-    <th>Sabado</th>
-</thead>
-<tbody>
-
-    <tr class="info">
-        <td>07:00 - 08:00</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-
-    <tr class="danger">
-        <td>08:00 - 09:00</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    
-    <tr class="info">
-        <td>09:00 - 10:00</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-
-    <tr class="danger">
-        <td>10:00 - 11:00</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    
-    <tr class="info">
-        <td>11:00 - 12:00</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-
-    <tr class="danger">
-        <td>12:00 - 13:00</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    
-    <tr class="info">
-        <td>13:00 - 14:00</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-
-    <tr class="danger">
-        <td>14:00 - 15:00</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    
-    <tr class="info">
-        <td>15:00 - 16:00</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-
-    <tr class="danger">
-        <td>16:00 - 17:00</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    
-    <tr class="info">
-        <td>17:00 - 18:00</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-
-    <tr class="danger">
-        <td>18:00 - 19:00</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    
-    <tr class="info">
-        <td>19:00 - 20:00</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-</tbody>
-</table>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span>&nbsp;Aceptar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>&nbsp;Close</button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>

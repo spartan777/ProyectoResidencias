@@ -499,19 +499,28 @@ class Jefe_carrera extends CI_Controller {
         $error = "";
         $checkHorario = $this->detalle_horario_model->check_detalle_horario($datos['id_salon'], $datos['id_horario'], $datos['id_dia_semana'], $datos['id_periodo']);
         $checkHorasMateria = $this->detalle_horario_model->check_horas_materia( $datos['id_materia'], $datos['id_catedratico'], $datos['id_periodo']);
-                
+        $checHorasDiariasMateria = $this->detalle_horario_model->check_horas_diarias($datos['id_catedratico'], $datos['id_dia_semana'],$datos['id_periodo'], $datos['id_materia']);
+        $checkHorasSeguidas = $this->detalle_horario_model->check_horas_seguidas($datos['id_catedratico'], $datos['id_dia_semana'],$datos['id_periodo'], $datos['id_materia'], $datos['id_horario']);
         if ($checkHorario == 0) {
             if($checkHorasMateria == 0){
-                $datosBitacora = array(
-                    'id_usuario' => $id_usuario,
-                    'modulo' => "Horario",
-                    'accion' => "Alta",
-                    'registro' => $datos['id_catedratico']
-                );
+                if($checHorasDiariasMateria == 0){
+                    if($checkHorasSeguidas == 0){
+                        $datosBitacora = array(
+                            'id_usuario' => $id_usuario,
+                            'modulo' => "Horario",
+                            'accion' => "Alta",
+                            'registro' => $datos['id_catedratico']
+                        );
 
-                $this->detalle_horario_model->insert_detalle_horario($datos);
-                $this->bitacora_model->insert_bitacora($datosBitacora);
-                redirect('jefe_carrera/asignar_horario/' . $datos['id_catedratico']);
+                        $this->detalle_horario_model->insert_detalle_horario($datos);
+                        $this->bitacora_model->insert_bitacora($datosBitacora);
+                        redirect('jefe_carrera/asignar_horario/' . $datos['id_catedratico']);
+                    }else{
+                        $error = "Las horas de la materias deben de ser seguidas";
+                    }    
+                }else{
+                    $error = "Solo se permiten dos horas diarias de la materia";
+                }
             }else{
                 $error = "Ya se ocuparon los creditos de la materia";
             }
@@ -647,10 +656,11 @@ class Jefe_carrera extends CI_Controller {
     }
 
     public function descargar_horario() {
-        $id_catedratico = $this->uri->segment(3);
+        $id_catedratico = $this->input->post('id_catedratico');
+        $id_periodo = $this->input->post('id_periodo');
         $id_usuario = $this->session->userdata['user_login'];
-        $resultados = $this->detalle_horario_model->get_detalle_horario_by_id_catedratico($id_catedratico);
-        $resultadosActividad = $this->detalle_actividad_model->get_detalle_actividad_by_id_catedratico($id_catedratico);
+        $resultados = $this->detalle_horario_model->get_detalle_horario_by_id_catedratico_descargar($id_catedratico, $id_periodo);
+        $resultadosActividad = $this->detalle_actividad_model->get_detalle_actividad_by_id_catedratico_descargar($id_catedratico, $id_periodo);
         $file = APPPATH . 'template/FORMATO_HORARIOS_MAESTRO.xlsx';
         $this->load->library('excel');
         $objPHPExcel = PHPExcel_IOFactory::load($file);
