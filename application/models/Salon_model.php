@@ -40,7 +40,7 @@ class Salon_model extends CI_Model {
     public function count_salon_of_detalle($id_salon){
         $this->db->where('id_salon',$id_salon);
     	$query = $this->db->get('detalle_horario');
-        return $query->num_rows;
+        return $query->num_rows();
     }
     
 }

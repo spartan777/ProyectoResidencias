@@ -46,7 +46,7 @@ class Materia_model extends CI_Model {
     public function count_materia_of_detalle($id_materia){
         $this->db->where('id_materia',$id_materia);
     	$query = $this->db->get('detalle_horario');
-        return $query->num_rows;
+        return $query->num_rows();
     }
     
 }
