@@ -46,25 +46,25 @@ class Carrera_model extends CI_Model {
     public function count_carrera_of_jefe($id_carrera){
         $this->db->where('id_carrera',$id_carrera);
     	$query = $this->db->get('jefe_carrera');
-        return $query->num_rows;
+        return $query->num_rows();
     }
     
     public function count_carrera_of_materia($id_carrera){
         $this->db->where('id_carrera',$id_carrera);
     	$query = $this->db->get('materias');
-        return $query->num_rows;
+        return $query->num_rows();
     }
     
     public function count_carrera_of_grupo($id_carrera){
         $this->db->where('id_carrera',$id_carrera);
     	$query = $this->db->get('grupos');
-        return $query->num_rows;
+        return $query->num_rows();
     }
     
     public function count_carrera_of_catedratico($id_carrera){
         $this->db->where('id_carrera',$id_carrera);
     	$query = $this->db->get('catedratico');
-        return $query->num_rows;
+        return $query->num_rows();
     }
     
     public function select_name_carrera($id_carrera){

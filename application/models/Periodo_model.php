@@ -40,7 +40,7 @@ class Periodo_model extends CI_Model {
     public function count_periodo_of_detalle($id_periodo){
         $this->db->where('id_periodo',$id_periodo);
     	$query = $this->db->get('detalle_horario');
-        return $query->num_rows;
+        return $query->num_rows();
     }
     
 }
