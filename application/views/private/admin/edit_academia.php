@@ -1,5 +1,5 @@
 <center><?php if (isset($error)){ echo '<br><div style ="color:#FF0000;">' . $error . '</div><br>'; }?></center>
-<form id="formRegJefeCarrera" class="form-horizontal" action="<?php echo base_url(); ?>administrador/edit_academia/<?php echo $id_academia; ?>" method="post">
+<form id="formRegAcademia" class="form-horizontal" action="<?php echo base_url(); ?>administrador/edit_academia/<?php echo $id_academia; ?>" method="post">
         
     <div class="form-group">
         <label for="nombre" class="col-sm-3 control-label">Nombre</label>
