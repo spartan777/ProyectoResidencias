@@ -9,7 +9,7 @@
     <div class="form-group">
         <label for="descripcion" class="col-sm-3 control-label">Descripción </label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="descripcion" maxlength="4" placeholder="Escriba la Descripción del Periodo" value="<?php if(isset($descripcion)){echo $descripcion;} ?>">
+            <input type="text" class="form-control" name="descripcion" maxlength="40" placeholder="Escriba la Descripción del Periodo" value="<?php if(isset($descripcion)){echo $descripcion;} ?>">
         </div>
     </div>
     <div class="form-group">
