@@ -4,21 +4,21 @@
     <div class="form-group">
         <label for="nombre" class="col-sm-3 control-label">Nombre</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="nombre" maxlength="50" placeholder="Escriba el Nombre del Catedrático" value="<?php if(isset($nombre)){ echo $nombre; } ?>">
+            <input type="text" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" name="nombre" maxlength="50" placeholder="Escriba el Nombre del Catedrático" value="<?php if(isset($nombre)){ echo $nombre; } ?>">
         </div>
     </div>
     
     <div class="form-group">
         <label for="paterno" class="col-sm-3 control-label">Apellido Paterno</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="paterno" maxlength="50" placeholder="Escriba Apellido Paterno" value="<?php if(isset($paterno)){ echo $paterno; } ?>">
+            <input type="text" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" name="paterno" maxlength="50" placeholder="Escriba Apellido Paterno" value="<?php if(isset($paterno)){ echo $paterno; } ?>">
         </div>
     </div>
 
     <div class="form-group">
         <label for="materno" class="col-sm-3 control-label">Apellido Materno</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="materno" maxlength="50" placeholder="Escriba Apellido Materno" value="<?php if(isset($materno)){ echo $materno; } ?>">
+            <input type="text" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" name="materno" maxlength="50" placeholder="Escriba Apellido Materno" value="<?php if(isset($materno)){ echo $materno; } ?>">
         </div>
     </div>
 
@@ -36,3 +36,6 @@
     </div>
 </form>
 
+<!-- Agrega esta linea en todos los formulario asi como en los de arriba
+
+style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();"
