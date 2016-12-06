@@ -725,7 +725,7 @@ class Administrador extends CI_Controller {
         }
 
         if ($data['descripcion'] == $descripcion) {
-            redirect('administrador/salon');
+            redirect('administrador/periodo');
         } else {
             $this->periodo_model->update_periodo($id_periodo, $data);
             redirect('administrador/periodo');
