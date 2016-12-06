@@ -138,4 +138,18 @@ $(document).ready(function () {
         }
     });
     
+    var validatorAddAcademia = $('#formRegAcademia').validate({
+        rules: {
+            nombre: {
+                required: true
+            },
+            paterno: {
+                required: true
+            },
+            materno: {
+                required: true
+            }
+        }
+    });
+    
 });

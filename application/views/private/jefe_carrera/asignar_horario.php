@@ -135,14 +135,7 @@
     <?php
     if ($resultTabla->num_rows > 0) {
         foreach ($resultTabla->result() as $row) {
-            /* $this->load->model('carrera_model');
-              $query = $this->carrera_model->count_carrera_of_jefe($row->id_carrera);
-
-              if($query > 0){
-              $visibleRef = "style='visibility:hidden'";
-              }else{
-              $visibleRef = "";
-              } */
+            
             ?>
             <tr class="info">
                 <td><?php echo $row->grupo; ?></td>
@@ -151,7 +144,7 @@
                 <td><?php echo $row->dia; ?></td>
                 <td><?php echo $row->hora; ?></td>
                 <td><?php echo $row->periodo; ?></td>
-                <!--<td><a href="<?php //echo base_url()  ?>jefe_carrera/editar_grupo/<?php //echo $row->id_grupo;  ?>"><span class="glyphicon glyphicon-edit"></span></a></td>-->
+               
                 <td><a onclick="confirmarDeleteDetalleHorario('<?php echo $row->detalle;  ?>','<?php echo $id_catedratico; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
                 
             </tr>
