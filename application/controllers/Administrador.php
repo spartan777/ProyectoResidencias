@@ -705,7 +705,7 @@ class Administrador extends CI_Controller {
 
         $data = array(
             'contenido' => "private/admin/edit_periodo",
-            'nav' => "navSalon",
+            'nav' => "navPeriodo",
             'titulo' => "Proyecto Residencias | Editar Periodo",
             'tituloPantalla' => "Editar Periodo " . $descripcion,
             'id_periodo' => $id_periodo,
