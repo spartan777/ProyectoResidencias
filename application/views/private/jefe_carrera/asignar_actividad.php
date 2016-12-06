@@ -201,7 +201,7 @@ if ($resultTabla->num_rows > 0) {
 
                 <div class="form-group">
                     <label for="id_periodo">Periodo:</label>
-                    <select class="form-control" name="id_periodo">
+                    <select class="form-control" name="id_periodo" required="">
                         <option value=""></option>
 <?php
 if (isset($resultPeriodo)) {
