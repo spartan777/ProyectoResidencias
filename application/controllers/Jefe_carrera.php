@@ -1358,6 +1358,7 @@ class Jefe_carrera extends CI_Controller {
         $tituloCatedratico = "CATEDRATICO DE " . $nombreCarrera;
         $horasTotales = $this->detalle_horario_model->suma_horas_periodo($id_catedratico, $id_periodo);
         $horasApoyo = $this->detalle_actividad_model->suma_horas_apoyo_periodo($id_catedratico, $id_periodo);
+        $horasFinales = $horasTotales + $horasApoyo;
         
         $objPHPExcel->getActiveSheet()->setCellValue('F35', $nombreDirAcademia);
         $objPHPExcel->getActiveSheet()->setCellValue('D35', $nombreSubAcademia);
@@ -1365,6 +1366,7 @@ class Jefe_carrera extends CI_Controller {
         $objPHPExcel->getActiveSheet()->setCellValue('A2', $docente);
         $objPHPExcel->getActiveSheet()->setCellValue('C5', $horasTotales);
         $objPHPExcel->getActiveSheet()->setCellValue('G5', $horasApoyo);
+        $objPHPExcel->getActiveSheet()->setCellValue('C7', $horasFinales);
         $objPHPExcel->getActiveSheet()->setCellValue('A3', $academia);
         $objPHPExcel->getActiveSheet()->setCellValue('A35', $nombreJefeCarrera);
         $objPHPExcel->getActiveSheet()->setCellValue('A36', $tituloDivision);
