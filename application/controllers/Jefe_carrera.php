@@ -632,16 +632,16 @@ class Jefe_carrera extends CI_Controller {
         $checkActividad = $this->detalle_actividad_model->check_detalle_actividad($datos['id_catedratico'], $datos['id_horario'], $datos['id_dia_semana'], $datos['id_periodo']);
         if ($checkHorario == 0 ) {
             if( $checkActividad == 0){
-            $datosBitacora = array(
-                'id_usuario' => $id_usuario,
-                'modulo' => "Horario",
-                'accion' => "Alta",
-                'registro' => $datos['id_catedratico']
-            );
+                $datosBitacora = array(
+                    'id_usuario' => $id_usuario,
+                    'modulo' => "Horario",
+                    'accion' => "Alta",
+                    'registro' => $datos['id_catedratico']
+                );
 
-            $this->detalle_actividad_model->insert_detalle_actividad($datos);
-            $this->bitacora_model->insert_bitacora($datosBitacora);
-            redirect('jefe_carrera/asignar_actividad/' . $datos['id_catedratico']);
+                $this->detalle_actividad_model->insert_detalle_actividad($datos);
+                $this->bitacora_model->insert_bitacora($datosBitacora);
+                redirect('jefe_carrera/asignar_actividad/' . $datos['id_catedratico']);
             }else{
                 $error = "Ya se encuentra ocupado el catedrático en ese horario";
             }
@@ -664,9 +664,7 @@ class Jefe_carrera extends CI_Controller {
             'id_catedratico' => $datos['id_catedratico'],
             'id_dia_semana' => $datos['id_dia_semana'],
             'id_horario' => $datos['id_horario'],
-            'actividad' => $datos['id_actividad'],
             'clasificacion' => $this->input->post('clasificacion'),
-            'id_grupo' => $datos['id_grupo'],
             'periodo' => $datos['id_periodo'],
             'error' => $error,
             'resultPeriodo' => $this->periodo_model->get_all_periodos()
