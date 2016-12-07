@@ -3,13 +3,13 @@
     <div class="form-group">
         <label for="id_carrera" class="col-sm-3 control-label">Id Carrera</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="id_carrera" maxlength="13" placeholder="Escriba el Id Carrera" value="<?php if(isset($id_carrera)){echo $id_carrera;} ?>">
+            <input type="text" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" name="id_carrera" maxlength="13" placeholder="Escriba el Id Carrera" value="<?php if(isset($id_carrera)){echo $id_carrera;} ?>">
         </div>
     </div>
     <div class="form-group">
         <label for="nombre_carrera" class="col-sm-3 control-label">Nombre Carrera </label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="nombre_carrera" maxlength="50" placeholder="Escriba el Nombre Carrera" value="<?php if(isset($nombre_carrera)){echo $nombre_carrera;} ?>">
+            <input type="text" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();"  name="nombre_carrera" maxlength="50" placeholder="Escriba el Nombre Carrera" value="<?php if(isset($nombre_carrera)){echo $nombre_carrera;} ?>">
         </div>
     </div>
     <div class="form-group">

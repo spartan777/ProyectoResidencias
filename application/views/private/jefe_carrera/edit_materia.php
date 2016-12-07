@@ -9,7 +9,7 @@
     <div class="form-group">
         <label for="nombre" class="col-sm-3 control-label">Nombre Materia </label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="nombre" maxlength="50"  value="<?php if(isset($nombre)){echo $nombre;} ?>">
+            <input type="text" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" name="nombre" maxlength="50"  value="<?php if(isset($nombre)){echo $nombre;} ?>">
         </div>
     </div>
     <div class="form-group">

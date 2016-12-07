@@ -3,13 +3,13 @@
     <div class="form-group">
         <label for="id_periodo" class="col-sm-3 control-label">Id Periodo</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="id_periodo" maxlength="2" placeholder="Escriba el Id del Periodo" value="<?php if(isset($id_periodo)){echo $id_periodo;} ?>">
+            <input type="text" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" name="id_periodo" maxlength="2" placeholder="Escriba el Id del Periodo" value="<?php if(isset($id_periodo)){echo $id_periodo;} ?>">
         </div>
     </div>
     <div class="form-group">
         <label for="descripcion" class="col-sm-3 control-label">Descripción </label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="descripcion" maxlength="30" placeholder="Escriba la Descripción del Periodo" value="<?php if(isset($descripcion)){echo $descripcion;} ?>">
+            <input type="text" class="form-control"style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" name="descripcion" maxlength="30" placeholder="Escriba la Descripción del Periodo" value="<?php if(isset($descripcion)){echo $descripcion;} ?>">
         </div>
     </div>
     <div class="form-group">

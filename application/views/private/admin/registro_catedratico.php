@@ -3,7 +3,7 @@
     <div class="form-group">
         <label for="id_usuario" class="col-sm-3 control-label">Id Catedrático</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="id_usuario" maxlength="5" placeholder="Escriba el Id del Catedrático" value="<?php if(isset($id_usuario)){ echo $id_usuario; } ?>">
+            <input type="text" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" name="id_usuario" maxlength="5" placeholder="Escriba el Id del Catedrático" value="<?php if(isset($id_usuario)){ echo $id_usuario; } ?>">
         </div>
     </div>
     

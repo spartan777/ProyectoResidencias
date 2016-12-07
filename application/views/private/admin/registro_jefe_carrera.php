@@ -3,7 +3,7 @@
     <div class="form-group">
         <label for="id_usuario" class="col-sm-3 control-label">Id Jefe</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="id_usuario" maxlength="5" placeholder="Escriba el Id del Jefe" value="<?php if(isset($id_usuario)){ echo $id_usuario; } ?>">
+            <input type="text" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" name="id_usuario" maxlength="5" placeholder="Escriba el Id del Jefe" value="<?php if(isset($id_usuario)){ echo $id_usuario; } ?>">
         </div>
     </div>
     
@@ -55,7 +55,7 @@
     <div class="form-group">
         <label for="contra" class="col-sm-3 control-label">Password</label>
         <div class="col-sm-6">
-            <input type="password" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" id="contra" name="contra" maxlength="20" placeholder="Password">
+            <input type="password" class="form-control"  id="contra" name="contra" maxlength="20" placeholder="Password">
         </div>
     </div>
     
