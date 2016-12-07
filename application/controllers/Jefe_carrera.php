@@ -26,7 +26,7 @@ class Jefe_carrera extends CI_Controller {
             'contenido' => "private/jefe_carrera/welcome",
             'nav' => "navHome",
             'titulo' => "Proyecto Residencias | Zona Jefe de Carrera",
-            'tituloPantalla' => "Bienvenido"
+            'tituloPantalla' => "Bienvenidos a la Página"
         );
         $this->load->view('private/jefe_carrera/index', $data);
     }

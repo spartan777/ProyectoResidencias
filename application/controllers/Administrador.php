@@ -23,7 +23,7 @@ class Administrador extends CI_Controller {
             'contenido' => "private/admin/welcome",
             'nav' => "navHome",
             'titulo' => "Proyecto Residencias | Zona Administrador",
-            'tituloPantalla' => "Bienvenido"
+            'tituloPantalla' => "Bienvenidos a la Página"
         );
         $this->load->view('private/admin/index', $data);
     }
