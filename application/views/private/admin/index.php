@@ -92,7 +92,15 @@
 
             <!-- Main component for a primary marketing message or call to action -->
             <div class="jumbotron">
-                <h1 align="center"><?php echo $tituloPantalla; ?></h1>
+                <center><table>
+                    <tr>
+                        <td><img class="img-thumbnail" src="<?php echo base_url() ?>assets/img/IMPALA.jpg" width="100px" height="100px"></td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td><h1 align="center"><?php echo $tituloPantalla; ?></h1></td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td><img class="img-thumbnail" src="<?php echo base_url() ?>assets/img/logo.jpg" width="100px" height="100px"></td>
+                    </tr>
+                </table></center>
             </div>
 
         </div> <!-- /container -->
