@@ -10,21 +10,21 @@
     <div class="form-group">
         <label for="nombre" class="col-sm-3 control-label">Nombre Jefe</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="nombre" maxlength="40" placeholder="Escriba el Nombre del Jefe" value="<?php if(isset($nombre)){ echo $nombre; } ?>">
+            <input type="text"  class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" name="nombre" maxlength="40" placeholder="Escriba el Nombre del Jefe" value="<?php if(isset($nombre)){ echo $nombre; } ?>">
         </div>
     </div>
     
     <div class="form-group">
         <label for="inputPassword3" class="col-sm-3 control-label">Apellido Paterno</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="ape_paterno" maxlength="40" placeholder="Escriba Apellido Paterno" value="<?php if(isset($ape_paterno)){ echo $ape_paterno; } ?>">
+            <input type="text" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" name="ape_paterno" maxlength="40" placeholder="Escriba Apellido Paterno" value="<?php if(isset($ape_paterno)){ echo $ape_paterno; } ?>">
         </div>
     </div>
 
     <div class="form-group">
         <label for="ape_materno" class="col-sm-3 control-label">Apellido Materno</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="ape_materno" maxlength="40" placeholder="Escriba Apellido Paterno" value="<?php if(isset($ape_materno)){ echo $ape_materno; } ?>">
+            <input type="text" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" name="ape_materno" maxlength="40" placeholder="Escriba Apellido Paterno" value="<?php if(isset($ape_materno)){ echo $ape_materno; } ?>">
         </div>
     </div>
 
@@ -55,7 +55,7 @@
     <div class="form-group">
         <label for="contra" class="col-sm-3 control-label">Password</label>
         <div class="col-sm-6">
-            <input type="password" class="form-control" id="contra" name="contra" maxlength="20" placeholder="Password">
+            <input type="password" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" id="contra" name="contra" maxlength="20" placeholder="Password">
         </div>
     </div>
     

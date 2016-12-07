@@ -23,13 +23,13 @@
     <div class="form-group">
         <label for="descripcion" class="col-sm-3 control-label">Descripción </label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="descripcion" maxlength="50" placeholder="Escriba la Descripción" value="<?php if(isset($descripcion)){echo $descripcion;} ?>">
+            <input type="text" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" name="descripcion" maxlength="50" placeholder="Escriba la Descripción" value="<?php if(isset($descripcion)){echo $descripcion;} ?>">
         </div>
     </div>
     <div class="form-group">
         <label for="actividad" class="col-sm-3 control-label">Actividad </label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="actividad" maxlength="50" placeholder="Escriba la Actividad" value="<?php if(isset($actividad)){echo $actividad;} ?>">
+            <input type="text" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" name="actividad" maxlength="50" placeholder="Escriba la Actividad" value="<?php if(isset($actividad)){echo $actividad;} ?>">
         </div>
     </div>
     <div class="form-group">
