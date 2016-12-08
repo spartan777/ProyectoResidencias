@@ -20,11 +20,11 @@
             <div class="jumbotron">
                 <center><table>
                     <tr>
-                        <td><img class="img-thumbnail" src="<?php echo base_url() ?>assets/img/IMPALA.jpg" width="100px" height="100px"></td>
+                        <td><img src="<?php echo base_url() ?>assets/img/IMPALA.jpg" width="150px" height="150px"></td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         <td><h1 align="center">SCAH</h1></td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td><img class="img-thumbnail" src="<?php echo base_url() ?>assets/img/logo.jpg" width="100px" height="100px"></td>
+                        <td><img src="<?php echo base_url() ?>assets/img/logo.jpg" width="170px" height="120px"></td>
                     </tr>
                     <tr>
                         <td></td>

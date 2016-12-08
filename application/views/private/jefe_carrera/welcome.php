@@ -1,8 +1,4 @@
-<?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+<center><h1 class="text-danger">Aplicacion Web SCAH(Sistemas de Cargas Academicas y Horarios) que permitan realizar horarios y cargas academicas
+        de cualquier institucion
+    </h1></center>
 
