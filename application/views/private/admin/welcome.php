@@ -1,4 +1,3 @@
-<center><h1 class="text-danger">Aplicacion Web SCAH(Sistemas de Cargas Academicas y Horarios) que permitan realizar horarios y cargas academicas
-        de cualquier institucion
+<center><h1 class="text-danger">Aplicación Web SCAH (Sistemas de Cargas Académicas y Horarios) que permitan realizar horarios y cargas académicas de cualquier institución.
     </h1></center>
 

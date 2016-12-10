@@ -430,7 +430,7 @@ class Jefe_carrera extends CI_Controller {
             'nav' => "navAsignar",
             'titulo' => "Proyecto Residencias | Asignar Horario",
             'result' => $this->catedratico_model->get_catedratico_by_carrera($id_carrera),
-            'tituloPantalla' => "Asignar Horario | Catedratico"
+            'tituloPantalla' => "Asignar Horario | Catedrático"
         );
         $this->load->view('private/jefe_carrera/index', $data);
     }

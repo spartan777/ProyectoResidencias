@@ -48,7 +48,7 @@
     <div class="form-group">
         <label for="correo" class="col-sm-3 control-label">Correo</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" name="correo" maxlength="100" placeholder="Correo" value="<?php if(isset($correo)){ echo $correo; } ?>">
+            <input type="text" class="form-control" name="correo" maxlength="100" placeholder="Correo" value="<?php if(isset($correo)){ echo $correo; } ?>">
         </div>
     </div>
 

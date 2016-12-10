@@ -3,7 +3,7 @@
     <div class="form-group">
         <label for="id_salon" class="col-sm-3 control-label">Id Materia</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="id_materia" maxlength="8" value="<?php if(isset($id_materia)){echo $id_materia;} ?>">
+            <input type="text" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" name="id_materia" maxlength="12" value="<?php if(isset($id_materia)){echo $id_materia;} ?>">
         </div>
     </div>
     <div class="form-group">
