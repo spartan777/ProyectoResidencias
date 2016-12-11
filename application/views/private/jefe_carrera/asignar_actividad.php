@@ -31,8 +31,8 @@
                         echo "selected";
                     }
                     ?>>Formación disciplinaria y pedagogica delporfesor</option>
-                    <option value="otras" <?php
-                    if (isset($clasificacion) and $clasificacion == "otras") {
+                    <option value="otros" <?php
+                    if (isset($clasificacion) and $clasificacion == "otros") {
                         echo "selected";
                     }
                     ?>>Otras Actividades</option>

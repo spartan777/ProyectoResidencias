@@ -472,6 +472,7 @@ class Jefe_carrera extends CI_Controller {
     }
 
     public function add_detalle_horario() {
+        //Se reciben los datos del formulario y se guardan en un arreglo
         $datos = array(
             'id_catedratico' => $this->input->post('id_catedratico'),
             'id_dia_semana' => $this->input->post('id_dia_semana'),
@@ -500,11 +501,11 @@ class Jefe_carrera extends CI_Controller {
         $checkHorario = $this->detalle_horario_model->check_detalle_horario($datos['id_salon'], $datos['id_horario'], $datos['id_dia_semana'], $datos['id_periodo']);
         $checkHorasMateria = $this->detalle_horario_model->check_horas_materia( $datos['id_materia'], $datos['id_catedratico'], $datos['id_periodo']);
         $checHorasDiariasMateria = $this->detalle_horario_model->check_horas_diarias($datos['id_catedratico'], $datos['id_dia_semana'],$datos['id_periodo'], $datos['id_materia']);
-        $checkHorasSeguidas = $this->detalle_horario_model->check_horas_seguidas($datos['id_catedratico'], $datos['id_dia_semana'],$datos['id_periodo'], $datos['id_materia'], $datos['id_horario']);
+        $checkHorasSeguidas = $this->detalle_horario_model->check_horas_seguidas($datos['id_catedratico'], $datos['id_dia_semana'],$datos['id_periodo'], $datos['id_materia'], $datos['id_horario'], $datos['id_grupo']);
         if ($checkHorario == 0) {
             if($checkHorasMateria == 0){
                 if($checHorasDiariasMateria == 0){
-                    if($checkHorasSeguidas == 0){
+                    if($checkHorasSeguidas != 0){
                         $datosBitacora = array(
                             'id_usuario' => $id_usuario,
                             'modulo' => "Horario",
@@ -1090,7 +1091,7 @@ class Jefe_carrera extends CI_Controller {
                     if ($rowAct->id_horario == 3) {
                         $objPHPExcel->getActiveSheet()->setCellValue('B14', $rowAct->descripcion);
                     }
-                    if ($row->id_horario == 4) {
+                    if ($rowAct->id_horario == 4) {
                         $objPHPExcel->getActiveSheet()->setCellValue('B16', $rowAct->descripcion);
                     }
                     if ($rowAct->id_horario == 5) {

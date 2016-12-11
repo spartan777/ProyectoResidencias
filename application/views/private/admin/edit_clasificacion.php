@@ -16,7 +16,7 @@
                 <option value="tutoria" <?php if(isset($clasificacion) and $clasificacion == "tutoria"){echo "selected"; } ?>>Tutoria y dirección individualizada de estudiantes</option>
                 <option value="gestion_aca" <?php if(isset($clasificacion) and $clasificacion == "gestion_aca"){echo "selected"; } ?>>Gestión académica-vinculación</option>
                 <option value="formacion" <?php if(isset($clasificacion) and $clasificacion == "formacion"){echo "selected"; } ?>>Formación disciplinaria y pedagogica delporfesor</option>
-                <option value="otras" <?php if(isset($clasificacion) and $clasificacion == "otras"){echo "selected"; } ?>>Otras Actividades</option>
+                <option value="otros" <?php if(isset($clasificacion) and $clasificacion == "otras"){echo "selected"; } ?>>Otras Actividades</option>
             </select>
         </div>
     </div>
