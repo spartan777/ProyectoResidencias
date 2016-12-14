@@ -24,20 +24,13 @@
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         <td><h1 align="center">SCAH</h1></td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td><img src="<?php echo base_url() ?>assets/img/logo.jpg" width="170px" height="120px"></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td><h1 align="center"><?php echo $tituloPantalla; ?></h1></td>
-                        <td></td>
-                        <td></td>
+                        <td><img src="<?php echo base_url() ?>assets/img/logo.jpg" width="300px" height="150px"></td>
                     </tr>
                 </table></center>
             </div>
 
         </div> <!-- /container -->
-     
+    <center><h1 align="center"><?php echo $tituloPantalla; ?></h1></center>
 
         <section class="main container">
             <div class="row">
