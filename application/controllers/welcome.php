@@ -12,6 +12,17 @@ class Welcome extends CI_Controller {
 
     public function index() {
         $data = array(
+            'nav' => "navHome",
+            'contenido' => "public/welcome",
+            'titulo' => "Proyecto Residencias | Bienvenido",
+            'tituloPantalla' => "Bienvenido"
+        );
+        $this->load->view('public/index', $data);
+    }
+    
+    public function login(){
+        $data = array(
+            'nav' => "navLogin",
             'contenido' => "public/iniciar_sesion",
             'titulo' => "Proyecto Residencias | Iniciar Sesión",
             'tituloPantalla' => "Iniciar Sesión"
@@ -45,6 +56,7 @@ class Welcome extends CI_Controller {
             }
         } else {
             $data = array(
+                'nav' => "navLogin",
                 'contenido' => "public/iniciar_sesion",
                 'titulo' => "Proyecto Residencias | Iniciar Sesión",
                 'tituloPantalla' => "Iniciar Sesión",

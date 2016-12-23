@@ -1,4 +1,4 @@
-<div class="alert alert-info" role="alert"><center><strong>Catedrático:</strong> <?php echo $nombre; ?>  &nbsp;<strong>Horas Totales:</strong><?php echo ($horas_teoricas + $horas_practicas); ?> &nbsp;<strong>Horas Teoricas:</strong><?php echo $horas_teoricas; ?> &nbsp;<strong>Horas Praticas:</strong><?php echo $horas_practicas; ?></center></div>
+<div class="alert alert-info" role="alert"><center><strong>Catedrático:</strong> <?php echo $nombre; ?>  &nbsp;<strong>Horas Totales:</strong><?php echo $horas_totales; ?> </center></div>
 
 <center><form class="form-inline" id="addDetalleHorario" action="<?php echo base_url(); ?>jefe_carrera/add_detalle_horario" method="post">
         <div class="form-group">

@@ -154,5 +154,12 @@ class Detalle_horario_model extends CI_Model {
         $this->db->where('id_detalle', $id_horario);
         $this->db->delete('detalle_horario');
     }
+    
+    public function suma_horas_totales($id_catedratico){
+        $this->db->where('id_catedratico', $id_catedratico);
+        $query = $this->db->get('detalle_horario');
+        
+        return $query->num_rows();
+    }
 
 }

@@ -464,6 +464,7 @@ class Jefe_carrera extends CI_Controller {
             'resultGrupos' => $this->grupo_model->get_grupo_by_id_carrera($id_carrera),
             'resultTabla' => $this->detalle_horario_model->get_detalle_horario_by_id_catedratico($id_catedratico),
             'id_catedratico' => $id_catedratico,
+            'horas_totales' => $this->detalle_horario_model->suma_horas_totales($id_catedratico),
             'horas_teoricas' => $this->detalle_horario_model->suma_horas_teoricas($id_catedratico),
             'horas_practicas' => $this->detalle_horario_model->suma_horas_practicas($id_catedratico),
             'resultPeriodo' => $this->periodo_model->get_all_periodos()
@@ -549,6 +550,7 @@ class Jefe_carrera extends CI_Controller {
             'id_grupo' => $datos['id_grupo'],
             'error' => $error,
             'periodo' => $datos['id_periodo'],
+            'horas_totales' => $this->detalle_horario_model->suma_horas_totales($datos['id_catedratico']),
             'horas_teoricas' => $this->detalle_horario_model->suma_horas_teoricas($datos['id_catedratico']),
             'horas_practicas' => $this->detalle_horario_model->suma_horas_practicas($datos['id_catedratico']),
             'resultPeriodo' => $this->periodo_model->get_all_periodos()
