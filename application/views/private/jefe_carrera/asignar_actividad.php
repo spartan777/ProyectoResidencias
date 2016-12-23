@@ -2,8 +2,8 @@
 
 <center><form class="form-inline" id="addDetalleActividad" action="<?php echo base_url(); ?>jefe_carrera/add_detalle_actividad" method="post">
         <div class="form-group">
-            <label for="clasificacion" class="col-sm-3 control-label">Clasificación </label>
-            <div class="col-sm-3">
+            <label for="clasificacion" class="control-label">Clasificación </label>
+            
                 <select class="form-control" name="clasificacion" id="clasificacion">
                     <option value=""></option>
                     <option value="docencia" <?php
@@ -37,15 +37,15 @@
                     }
                     ?>>Otras Actividades</option>
                 </select>
-            </div>
+            
         </div>
         <div class="form-group">
-            <label for="actividad" class="col-sm-3 control-label">Actividad </label>
-            <div class="col-sm-3">
+            <label for="actividad" class="control-label">Actividad </label>
+            
                 <select class="form-control" name="actividad" id="actividad">
                     <option value=""></option>
                 </select>
-            </div>
+            
         </div>
         <div class="form-group">
             <label for="id_dia_semana">Dia semana:</label>
