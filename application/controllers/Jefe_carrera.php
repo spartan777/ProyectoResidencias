@@ -513,6 +513,12 @@ class Jefe_carrera extends CI_Controller {
                             'accion' => "Alta",
                             'registro' => $datos['id_catedratico']
                         );
+                        
+                        if($this->session->userdata['id_periodo'] == NULL){
+                            $user_data = array(
+                                'id_periodo' => $this->input->post('periodo')               
+                            );
+                        }
 
                         $this->detalle_horario_model->insert_detalle_horario($datos);
                         $this->bitacora_model->insert_bitacora($datosBitacora);
@@ -641,6 +647,12 @@ class Jefe_carrera extends CI_Controller {
                     'accion' => "Alta",
                     'registro' => $datos['id_catedratico']
                 );
+                
+                if($this->session->userdata['id_periodo'] == NULL){
+                    $user_data = array(
+                        'id_periodo' => $this->input->post('periodo')               
+                    );
+                }
 
                 $this->detalle_actividad_model->insert_detalle_actividad($datos);
                 $this->bitacora_model->insert_bitacora($datosBitacora);
