@@ -592,12 +592,12 @@ class Administrador extends CI_Controller {
         }
 
         $data = array(
-            'contenido' => "private/admin/clasificacion",
+            'contenido' => "private/admin/registro_clasificacion",
             'nav' => "navClasificacion",
             'titulo' => "Proyecto Residencias | Registro de Clasificación",
             'tituloPantalla' => "Registro de Clasificación",
             'error' => $error,
-            'id_clasificaion' => $datos['id_clasificaion'],
+            'id_clasificaion' => $datos['id_clasificacion'],
             'clasificacion' => $datos['clasificacion'],
             'descripcion' => $datos['descripcion'],
             'actividad' => $datos['actividad']
