@@ -94,7 +94,7 @@ class Jefe_carrera extends CI_Controller {
             'titulo' => "Proyecto Residencias | Registro Catedrático",
             'tituloPantalla' => "Registro de Catedráticos",
             'error' => $error,
-            'id_usuario' => $datosCatedratico['id_usuario'],
+            'id_usuario' => $datosCatedratico['id_catedratico'],
             'nombre' => $datosCatedratico['nombre'],
             'ape_paterno' => $datosCatedratico['ape_paterno'],
             'ape_materno' => $datosCatedratico['ape_materno'],
