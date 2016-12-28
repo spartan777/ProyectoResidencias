@@ -227,7 +227,7 @@ class Administrador extends CI_Controller {
             'tituloPantalla' => "Registro de Catedráticos",
             'result' => $this->carrera_model->get_all_carreras(),
             'error' => $error,
-            'id_usuario' => $datosCatedratico['id_usuario'],
+            'id_usuario' => $datosCatedratico['id_catedratico'],
             'nombre' => $datosCatedratico['nombre'],
             'ape_paterno' => $datosCatedratico['ape_paterno'],
             'ape_materno' => $datosCatedratico['ape_materno'],
