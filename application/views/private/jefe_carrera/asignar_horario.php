@@ -206,13 +206,15 @@ if ($resultTabla->num_rows > 0) {
                         if (isset($resultPeriodo)) {
                             foreach ($resultPeriodo->result() as $row) {
                                 ?>
-                                <option <?php if (isset($this->session->userdata['id_periodo']) == $row->id_periodo ) {
-                                echo "selected";
-                            } ?> value="<?php echo $row->id_periodo ?>"><?php echo $row->descripcion ?></option>
-                                <?php
-                            }
+                                <option <?php
+                        if (isset($this->session->userdata['id_periodo']) == $row->id_periodo) {
+                            echo "selected";
                         }
-                        ?>
+                                ?> value="<?php echo $row->id_periodo ?>"><?php echo $row->descripcion ?></option>
+                                    <?php
+                                }
+                            }
+                            ?>
                     </select>
                 </div>
                 <input type="hidden" name="id_catedratico" value="<?php echo $id_catedratico ?>">

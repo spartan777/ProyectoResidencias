@@ -500,36 +500,37 @@ class Jefe_carrera extends CI_Controller {
 
         $error = "";
         $checkHorario = $this->detalle_horario_model->check_detalle_horario($datos['id_salon'], $datos['id_horario'], $datos['id_dia_semana'], $datos['id_periodo']);
-        $checkHorasMateria = $this->detalle_horario_model->check_horas_materia( $datos['id_materia'], $datos['id_catedratico'], $datos['id_periodo']);
-        $checHorasDiariasMateria = $this->detalle_horario_model->check_horas_diarias($datos['id_catedratico'], $datos['id_dia_semana'],$datos['id_periodo'], $datos['id_materia']);
-        $checkHorasSeguidas = $this->detalle_horario_model->check_horas_seguidas($datos['id_catedratico'], $datos['id_dia_semana'],$datos['id_periodo'], $datos['id_materia'], $datos['id_horario'], $datos['id_grupo']);
+        $checkHorasMateria = $this->detalle_horario_model->check_horas_materia($datos['id_materia'], $datos['id_catedratico'], $datos['id_periodo']);
+        $checHorasDiariasMateria = $this->detalle_horario_model->check_horas_diarias($datos['id_catedratico'], $datos['id_dia_semana'], $datos['id_periodo'], $datos['id_materia']);
+        $checkHorasSeguidas = $this->detalle_horario_model->check_horas_seguidas($datos['id_catedratico'], $datos['id_dia_semana'], $datos['id_periodo'], $datos['id_materia'], $datos['id_horario'], $datos['id_grupo']);
         if ($checkHorario == 0) {
-            if($checkHorasMateria == 0){
-                if($checHorasDiariasMateria == 0){
-                    if($checkHorasSeguidas != 0){
+            if ($checkHorasMateria == 0) {
+                if ($checHorasDiariasMateria == 0) {
+                    if ($checkHorasSeguidas != 0) {
                         $datosBitacora = array(
                             'id_usuario' => $id_usuario,
                             'modulo' => "Horario",
                             'accion' => "Alta",
                             'registro' => $datos['id_catedratico']
                         );
-                        
-                        if($this->session->userdata['id_periodo'] == NULL){
+
+                        if ($this->session->userdata['id_periodo'] == NULL) {
                             $user_data = array(
-                                'id_periodo' => $this->input->post('periodo')               
+                                'id_periodo' => $this->input->post('periodo')
                             );
+                            $this->session->set_userdata($user_data);
                         }
 
                         $this->detalle_horario_model->insert_detalle_horario($datos);
                         $this->bitacora_model->insert_bitacora($datosBitacora);
                         redirect('jefe_carrera/asignar_horario/' . $datos['id_catedratico']);
-                    }else{
+                    } else {
                         $error = "Las horas de la materias deben de ser seguidas";
-                    }    
-                }else{
+                    }
+                } else {
                     $error = "Solo se permiten dos horas diarias de la materia";
                 }
-            }else{
+            } else {
                 $error = "Ya se ocuparon los creditos de la materia";
             }
         } else {
@@ -563,8 +564,8 @@ class Jefe_carrera extends CI_Controller {
         );
         $this->load->view('private/jefe_carrera/index', $data);
     }
-    
-    public function delete_detalle_horario(){
+
+    public function delete_detalle_horario() {
         $id_horario = $this->input->post('id_detalle');
         $id_catedratico = $this->input->post('id_catedratico');
         $datosBitacora = array(
@@ -605,7 +606,7 @@ class Jefe_carrera extends CI_Controller {
         );
         $this->load->view('private/jefe_carrera/index', $data);
     }
-    
+
     public function carga_actividad() {
         $options = "";
         if ($this->input->post('clasificacion')) {
@@ -618,7 +619,7 @@ class Jefe_carrera extends CI_Controller {
             }
         }
     }
-    
+
     public function add_detalle_actividad() {
         $datos = array(
             'id_catedratico' => $this->input->post('id_catedratico'),
@@ -639,25 +640,26 @@ class Jefe_carrera extends CI_Controller {
         $error = "";
         $checkHorario = $this->detalle_actividad_model->check_detalle_horario($datos['id_catedratico'], $datos['id_horario'], $datos['id_dia_semana'], $datos['id_periodo']);
         $checkActividad = $this->detalle_actividad_model->check_detalle_actividad($datos['id_catedratico'], $datos['id_horario'], $datos['id_dia_semana'], $datos['id_periodo']);
-        if ($checkHorario == 0 ) {
-            if( $checkActividad == 0){
+        if ($checkHorario == 0) {
+            if ($checkActividad == 0) {
                 $datosBitacora = array(
                     'id_usuario' => $id_usuario,
                     'modulo' => "Horario",
                     'accion' => "Alta",
                     'registro' => $datos['id_catedratico']
                 );
-                
-                if($this->session->userdata['id_periodo'] == NULL){
+
+                if ($this->session->userdata['id_periodo'] == NULL) {
                     $user_data = array(
-                        'id_periodo' => $this->input->post('periodo')               
+                        'id_periodo' => $this->input->post('periodo')
                     );
+                    $this->session->set_userdata($user_data);
                 }
 
                 $this->detalle_actividad_model->insert_detalle_actividad($datos);
                 $this->bitacora_model->insert_bitacora($datosBitacora);
                 redirect('jefe_carrera/asignar_actividad/' . $datos['id_catedratico']);
-            }else{
+            } else {
                 $error = "Ya se encuentra ocupado el catedrático en ese horario";
             }
         } else {
@@ -686,8 +688,8 @@ class Jefe_carrera extends CI_Controller {
         );
         $this->load->view('private/jefe_carrera/index', $data);
     }
-    
-    public function delete_detalle_actividad(){
+
+    public function delete_detalle_actividad() {
         $id_horario = $this->input->post('id_detalle');
         $id_catedratico = $this->input->post('id_catedratico');
         $datosBitacora = array(
@@ -1092,7 +1094,7 @@ class Jefe_carrera extends CI_Controller {
                 $periodo = $row->periodo;
             }
         }
-        
+
         if ($resultadosActividad != NULL) {
             foreach ($resultadosActividad->result() as $rowAct) {
                 if ($rowAct->id_dia == 1) {
@@ -1348,25 +1350,25 @@ class Jefe_carrera extends CI_Controller {
             $ape_paternoJefe = $rowJefe->ape_paterno;
             $ape_maternoJefe = $rowJefe->ape_materno;
         }
-                
+
         $resultAcademia = $this->academia_model->get_all_academia();
-        foreach ($resultAcademia->result() as $academia){
-            if($academia->id_academia == 2){
+        foreach ($resultAcademia->result() as $academia) {
+            if ($academia->id_academia == 2) {
                 $nombreDirector = $academia->nombre;
                 $paternoDirector = $academia->paterno;
                 $maternoDirector = $academia->materno;
             }
-            
-            if($academia->id_academia == 1){
+
+            if ($academia->id_academia == 1) {
                 $nombreSubdirector = $academia->nombre;
                 $paternoSubdirector = $academia->paterno;
                 $maternoSubdirector = $academia->materno;
             }
         }
-        
+
         $nombreDocente = $nombre . " " . $ape_paterno . " " . $ape_materno;
         $nombreDirAcademia = $nombreDirector . " " . $paternoDirector . " " . $maternoDirector;
-        $nombreSubAcademia = $nombreSubdirector . " " . $paternoSubdirector . " " . $maternoSubdirector;        
+        $nombreSubAcademia = $nombreSubdirector . " " . $paternoSubdirector . " " . $maternoSubdirector;
         $nombreJefeCarrera = $nombreJefe . " " . $ape_paternoJefe . " " . $ape_maternoJefe;
         $titulo = "INSTITUTO TECNOLÓGICO SUPERIOR DE COSAMALOAPAN SEMESTRE " . $periodo;
         $docente = "NOMBRE DEL DOCENTE: " . $nombreDocente;
@@ -1376,7 +1378,7 @@ class Jefe_carrera extends CI_Controller {
         $horasTotales = $this->detalle_horario_model->suma_horas_periodo($id_catedratico, $id_periodo);
         $horasApoyo = $this->detalle_actividad_model->suma_horas_apoyo_periodo($id_catedratico, $id_periodo);
         $horasFinales = $horasTotales + $horasApoyo;
-        
+
         $objPHPExcel->getActiveSheet()->setCellValue('F35', $nombreDirAcademia);
         $objPHPExcel->getActiveSheet()->setCellValue('D35', $nombreSubAcademia);
         $objPHPExcel->getActiveSheet()->setCellValue('E1', $titulo);
