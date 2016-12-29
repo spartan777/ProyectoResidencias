@@ -105,8 +105,8 @@
                     foreach ($resultPeriodo->result() as $row) {
                         ?>
                         <option <?php
-                       if (($this->session->userdata['id_periodo'] == $row->id_periodo) OR (isset($periodo) && $periodo == $row->id_periodo)) {
-                                echo "selected";
+                        if ((isset($this->session->userdata['id_periodo']) && $this->session->userdata['id_periodo'] == $row->id_periodo) OR ( isset($periodo) && $periodo == $row->id_periodo)) {
+                            echo "selected";
                         }
                         ?> value="<?php echo $row->id_periodo ?>"><?php echo $row->descripcion ?></option>
                             <?php
@@ -202,19 +202,19 @@ if ($resultTabla->num_rows > 0) {
                     <label for="id_periodo">Periodo:</label>
                     <select class="form-control" name="id_periodo" required="">
                         <option value=""></option>
-                        <?php
-                        if (isset($resultPeriodo)) {
-                            foreach ($resultPeriodo->result() as $row) {
-                                ?>
-                                <option <?php
-                        if ($this->session->userdata['id_periodo'] == $row->id_periodo) {
+                         <?php
+                if (isset($resultPeriodo)) {
+                    foreach ($resultPeriodo->result() as $row) {
+                        ?>
+                        <option <?php
+                        if ((isset($this->session->userdata['id_periodo']) && $this->session->userdata['id_periodo'] == $row->id_periodo) OR ( isset($periodo) && $periodo == $row->id_periodo)) {
                             echo "selected";
                         }
-                                ?> value="<?php echo $row->id_periodo ?>"><?php echo $row->descripcion ?></option>
-                                    <?php
-                                }
-                            }
-                            ?>
+                        ?> value="<?php echo $row->id_periodo ?>"><?php echo $row->descripcion ?></option>
+                            <?php
+                        }
+                    }
+                    ?>
                     </select>
                 </div>
                 <input type="hidden" name="id_catedratico" value="<?php echo $id_catedratico ?>">
