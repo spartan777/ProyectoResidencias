@@ -105,7 +105,7 @@
                     foreach ($resultPeriodo->result() as $row) {
                         ?>
                         <option <?php
-                       if (((isset($this->session->userdata['id_periodo']) == $row->id_periodo)) OR (isset($periodo) && $periodo == $row->id_periodo)) {
+                       if (($this->session->userdata['id_periodo'] == $row->id_periodo) OR (isset($periodo) && $periodo == $row->id_periodo)) {
                                 echo "selected";
                         }
                         ?> value="<?php echo $row->id_periodo ?>"><?php echo $row->descripcion ?></option>
@@ -207,7 +207,7 @@ if ($resultTabla->num_rows > 0) {
                             foreach ($resultPeriodo->result() as $row) {
                                 ?>
                                 <option <?php
-                        if (isset($this->session->userdata['id_periodo']) == $row->id_periodo) {
+                        if ($this->session->userdata['id_periodo'] == $row->id_periodo) {
                             echo "selected";
                         }
                                 ?> value="<?php echo $row->id_periodo ?>"><?php echo $row->descripcion ?></option>
