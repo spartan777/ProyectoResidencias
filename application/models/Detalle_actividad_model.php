@@ -19,10 +19,10 @@ class Detalle_actividad_model extends CI_Model {
     
     public function get_detalle_actividad_by_id_catedratico_descargar($id_catedratico, $id_periodo){
         $queryBD = "SELECT dh.id_detalle_act AS detalle, h.desc_horario AS hora, ds.desc_dia_semana AS dia, c.*, "
-                . "dh.id_dia_semana AS id_dia, dh.id_horario AS id_horario "
-                . "FROM detalle_actividad dh, cat_horario h, cat_dia_semana ds, clasificacion c "
+                . "dh.id_dia_semana AS id_dia, dh.id_horario AS id_horario, p.descripcion AS periodo "
+                . "FROM detalle_actividad dh, cat_horario h, cat_dia_semana ds, clasificacion c, periodos p "
                 . "WHERE dh.id_dia_semana = ds.id_dia_semana AND dh.id_horario = h.id_horario "
-                . "AND dh.id_clasificacion = c.id_clasificacion AND dh.id_catedratico = '$id_catedratico' AND dh.id_periodo = '$id_periodo'"
+                . "AND dh.id_clasificacion = c.id_clasificacion AND p.id_periodo = dh.id_periodo AND dh.id_catedratico = '$id_catedratico' AND dh.id_periodo = '$id_periodo'"
                 . "ORDER BY ds.id_dia_semana, h.id_horario";
       
         $query = $this->db->query($queryBD);

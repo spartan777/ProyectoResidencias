@@ -1328,6 +1328,7 @@ class Jefe_carrera extends CI_Controller {
                         $objPHPExcel->getActiveSheet()->setCellValue('L32', $rowAct->descripcion);
                     }
                 }
+                $periodo = $rowAct->periodo;
             }
         }
 
