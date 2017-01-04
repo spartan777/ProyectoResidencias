@@ -25,7 +25,7 @@
     <div class="form-group">
         <label for="tipo" class="col-sm-3 control-label">Puesto</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="tipo" maxlength="100" readonly="" value="<?php if(isset($tipo)){ echo $tipo; } ?>">
+            <input type="text" class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" name="tipo" maxlength="100" value="<?php if(isset($tipo)){ echo $tipo; } ?>">
         </div>
     </div>
 

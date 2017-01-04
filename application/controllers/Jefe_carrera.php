@@ -1358,12 +1358,14 @@ class Jefe_carrera extends CI_Controller {
                 $nombreDirector = $academia->nombre;
                 $paternoDirector = $academia->paterno;
                 $maternoDirector = $academia->materno;
+                $tipoDirector = $academia->tipo;
             }
 
             if ($academia->id_academia == 1) {
                 $nombreSubdirector = $academia->nombre;
                 $paternoSubdirector = $academia->paterno;
                 $maternoSubdirector = $academia->materno;
+                $tipoSubdirector = $academia->tipo;
             }
         }
 
@@ -1381,7 +1383,9 @@ class Jefe_carrera extends CI_Controller {
         $horasFinales = $horasTotales + $horasApoyo;
 
         $objPHPExcel->getActiveSheet()->setCellValue('F35', $nombreDirAcademia);
+        $objPHPExcel->getActiveSheet()->setCellValue('F36', $tipoDirector);
         $objPHPExcel->getActiveSheet()->setCellValue('D35', $nombreSubAcademia);
+        $objPHPExcel->getActiveSheet()->setCellValue('D36', $tipoSubdirector);
         $objPHPExcel->getActiveSheet()->setCellValue('E1', $titulo);
         $objPHPExcel->getActiveSheet()->setCellValue('A2', $docente);
         $objPHPExcel->getActiveSheet()->setCellValue('C5', $horasTotales);

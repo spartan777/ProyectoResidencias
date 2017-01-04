@@ -327,7 +327,8 @@ class Administrador extends CI_Controller {
         $data = array(
             'nombre' => $this->input->post('nombre'),
             'paterno' => $this->input->post('paterno'),
-            'materno' => $this->input->post('materno')
+            'materno' => $this->input->post('materno'),
+            'tipo' => $this->input->post('tipo')
         );
         $this->academia_model->update_academia($id_academia, $data);
         redirect('administrador/academia');
