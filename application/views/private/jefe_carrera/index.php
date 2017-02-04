@@ -71,13 +71,17 @@
             <!-- Main component for a primary marketing message or call to action -->
             <div class="jumbotron">
                 <center><table>
-                    <tr>
-                        <td><img src="<?php echo base_url() ?>assets/img/IMPALA.jpg" width="150px" height="150px"></td>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td><h1 align="center">SCAH</h1></td>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td><img src="<?php echo base_url() ?>assets/img/logo.jpg" width="300px" height="150px"></td>
-                    </tr>
+                   <tr>
+                            <img src="<?php echo base_url() ?>assets/img/new_logo.png" width="800px" height="150px">
+                            &nbsp;&nbsp;&nbsp;
+                            <img src="<?php echo base_url() ?>assets/img/IMPALA.jpg" width="150px" height="150px">
+                        </tr>
+                        <tr>
+                            <br>
+                        </tr>
+                        <tr>
+                            <h1 align="center">SCAH</h1>
+                        </tr>  
                 </table></center>
             </div>
 

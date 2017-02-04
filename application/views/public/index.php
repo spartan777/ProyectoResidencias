@@ -13,10 +13,10 @@
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/estilos.css" />
     </head>
-    
+
     <body>
         <div class="container">
-            
+
             <!-- Static navbar -->
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
@@ -37,42 +37,46 @@
                     </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->
             </nav>
-            
+
             <!-- Main component for a primary marketing message or call to action -->
             <div class="jumbotron">
                 <center><table>
-                    <tr>
-                        <td><img src="<?php echo base_url() ?>assets/img/IMPALA.jpg" width="150px" height="150px"></td>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td><h1 align="center">SCAH</h1></td>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td><img src="<?php echo base_url() ?>assets/img/logo.jpg" width="300px" height="150px"></td>
-                    </tr>
-                </table></center>
+                        <tr>
+                            <img src="<?php echo base_url() ?>assets/img/new_logo.png" width="800px" height="150px">
+                            &nbsp;&nbsp;&nbsp;
+                            <img src="<?php echo base_url() ?>assets/img/IMPALA.jpg" width="150px" height="150px">
+                        </tr>
+                        <tr>
+                            <br>
+                        </tr>
+                        <tr>
+                            <h1 align="center">SCAH</h1>
+                        </tr> 
+                    </table></center>
             </div>
 
         </div> <!-- /container -->
-    <center><h1 align="center"><?php echo $tituloPantalla; ?></h1></center>
+    <center><h1 align="center" class="text-success" style="font-family:courier;"><?php echo $tituloPantalla; ?></h1></center>
 
-        <section class="main container">
-            <div class="row">
-                <section class="posts col-md-12">
-                    <?php $this->load->view($contenido); ?>
-                </section>
-            </div>
-        </section>
+    <section class="main container">
+        <div class="row">
+            <section class="posts col-md-12">
+                <?php $this->load->view($contenido); ?>
+            </section>
+        </div>
+    </section>
 
 
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script type="text/javascript" src= "<?php echo base_url(); ?>assets/js/jquery-2.2.0.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function(){
-               document.getElementById("<?php echo $nav; ?>").className = "active";
-            });
-        </script>
-    </body>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src= "<?php echo base_url(); ?>assets/js/jquery-2.2.0.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            document.getElementById("<?php echo $nav; ?>").className = "active";
+        });
+    </script>
+</body>
 </html>
 

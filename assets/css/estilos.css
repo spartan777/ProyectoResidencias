@@ -3,10 +3,16 @@
 	margin-bottom:0;
  
 }
+
+nav.navbar {
+    background-color:#00FA9A;
+}
+
+
 .jumbotron{
-	background: #1BB50D;
-	color: #fff;
-	padding:20px 0;
+	background:#fff;
+	color: #000000;
+	padding:40px 0;
 }
 
 
