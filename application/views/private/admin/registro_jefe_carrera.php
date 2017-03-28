@@ -65,7 +65,23 @@
             <input type="password" class="form-control" name="contra2" maxlength="20" placeholder="Repetir Password">
         </div>
     </div>
-
+    
+    <div class="form-group">
+            <label for="periodo">Periodo:</label>
+            <select class="form-control" name="periodo">
+                <option value=""></option>
+                <?php
+                if (isset($resultPeriodo)) {
+                    foreach ($resultPeriodo->result() as $row) {
+                        ?>
+                        <option value="<?php echo $row->id_periodo ?>"><?php echo $row->descripcion ?></option>
+                            <?php
+                        }
+                    }
+                    ?>
+            </select>
+        </div>
+    
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-6">
             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;Guardar</button>

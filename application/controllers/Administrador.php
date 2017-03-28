@@ -45,7 +45,8 @@ class Administrador extends CI_Controller {
             'nav' => "navJefeCarrera",
             'titulo' => "Proyecto Residencias | Registro Jefes de Carrera",
             'tituloPantalla' => "Registro de Jefes de Carrera",
-            'result' => $this->carrera_model->get_all_carreras()
+            'result' => $this->carrera_model->get_all_carreras(),
+            'resultPeriodo' => $this->periodo_model->get_all_periodos()
         );
         $this->load->view('private/admin/index', $data);
     }
@@ -64,22 +65,34 @@ class Administrador extends CI_Controller {
             'ape_paterno' => $this->input->post('ape_paterno'),
             'ape_materno' => $this->input->post('ape_materno'),
             'correo' => $this->input->post('correo'),
-            'id_carrera' => $this->input->post('id_carrera')
+            'id_carrera' => $this->input->post('id_carrera'),
+            'estatus' => 1
         );
+        
+        
 
         $checkIdJefeCarrera = $this->jefe_carrera_model->check_id_jefe_carrera($datosJefe['id_usuario']);
-        $checkNombreJefeCarrera = $this->jefe_carrera_model->check_carrera_jefe_carrera($datosJefe['id_carrera']);
+        //$checkNombreJefeCarrera = $this->jefe_carrera_model->check_carrera_jefe_carrera($datosJefe['id_carrera']);
         $checkCorreoJefeCarrera = $this->jefe_carrera_model->check_correo_jefe_carrera($datosJefe['correo']);
-
+        $checkJefeActivo = $this->jefe_carrera_model->check_jefe_carrera_activo($datosJefe['id_carrera']);
+        foreach ($checkJefeActivo->result() as $row){
+            $idJefeAnterior = $row->id_usuario;
+        }
+        $datosUpdate = array(
+            'estaus' => 2,
+            'id_periodo' => $this->input->post('periodo')
+        );
+        
         if ($checkIdJefeCarrera == 0) {
             if ($checkCorreoJefeCarrera == 0) {
-                if ($checkNombreJefeCarrera == 0) {
+                //if ($checkNombreJefeCarrera == 0) {
                     $this->login_model->insert_usuario($datosUsuario);
                     $this->jefe_carrera_model->add_jefe_carrera($datosJefe);
+                    $this->jefe_carrera_model->update_jefe_carrera($idJefeAnterior, $datosUpdate);
                     redirect('administrador/jefe_carrera');
-                } else {
+                /*} else {
                     $error = "La carrera ya tiene un Jefe registrado.";
-                }
+                }*/
             } else {
                 $error = "El correo ya existe.";
             }
@@ -142,18 +155,18 @@ class Administrador extends CI_Controller {
             'id_carrera' => $this->input->post('id_carrera')
         );
 
-        $checkNombreJefeCarrera = $this->jefe_carrera_model->check_update_jefe_carrera($id_usuario, $datosJefe['id_carrera']);
+        //$checkNombreJefeCarrera = $this->jefe_carrera_model->check_update_jefe_carrera($id_usuario, $datosJefe['id_carrera']);
         $checkCorreoJefeCarrera = $this->jefe_carrera_model->check_update_correo_jefe_carrera($datosJefe['correo'], $datosJefe['id_carrera']);
-        if ($checkNombreJefeCarrera == 0) {
+        //if ($checkNombreJefeCarrera == 0) {
             if ($checkCorreoJefeCarrera == 0) {
                 $this->jefe_carrera_model->update_jefe_carrera($id_usuario, $datosJefe);
                 redirect('administrador/jefe_carrera');
             } else {
                 $error = "El correo ya existe.";
             }
-        } else {
+        /*} else {
             $error = "La carrera ya tiene un Jefe registrado.";
-        }
+        }*/
 
         $data = array(
             'contenido' => "private/admin/edit_jefe_carrera",

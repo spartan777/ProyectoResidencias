@@ -6,6 +6,8 @@
     <th>Materno</th>
     <th>Carrera</th>
     <th>Correo</th>
+    <th>Estatus</th>
+    <th>Ultimo Periodo</th>
     <th>Editar</th>
     <th>Eliminar</th>
 </thead>
@@ -13,11 +15,16 @@
     <?php if ($result->num_rows > 0) {
         foreach ($result->result() as $row) {
             $this->load->model('carrera_model');
+            $this->load->model('periodo_model');
             //$query = $this->carrera_model->count_carrera_of_jefe($row->id_carrera);
             $queryNombre = $this->carrera_model->select_name_carrera($row->id_carrera);
-            
+            $queryPeriodo = $this->periodo_model->get_periodo_by_id($row->id_periodo);
             foreach ($queryNombre->result() as $carrera){
                 $nombreCarrera = $carrera->nombre_carrera;
+            }
+            
+            foreach($queryPeriodo->result() as $periodo){
+                $nombrePeriodo = $periodo->descripcion;
             }
             
             $query = $this->jefe_carrera_model->count_jefe_of_bitacora($row->id_usuario);
@@ -34,6 +41,8 @@
                 <td><?php echo $row->ape_materno; ?></td>
                 <td><?php echo $nombreCarrera; ?></td>
                 <td><?php echo $row->correo; ?></td>
+                <td><?php if($row->estatus == 1){ echo "Activo"; }else{ echo "Inactivo";} ?></td>
+                <td><?php if($row->estatus == 2){ echo $nombrePeriodo; }  ?></td>
                 <td><a href="<?php echo base_url() ?>administrador/editar_jefe_carrera/<?php echo $row->id_usuario; ?>"><span class="glyphicon glyphicon-edit"></span></a></td>
                 <td><a <?php echo $visibleRef; ?> onclick="confirmarDeleteJefeCarrera('<?php echo $row->id_usuario; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>
@@ -41,6 +50,8 @@
 } else { ?>
         <tr class="danger">
             <td>No hay registros</td>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>

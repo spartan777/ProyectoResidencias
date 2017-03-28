@@ -94,4 +94,11 @@ class Jefe_carrera_model extends CI_Model {
         $query = $this->db->get('bitacora');
         return $query->num_rows();
     }
+    
+    public function check_jefe_carrera_activo($id_carrera){
+        $this->db->where('id_carrera', $id_carrera);
+        $this->db->where('estatus', 1);
+        $query = $this->db->get('jefe_carrera');
+        return $query;
+    }
 }

@@ -150,11 +150,11 @@ INSERT INTO `cat_horario` (`id_horario`, `desc_horario`) VALUES
 (5, '11:00 - 12:00'),
 (6, '12:00 - 13:00'),
 (7, '13:00 - 14:00'),
-(8, '15:00 - 16:00'),
-(9, '16:00 - 17:00'),
-(10, '17:00 - 18:00'),
-(11, '18:00 - 19:00'),
-(12, '19:00 - 20:00');
+(8, '14:00 - 15:00'),
+(9, '15:00 - 16:00'),
+(10, '16:00 - 17:00'),
+(11, '17:00 - 18:00'),
+(12, '18:00 - 19:00'),
 
 -- --------------------------------------------------------
 
@@ -552,3 +552,8 @@ ALTER TABLE `jefe_carrera`
 --
 ALTER TABLE `materias`
   ADD CONSTRAINT `materias_ibfk_1` FOREIGN KEY (`id_carrera`) REFERENCES `carreras` (`id_carrera`);
+
+/* Corre esta parte del script en la parte que dice SQL del phpMyAdmin */
+ALTER TABLE `jefe_carrera` ADD `estatus` INT(1) NOT NULL AFTER `id_carrera`;
+ALTER TABLE `jefe_carrera` ADD `id_periodo` VARCHAR(10) NOT NULL AFTER `estatus`;
+UPDATE `jefe_carrera` SET `estatus` = 1;
