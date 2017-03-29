@@ -79,7 +79,7 @@ class Administrador extends CI_Controller {
             $idJefeAnterior = $row->id_usuario;
         }
         $datosUpdate = array(
-            'estaus' => 2,
+            'estatus' => 2,
             'id_periodo' => $this->input->post('periodo')
         );
         
