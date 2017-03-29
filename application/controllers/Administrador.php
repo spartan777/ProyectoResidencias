@@ -66,7 +66,8 @@ class Administrador extends CI_Controller {
             'ape_materno' => $this->input->post('ape_materno'),
             'correo' => $this->input->post('correo'),
             'id_carrera' => $this->input->post('id_carrera'),
-            'estatus' => 1
+            'estatus' => 1,
+            'id_periodo' => $this->input->post('periodo')
         );
         
         
@@ -79,8 +80,7 @@ class Administrador extends CI_Controller {
             $idJefeAnterior = $row->id_usuario;
         }
         $datosUpdate = array(
-            'estatus' => 2,
-            'id_periodo' => $this->input->post('periodo')
+            'estatus' => 2
         );
         
         if ($checkIdJefeCarrera == 0) {

@@ -42,7 +42,7 @@
                 <td><?php echo $nombreCarrera; ?></td>
                 <td><?php echo $row->correo; ?></td>
                 <td><?php if($row->estatus == 1){ echo "Activo"; }else{ echo "Inactivo";} ?></td>
-                <td><?php if($row->estatus == 2){ echo $nombrePeriodo; }  ?></td>
+                <td><?php echo $nombrePeriodo;  ?></td>
                 <td><a href="<?php echo base_url() ?>administrador/editar_jefe_carrera/<?php echo $row->id_usuario; ?>"><span class="glyphicon glyphicon-edit"></span></a></td>
                 <td><a <?php echo $visibleRef; ?> onclick="confirmarDeleteJefeCarrera('<?php echo $row->id_usuario; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>
